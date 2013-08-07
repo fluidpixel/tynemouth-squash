@@ -8,6 +8,20 @@
 
 TimeSlot.delete_all
 Booking.delete_all
+Player.delete_all
+Court.delete_all
+
+Player.create([
+{ first_name: 'Stuart', last_name: 'Varrall', tel: '0191', membership_number: '100'}
+])
+
+Court.create([
+{ court_name: 'Court 1'},
+{ court_name: 'Court 2'},
+{ court_name: 'Court 3'},
+{ court_name: 'Court 4'},
+{ court_name: 'Court 5'},
+])
 
 TimeSlot.create([
 { time: Time.zone.parse('10:00'), court_id: 1},

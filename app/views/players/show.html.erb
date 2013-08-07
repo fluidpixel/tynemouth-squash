@@ -1,13 +1,13 @@
-<h1> <%= @player.firstName %> <%= @player.lastName %> </h1>
+<h1> <%= @player.first_name %> <%= @player.last_name %> </h1>
 <h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3>
 <p>
   Tel: <%= @player.tel %>
-  <%= @player.membershipNumber %>
+  <%= @player.membership_number %>
 </p>
 
 <h2>Bookings</h2>
 <% @player.bookings.each do |booking| %>
   <p>
-    <strong>Booking <%= booking.id %> | <%= booking.court.courtName %> | <%= booking.startTime %></strong>
+    <strong>Booking <%= booking.id %> | <%= booking.court.court_name %> | <%= booking.start_time %></strong>
   </p>
 <% end %>

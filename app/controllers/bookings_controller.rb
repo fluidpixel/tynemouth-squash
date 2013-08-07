@@ -52,7 +52,7 @@ end
 def update
   @booking = Booking.find(params[:id])
 
-  if @booking.update(params[:booking].permit(:court_id, :player_id, :startTime, :courtTime))
+  if @booking.update(params[:booking].permit(:court_id, :player_id, :start_time, :court_time))
     redirect_to @booking
   else
     render 'edit'
@@ -65,6 +65,7 @@ def index
 	else
 		@day = 0
 	end
+	
 	@court1Bookings = Booking.by_court(1).by_day(@day)
 	@court2Bookings = Booking.by_court(2).by_day(@day)
 	@court3Bookings = Booking.by_court(3).by_day(@day)
@@ -92,7 +93,7 @@ end
 	
 private
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :startTime, :courtTime, :timeSlot_id, :paid)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid)
   end
   
   respond_to :html, :js

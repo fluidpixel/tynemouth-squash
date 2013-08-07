@@ -1,12 +1,52 @@
-<h1>Enter a new Court</h1>
-<%= form_for :court, url: courts_path do |f| %>
+<h1>Edit Court</h1>
+<%= form_for :court, url: courts_path(@court.id), method: :patch do |f| %>
+<% if @court.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@court.errors.count, "error") %> prohibited
+		  this court from being saved:</h2>
+		<ul>
+		<% @court.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
   <p>
-    <%= f.label :courtName %><br>
-    <%= f.text_field :courtName %>
+    <%= f.label :court_name %><br>
+    <%= f.text_field :court_name %>
+    <%= f.time_select :start_time, :minute_step => 5 %>
   </p>
   
   <p>
     <%= f.submit %>
   </p>
 <% end %>
-<%= link_to 'Courts', courts_path %>
+
+<h1>Edit Booking</h1>
+<%= form_for :booking, url: booking_path(@booking.id), method: :patch do |f| %>
+	<% if @booking.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@booking.errors.count, "error") %> prohibited
+		  this booking from being saved:</h2>
+		<ul>
+		<% @booking.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+  
+	<p>
+		<%= f.collection_select :court_id, @courts.all, :id, :court_name %> 
+		<%= f.collection_select :player_id, @players.all, :id, :last_name, :include_blank => "Please select" %>
+	</p>
+	<p>
+		<%= f.time_select :start_time, :minute_step => 5 %>
+	</p>
+  <p>
+  Court Time: <%= number_field_tag ':courtTime', 40, in: 40...400, step: 40 %>
+  </p>
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>

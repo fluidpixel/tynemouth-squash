@@ -1,12 +1,12 @@
-<h1><%= @court.courtName %></h1>
+<h1><%= @court.court_name %></h1>
 
 <% if @player %>
-<p><%= @player.firstName %></p>
+<p><%= @player.first_name %></p>
 <% else %>
 <p>Book Court</p>
 <% end %>
 
-<%= @booking.startTime %> <br />
+<%= @booking.start_time %> <br />
 <%= @booking.courtTime %> <br />
 <%= @booking.timeSlot.id %>
 

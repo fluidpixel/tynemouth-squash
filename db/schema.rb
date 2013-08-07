@@ -11,24 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807094612) do
+ActiveRecord::Schema.define(version: 20130806081506) do
 
-# Could not dump table "bookings" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
-
-# Could not dump table "courts" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
-
-  create_table "players", force: true do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "tel"
+  create_table "bookings", force: true do |t|
+    t.integer  "court_id"
+    t.integer  "player_id"
+    t.integer  "time_slot_id"
+    t.datetime "start_time"
+    t.integer  "court_time"
+    t.boolean  "paid"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "membershipNumber"
   end
 
-# Could not dump table "time_slots" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "courts", force: true do |t|
+    t.string   "court_name"
+    t.integer  "time_slot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "tel"
+    t.integer  "membership_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_slots", force: true do |t|
+    t.time     "time"
+    t.integer  "court_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

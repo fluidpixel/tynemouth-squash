@@ -1,9 +1,9 @@
-<h1><%= @court.courtName %></h1>
+<h1><%= @court.court_name %></h1>
 
 <h2>Bookings</h2>
 <% @court.bookings.each do |booking| %>
   <p>
-		<strong>Booking <%= booking.id %> - <%= booking.startTime.strftime("%H:%M") %> <%= booking.courtTime %> <% if booking.player %> - <%= booking.player.lastName %><% end %></strong>
+		<strong>Booking <%= booking.id %> - <%= booking.start_time.strftime("%H:%M") %> <%= booking.courtTime %> <% if booking.player %> - <%= booking.player.last_name %><% end %></strong>
   </p>
 <% end %>
   

@@ -2,11 +2,11 @@
 <% @booked = false %>
 <% if bookings %>
 	<% bookings.each do |booking| %>
-		<% if booking.startTime.strftime("%H:%M") == timeSlot.time.strftime("%H:%M") %>
+		<% if booking.start_time.strftime("%H:%M") == timeSlot.time.strftime("%H:%M") %>
 			<% @booked = true %>
 			<%if booking.player %>
 				<div class="booked">
-					<%= link_to 'Booked by', booking_path(booking) %> <%= link_to booking.player.lastName, player_path(booking.player) %>
+					<%= link_to 'Booked by', booking_path(booking) %> <%= link_to booking.player.last_name, player_path(booking.player) %>
 				</div>
 				<div class="paid">
 				<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking), :remote => true, :id => "paid_link_#{booking.id}" %>    

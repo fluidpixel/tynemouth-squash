@@ -10,8 +10,8 @@
   </tr>
   <% @players.each do |player| %>
     <tr>
-		<td class="first"><%= player.membershipNumber %></td>
-		<td><%= link_to (player.firstName + ' ' + player.lastName), player_path(player.id) %></td>
+		<td class="first"><%= player.membership_number %></td>
+		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id) %></td>
 		<td><%= player.tel %></td>
     </tr>
   <% end %>

@@ -21,7 +21,7 @@ end
 
 private
   def court_params
-    params.require(:court).permit(:courtName, :timeSlots)
+    params.require(:court).permit(:court_name, :time_slot_id)
   end
 
 end

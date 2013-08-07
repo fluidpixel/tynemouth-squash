@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   
   private
   def current_player
+   if (session[:player_id])
     @current_player ||= Player.find(session[:player_id]) if session[:player_id]
+    end
   end
   
 end

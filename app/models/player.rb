@@ -2,13 +2,13 @@ class Player < ActiveRecord::Base
 
 has_many :bookings
 
-validates_presence_of :membershipNumber, :on => :create
-validates_presence_of :lastName
-validates_uniqueness_of :membershipNumber
+validates_presence_of :membership_number, :on => :create
+validates_presence_of :last_name
+validates_uniqueness_of :membership_number
 
-def self.authenticate(lastName, membershipNumber)
-  player = Player.where('lower(lastName) = ?', lastName.downcase).first
-  if player && player.membershipNumber == membershipNumber.to_i
+def self.authenticate(last_name, membership_number)
+  player = Player.where('lower(last_name) = ?', last_name.downcase).first
+  if player && player.membership_number == membership_number.to_i
     player
   else
     nil

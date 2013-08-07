@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  courtName: MyString
+  court_name: MyString
 
 two:
-  courtName: MyString
+  court_name: MyString

@@ -3,7 +3,7 @@
 <table>
   <% @courts.each do |court| %>
     <tr>
-      <td class="first"><%= link_to court.courtName, court_path(court.id) %></td>
+      <td class="first"><%= link_to court.court_name, court_path(court.id) %></td>
     </tr>
   <% end %>
 </table>
