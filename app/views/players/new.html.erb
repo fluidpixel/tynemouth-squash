@@ -1,0 +1,13 @@
+<h1>Enter a new Player</h1>
+<%= form_for :player, url: players_path do |f| %>
+  <p>
+	<%= f.label :membershipNumber %><%= f.text_field :membershipNumber %><br>
+    <%= f.label :firstName %><%= f.text_field :firstName %><br>
+    <%= f.label :lastName %><%= f.text_field :lastName %><br>  
+	<%= f.label :tel %><%= f.text_field :tel %><br>  
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<%= link_to 'Players', players_path %>

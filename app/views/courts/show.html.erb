@@ -1,0 +1,15 @@
+<h1><%= @court.courtName %></h1>
+
+<h2>Bookings</h2>
+<% @court.bookings.each do |booking| %>
+  <p>
+		<strong>Booking <%= booking.id %> - <%= booking.startTime.strftime("%H:%M") %> <%= booking.courtTime %> <% if booking.player %> - <%= booking.player.lastName %><% end %></strong>
+  </p>
+<% end %>
+  
+<% @court.timeSlots.each do |timeSlot| %>
+	<p>
+	<strong>Time Slot:</strong>
+	<%= timeSlot.time.strftime("%H:%M") %>
+	</p>
+<% end %>

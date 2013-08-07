@@ -1,0 +1,80 @@
+// Place all the styles related to the bookings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table {
+	border-collapse:collapse;
+	width: 100%;
+}
+
+table, th, td {
+	background-color: lightgrey;
+	border: 1px solid grey;
+	margin-top: 10px;
+}
+ 
+td {
+	padding-top: 15px;
+	padding-bottom: 4px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+td.first {
+	padding: 0px;
+	width: 100px;
+	font-size: 20px;
+	font-weight: bold;
+}
+tr {
+	height: 80px;
+}
+
+.date, .today{
+	text-align: center;
+	font-size: 20px;	
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.date a{
+margin: 0px 15%;
+}
+
+.book {
+ color: green;
+ font-weight: bold;
+ text-decoration: none;
+ background: lightgreen;
+ padding: 5px 20px;
+ z-index:1;
+ position:relative;
+}
+
+.booked {
+	position: absolute;
+	z-index: 3;
+	padding: 30px 34px 0px 34px;
+}
+.paid {
+z-index: 4;
+position: absolute;
+margin-top: -30px;
+}
+
+.time{
+padding: 0px;
+margin-top: -10px;
+position:relative;
+z-index:2;
+font-size: 50px;
+}
+
+.noTime{
+padding: 0px;
+margin-top: -25px;
+position:relative;
+z-index:1;
+font-size: 50px;
+color: silver;
+}

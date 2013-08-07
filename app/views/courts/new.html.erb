@@ -1,0 +1,12 @@
+<h1>Enter a new Court</h1>
+<%= form_for :court, url: courts_path do |f| %>
+  <p>
+    <%= f.label :courtName %><br>
+    <%= f.text_field :courtName %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<%= link_to 'Courts', courts_path %>

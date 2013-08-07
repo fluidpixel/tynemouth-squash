@@ -1,0 +1,9 @@
+<h1>Listing Courts</h1>
+ 
+<table>
+  <% @courts.each do |court| %>
+    <tr>
+      <td class="first"><%= link_to court.courtName, court_path(court.id) %></td>
+    </tr>
+  <% end %>
+</table>

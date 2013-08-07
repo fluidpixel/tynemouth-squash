@@ -1,0 +1,5 @@
+<td>
+<% if booking.startTime %><%= link_to booking.startTime.strftime("%H:%M"), booking_path(booking) %> <% end %> <br />
+<% if booking.player %><%= link_to booking.player.firstName, player_path(booking.player_id) %><% end %> 
+<%= link_to 'book', edit_booking_path(booking) %>
+</td> 

@@ -1,0 +1,35 @@
+<h1>Bookings</h1>
+<p class="date"><%= link_to "Prev", :day => (@day - 1) %> <%= @bookingDay %> <%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %></p>
+<div class="today">&nbsp<% if @day != 0 %><%= link_to "Skip to Today", { :day => 0 }, :class => 'date' %><% end %></div>
+<table>
+  <tr>
+    <td class="first" >Court 1</td>
+    <% @court1Slots.each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court1Bookings, :day => @day, :court_id => 1 %>
+	<% end %>
+  </tr>
+  <tr>
+    <td class="first">Court 2</td>
+    <% @court2Slots.each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court2Bookings, :day => @day, :court_id => 2 %>
+	<% end %>
+  </tr>
+  <tr>
+    <td class="first">Court 3</td>
+    <% @court3Slots.each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court3Bookings, :day => @day, :court_id => 3 %>
+	<% end %>
+  </tr>
+  <tr>
+    <td class="first">Court 4</td>
+    <% @court4Slots.each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court4Bookings, :day => @day, :court_id => 4 %>
+	<% end %>
+  </tr>
+  <tr>
+    <td class="first">Court 5</td>
+    <% @court5Slots.each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court5Bookings, :day => @day, :court_id => 5 %>
+	<% end %>
+  </tr>
+</table>

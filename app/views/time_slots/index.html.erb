@@ -1,0 +1,12 @@
+<h1>TimeSlots Listing</h1>
+ 
+<table>
+  <tr>
+  <th>TimeSlots </th>
+  </tr>
+  <% @timeSlots.each do |timeSlot| %>
+    <tr>
+		<td><%= timeSlot.time.strftime("%H:%M") %></td>
+    </tr>
+  <% end %>
+</table>

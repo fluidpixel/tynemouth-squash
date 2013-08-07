@@ -1,0 +1,30 @@
+<td >
+<% @booked = false %>
+<% if bookings %>
+	<% bookings.each do |booking| %>
+		<% if booking.startTime.strftime("%H:%M") == timeSlot.time.strftime("%H:%M") %>
+			<% @booked = true %>
+			<%if booking.player %>
+				<div class="booked">
+					<%= link_to 'Booked by', booking_path(booking) %> <%= link_to booking.player.lastName, player_path(booking.player) %>
+				</div>
+				<div class="paid">
+				<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking), :remote => true, :id => "paid_link_#{booking.id}" %>    
+				</div>
+			<% else %>
+				<%= link_to booking.id, booking_path(booking) %>
+			<% end %>
+			
+		<% end %>
+	<% end %>
+<% end %>
+
+	<% if !@booked && @day >=0 %>
+		<div class='time'><%= timeSlot.time.strftime("%H:%M")%></div>
+		<%= link_to 'Book Court', new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'book' %>
+	<% elsif @day < 0 %>
+		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
+	<% else %>
+		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
+	<% end %>
+</td> 

@@ -1,0 +1,25 @@
+<h1>Edit Player</h1>
+<%= form_for :player, url: player_path(@player.id), method: :patch do |f| %>
+	<% if @player.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@player.errors.count, "error") %> prohibited
+		  this player from being saved:</h2>
+		<ul>
+		<% @player.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+  
+	<p>
+	<%= f.label 'membership Number' %><%= f.text_field :membershipNumber %><br>
+    <%= f.label 'first name' %><%= f.text_field :firstName %><br>
+    <%= f.label 'last name' %><%= f.text_field :lastName %><br>  
+	<%= f.label 'telephone' %><%= f.text_field :tel %><br>
+  </p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>

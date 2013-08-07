@@ -1,0 +1,21 @@
+<h1>Book <%= @court.courtName %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<%= form_for :booking, url: bookings_path do |f| %>
+  <p>
+  <%= f.hidden_field :court_id, :value => params[:court] %>
+    <!-- <%= f.collection_select :court_id, @courts.all, :id, :courtName, :selected => params[:court] %> -->
+  </p>
+   <p>
+   <%= f.collection_select :player_id, @players.all, :id, :lastName %>
+  </p>
+  <p>
+	  <%= f.hidden_field :startTime, :value => @time %>
+	  <%= f.hidden_field :days, :value => @days %>
+	  <%= f.hidden_field :timeSlot_id, :value => params[:timeSlot] %>
+	  <%= f.hidden_field :courtTime, :value => 40 %>
+	   <!--Court Time: <%= number_field_tag :courtTime, 40, in: 40...400, step: 40 %>-->
+  </p>
+  <%= %>
+    <p>
+    <%= f.submit 'Book Court' %>
+  </p>
+<% end %>
