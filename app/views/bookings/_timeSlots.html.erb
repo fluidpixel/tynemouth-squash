@@ -26,7 +26,7 @@
 		<% if current_player %>
 			<%= link_to 'Book Court', new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'book' %>
 		<% else %>
-		<span class='login_to_book'>Login to Book</span>
+			<%= link_to 'Login to Book', log_in_path, :class => 'login_to_book' %>
 		<% end %>
 		
 	<% elsif @day < 0 %>
