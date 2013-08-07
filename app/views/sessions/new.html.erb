@@ -1,0 +1,13 @@
+<h1>Log in</h1>
+
+<%= form_tag sessions_path do %>
+  <p>
+    <%= label_tag 'Last Name' %><br />
+    <%= text_field_tag :lastName, params[:lastName] %>
+  </p>
+  <p>
+    <%= label_tag 'Membership Number' %><br />
+    <%= password_field_tag :membershipNumber %>
+  </p>
+  <p class="button"><%= submit_tag 'Login' %></p>
+<% end %>

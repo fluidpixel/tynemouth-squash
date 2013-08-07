@@ -1,6 +1,12 @@
-<h1>Bookings</h1>
-<p class="date"><%= link_to "Prev", :day => (@day - 1) %> <%= @bookingDay %> <%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %></p>
-<div class="today">&nbsp<% if @day != 0 %><%= link_to "Skip to Today", { :day => 0 }, :class => 'date' %><% end %></div>
+<h1>Tynemouth Squash Court Bookings</h1>
+
+<div class="links"> 
+<%= link_to "Prev", :day => (@day - 1) %> 
+<%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
+<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :class => 'date' %><% end %>
+</div>
+<div class="date"> <%= @bookingDay %></div>
+
 <table>
   <tr>
     <td class="first" >Court 1</td>

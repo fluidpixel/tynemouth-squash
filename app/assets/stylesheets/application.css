@@ -15,6 +15,7 @@
  h1{
 text-align: center;
 margin-bottom: 5px;
+margin-top: 0px;
 }
 
 a {
@@ -36,3 +37,8 @@ ul
 }
 
 ul li { display: inline; }
+
+#user_nav{
+	text-align: right;
+	margin-top: -20px;
+}

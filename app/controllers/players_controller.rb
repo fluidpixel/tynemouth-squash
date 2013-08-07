@@ -1,11 +1,16 @@
 class PlayersController < ApplicationController
+
+def new
+    @player = Player.new
+  end
+  
 def create
 	@player = Player.new(player_params)
 	@player.save
 	redirect_to @player
 end
  
- def show
+def show
   @player = Player.find(params[:id])
 end
 

@@ -1,10 +1,21 @@
 <h1>Enter a new Player</h1>
-<%= form_for :player, url: players_path do |f| %>
+<%= form_for @player, url: players_path do |f| %>
+ <% if @player.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @player.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <p>
-	<%= f.label :membershipNumber %><%= f.text_field :membershipNumber %><br>
-    <%= f.label :firstName %><%= f.text_field :firstName %><br>
-    <%= f.label :lastName %><%= f.text_field :lastName %><br>  
-	<%= f.label :tel %><%= f.text_field :tel %><br>  
+	<%= f.label 'Membership Number' %><%= f.text_field :membershipNumber %><br>
+    <%= f.label 'First Name' %><%= f.text_field :firstName %><br>
+    <%= f.label 'Last Name' %><%= f.text_field :lastName %><br>  
+	<%= f.label 'Tel' %><%= f.text_field :tel %><br>  
   </p>
   <p>
     <%= f.submit %>
