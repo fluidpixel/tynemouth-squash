@@ -47,7 +47,7 @@ tr {
  font-weight: bold;
  text-decoration: none;
  background: lightgreen;
- padding: 5px 20px;
+ padding: 5px 5px;
  z-index:1;
  position:relative;
 }
@@ -60,7 +60,7 @@ background: none;
 .booked {
 	position: absolute;
 	z-index: 3;
-	padding: 30px 34px 0px 34px;
+	padding: 32px 0px 0px 0px;
 }
 .paid {
 z-index: 4;
