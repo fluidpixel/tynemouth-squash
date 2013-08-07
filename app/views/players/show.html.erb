@@ -1,13 +1,12 @@
-<h1> <%= @player.first_name %> <%= @player.last_name %> </h1>
+<h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %> </h1>
 <h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3>
 <p>
   Tel: <%= @player.tel %>
-  <%= @player.membership_number %>
 </p>
 
-<h2>Bookings</h2>
+<h2><%= @player.bookings.count %> Bookings</h2>
 <% @player.bookings.each do |booking| %>
   <p>
-    <strong>Booking <%= booking.id %> | <%= booking.court.court_name %> | <%= booking.start_time %></strong>
+    <strong><%= booking.start_time.strftime("%H:%M on %A %Ith %B") %> | <%= booking.court.court_name %></strong>
   </p>
 <% end %>

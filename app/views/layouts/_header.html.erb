@@ -5,7 +5,7 @@
 <div id="user_nav">
   <% if current_player %>
     <%= link_to "Log out", log_out_path %><br />
-    Logged in as <%= current_player.last_name %>
+     Logged in as <%= link_to current_player.last_name, player_path(current_player) %>
   <% else %>
     <%= link_to "Log in", log_in_path %>
   <% end %>

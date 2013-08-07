@@ -4,9 +4,13 @@
   <%= f.hidden_field :court_id, :value => params[:court] %>
     <!-- <%= f.collection_select :court_id, @courts.all, :id, :court_name, :selected => params[:court] %> -->
   </p>
+  <% if current_player %>
+  <%= f.hidden_field :player_id, :value => current_player.id %>
+  <% else %>
    <p>
    <%= f.collection_select :player_id, @players.all, :id, :last_name %>
   </p>
+  <% end %>
   <p>
 	  <%= f.hidden_field :start_time, :value => @time %>
 	  <%= f.hidden_field :days, :value => @days %>

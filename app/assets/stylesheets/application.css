@@ -42,3 +42,8 @@ ul li { display: inline; }
 	text-align: right;
 	margin-top: -20px;
 }
+
+form
+{
+	text-align: center;
+}

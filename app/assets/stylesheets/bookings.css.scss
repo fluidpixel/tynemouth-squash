@@ -42,7 +42,7 @@ tr {
 	font-size: 20px;	
 }
 
-.book {
+.book, .login_to_book {
  color: green;
  font-weight: bold;
  text-decoration: none;
@@ -50,6 +50,11 @@ tr {
  padding: 5px 20px;
  z-index:1;
  position:relative;
+}
+
+.login_to_book{
+color: darkgrey;
+background: none;
 }
 
 .booked {

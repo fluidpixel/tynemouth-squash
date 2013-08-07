@@ -7,8 +7,6 @@
 <% end %>
 
 <%= @booking.start_time %> <br />
-<%= @booking.courtTime %> <br />
-<%= @booking.timeSlot.id %>
 
 <%= form_for :booking, url: bookings_path do |f| %>
 <%= link_to 'Edit', edit_booking_path(@booking) %> | <%= link_to 'Destroy', booking_path(@booking),

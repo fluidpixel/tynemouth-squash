@@ -1,7 +1,5 @@
 class BookingsController < ApplicationController
 
-http_basic_authenticate_with name: "name", password: "pass", except: [:index, :show]
-
 def new
 	@courts = Court.all
 	@players = Player.all

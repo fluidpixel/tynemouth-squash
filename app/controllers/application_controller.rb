@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_player
   
   private
+  
   def current_player
    if (session[:player_id])
     @current_player ||= Player.find(session[:player_id]) if session[:player_id]
