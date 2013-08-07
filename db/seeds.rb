@@ -6,11 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-TimeSlot.delete_all
-Booking.delete_all
-Player.delete_all
-Court.delete_all
-
 Player.create([
 { first_name: 'Stuart', last_name: 'Varrall', tel: '0191', membership_number: '100'}
 ])
