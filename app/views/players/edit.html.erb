@@ -14,9 +14,12 @@
   
 	<p>
 	<%= f.label 'membership Number' %><%= f.text_field :membership_number %><br>
-    <%= f.label 'first name' %><%= f.text_field :first_nam %><br>
+    <%= f.label 'first name' %><%= f.text_field :first_name %><br>
     <%= f.label 'last name' %><%= f.text_field :last_name %><br>  
 	<%= f.label 'telephone' %><%= f.text_field :tel %><br>
+	<% if is_admin %>
+		<%= f.label 'Admin' %><%= f.check_box :admin %>
+	<% end %>	
   </p>
 
 	<p>

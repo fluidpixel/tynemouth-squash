@@ -12,8 +12,6 @@ class Booking < ActiveRecord::Base
 	def self.by_court(court)
 		return scoped unless court.present?
 	  where(:court_id => court)
-	end
-	
-	
+	end	
 
 end

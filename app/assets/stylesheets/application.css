@@ -12,7 +12,7 @@
  *= require_tree .
  */
  
- h1{
+ h1, h2{
 text-align: center;
 margin-bottom: 5px;
 margin-top: 0px;
@@ -20,12 +20,14 @@ margin-top: 0px;
 
 a {
  text-decoration: none;
- color: SlateGrey ;
+ color: LightSlateGrey ;
 }
 
 body {
-color: #434D56;
+color: Azure;
 font-family:arial;
+background-color: #0f2f3b;
+margin: 0px;
 }
 
 ul

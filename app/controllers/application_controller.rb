@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :current_player
+  helper_method :is_admin
   
   private
   
@@ -12,5 +13,13 @@ class ApplicationController < ActionController::Base
     @current_player ||= Player.find(session[:player_id]) if session[:player_id]
     end
   end
+  
+  def is_admin
+  if (session[:player_id])
+   if current_player.admin
+   	@is_admin ||= current_player
+   	end
+   end
+   end
   
 end

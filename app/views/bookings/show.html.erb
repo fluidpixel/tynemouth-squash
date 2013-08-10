@@ -1,15 +1,13 @@
 <h1><%= @court.court_name %></h1>
 
 <% if @player %>
-<p><%= @player.first_name %></p>
+<h2><%= @player.first_name %> <%= @player.last_name %> | <%= @booking.start_time.strftime("%H:%M on %A %Ith %B") %></h2>
 <% else %>
 <p>Book Court</p>
 <% end %>
 
-<%= @booking.start_time %> <br />
-
 <%= form_for :booking, url: bookings_path do |f| %>
-<%= link_to 'Edit', edit_booking_path(@booking) %> | <%= link_to 'Destroy', booking_path(@booking),
+<%= link_to 'Change Player', edit_booking_path(@booking) %> | <%= link_to 'Remove Booking', booking_path(@booking),
                     method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <% end %>

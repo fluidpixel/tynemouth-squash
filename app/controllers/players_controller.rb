@@ -25,7 +25,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :tel, :membership_number))
+  if @player.update(params[:player].permit(:first_name, :last_name, :tel, :membership_number, :admin))
     redirect_to @player
   else
     render 'edit'
@@ -33,7 +33,7 @@ def update
 end
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :tel, :membership_number)
+    params.require(:player).permit(:first_name, :last_name, :tel, :membership_number, :admin)
   end
 
 end

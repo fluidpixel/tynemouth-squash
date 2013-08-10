@@ -1,4 +1,4 @@
-<h1>Tynemouth Squash Court Bookings</h1>
+<h1>Tynemouth Squash Court Bookings <%= @value %></h1>
 
 <div class="links"> 
 <%= link_to "Prev", :day => (@day - 1) %> 
@@ -8,32 +8,42 @@
 <div class="date"> <%= @bookingDay %></div>
 
 <table>
-  <tr>
-    <td class="first" >Court 1</td>
+  <tr class="first">
+    <td class="first" colspan="20" >Court 1</td>
+    </tr>
+    <tr>
     <% @court1Slots.each do |timeSlot| %>
 		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court1Bookings, :day => @day, :court_id => 1 %>
 	<% end %>
   </tr>
-  <tr>
-    <td class="first">Court 2</td>
+  <tr class="first">
+    <td class="first" colspan="20">Court 2</td>
+    </tr>
+    <tr>
     <% @court2Slots.each do |timeSlot| %>
 		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court2Bookings, :day => @day, :court_id => 2 %>
 	<% end %>
   </tr>
-  <tr>
-    <td class="first">Court 3</td>
+  <tr class="first">
+    <td class="first" colspan="20">Court 3</td>
+    </tr>
+    <tr>
     <% @court3Slots.each do |timeSlot| %>
 		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court3Bookings, :day => @day, :court_id => 3 %>
 	<% end %>
   </tr>
-  <tr>
-    <td class="first">Court 4</td>
+  <tr class="first">
+    <td class="first" colspan="20">Court 4</td>
+    </tr>
+    <tr>
     <% @court4Slots.each do |timeSlot| %>
 		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court4Bookings, :day => @day, :court_id => 4 %>
 	<% end %>
   </tr>
-  <tr>
-    <td class="first">Court 5</td>
+  <tr class="first">
+    <td class="first" colspan="20">Court 5</td>
+    </tr>
+    <tr>
     <% @court5Slots.each do |timeSlot| %>
 		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court5Bookings, :day => @day, :court_id => 5 %>
 	<% end %>

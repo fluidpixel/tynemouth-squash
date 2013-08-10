@@ -13,17 +13,18 @@
 	<% end %>
   
 	<p>
-		<%= f.collection_select :court_id, @courts.all, :id, :court_name %> 
+		<!--<%= f.collection_select :court_id, @courts.all, :id, :court_name %> -->
 		<%= f.collection_select :player_id, @players.all, :id, :last_name, :include_blank => "Please select" %>
 	</p>
+	<!--
 	<p>
 		<%= f.time_select :start_time, :minute_step => 5 %>
 	</p>
   <p>
   Court Time: <%= number_field_tag :courtTime, 40, in: 40...400, step: 40 %>
   </p>
+  -->
 	<p>
 		<%= f.submit %>
 	</p>
 <% end %>
-<%= link_to 'All Bookings', bookings_path %>

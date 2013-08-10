@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20130806081506) do
     t.string   "last_name"
     t.string   "tel"
     t.integer  "membership_number"
+    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20130806081506) do
   create_table "time_slots", force: true do |t|
     t.time     "time"
     t.integer  "court_id"
+    t.boolean  "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

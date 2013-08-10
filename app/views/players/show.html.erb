@@ -1,10 +1,10 @@
-<h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %> </h1>
+<h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><h2><% if @player.admin %>Admin<% end %></h2>
 <h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3>
 <p>
   Tel: <%= @player.tel %>
 </p>
 
-<h2><%= @player.bookings.count %> Bookings</h2>
+<h3><%= @player.bookings.count %> Bookings</h2>
 <% @player.bookings.each do |booking| %>
   <p>
     <strong><%= booking.start_time.strftime("%H:%M on %A %Ith %B") %> | <%= booking.court.court_name %></strong>

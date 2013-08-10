@@ -8,26 +8,33 @@ table {
 }
 
 table, th, td {
-	background-color: lightgrey;
-	border: 1px solid grey;
+	background-color: #2b748f;
+	border: 3px solid #95bac7;
 	margin-top: 10px;
 }
  
 td {
 	padding-top: 15px;
-	padding-bottom: 4px;
+	padding-bottom: 0px;
 	text-align:center;
 	vertical-align:middle;
+	border-width: 0px 1px 1px 1px;
+	line-height: 13px;
 }
 
 td.first {
-	padding: 0px;
-	width: 100px;
+	padding: 6px 0px;
 	font-size: 20px;
 	font-weight: bold;
+	border-width: 3px 3px 1px 3px;
+	width:110px;
+}
+
+tr.first {
+	height: 20px;
 }
 tr {
-	height: 80px;
+	height: 65px;
 }
 
 .date{
@@ -39,15 +46,16 @@ tr {
 
 .links a{
 	margin: 0px 10px;
-	font-size: 20px;	
+	font-size: 20px;
 }
 
 .book, .login_to_book {
  color: green;
  font-weight: bold;
+ font-size: 11px;
  text-decoration: none;
  background: lightgreen;
- padding: 5px 5px;
+ //padding: 5px 5px;
  z-index:1;
  position:relative;
 }
@@ -58,29 +66,38 @@ background: none;
 }
 
 .booked {
-	position: absolute;
 	z-index: 3;
-	padding: 32px 0px 0px 0px;
+	margin-top: -5px;
+}
+
+.booked a{
+	color: #D5E3E9;
+	font-size: 13px;
 }
 .paid {
 z-index: 4;
 position: absolute;
-margin-top: -30px;
+margin-top: -60px;
+
+}
+
+.paid a{
+	color: lightgreen;
+	font-size:12px;
+}
+
+.time, .noTime{
+padding: 0px;
+position:relative;
+z-index:2;
+font-size: 18px;
 }
 
 .time{
-padding: 0px;
-margin-top: -10px;
-position:relative;
-z-index:2;
-font-size: 50px;
+margin-top: 6px;
 }
 
 .noTime{
-padding: 0px;
-margin-top: -25px;
-position:relative;
-z-index:1;
-font-size: 50px;
-color: silver;
+margin-top: -42px;
+color: #1E5164;
 }
