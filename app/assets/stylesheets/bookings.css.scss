@@ -78,11 +78,15 @@ background: none;
 z-index: 4;
 position: absolute;
 margin-top: -60px;
-
 }
 
 .paid a{
 	color: lightgreen;
+	font-size:12px;
+}
+
+a.to_pay{
+	color: Gold ;
 	font-size:12px;
 }
 
@@ -94,15 +98,17 @@ font-size: 18px;
 }
 
 .time{
-margin-top: 6px;
+margin-top: 5px;
+margin-bottom: 6px;
 }
 
 .noTime{
 margin-top: -42px;
-color: #1E5164;
+color: #1A4656;
 }
 
 .noTimeOrBooking{
 margin-top: -16px;
-color: #1E5164;
+color: #1A4656;
+font-size: 18px;
 }

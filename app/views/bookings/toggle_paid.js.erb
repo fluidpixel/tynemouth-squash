@@ -1,2 +1,2 @@
-$("#paid_link_<%= @booking.id %>").text("<%= paid_link_text(@booking) %>");  
-
+$("#paid_link_<%= @booking.id %>").text("<%= paid_link_text(@booking) %>");
+$("#paid_link_<%= @booking.id %>").removeClass('has_paid').removeClass('to_pay').addClass('<%= paid_link_class(@booking) %>');
