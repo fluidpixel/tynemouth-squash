@@ -6,46 +6,15 @@
 <% if @day != 0 %><%= link_to "Today", { :day => 0 }, :class => 'date' %><% end %>
 </div>
 <div class="date"> <%= @bookingDay %></div>
-
 <table>
+<% Court.all.each do |court| %>
   <tr class="first">
-    <td class="first" colspan="20" >Court 1</td>
+    <td class="first" colspan="20" >Court <%= court.id %></td>
     </tr>
     <tr>
-    <% @court1Slots.each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court1Bookings, :day => @day, :court_id => 1 %>
+    <% instance_variable_get("@#{'court' + court.id.to_s + 'Slots'}").each do |timeSlot| %>
+		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @daysBookings, :day => @day, :court_id => court.id %>
 	<% end %>
   </tr>
-  <tr class="first">
-    <td class="first" colspan="20">Court 2</td>
-    </tr>
-    <tr>
-    <% @court2Slots.each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court2Bookings, :day => @day, :court_id => 2 %>
-	<% end %>
-  </tr>
-  <tr class="first">
-    <td class="first" colspan="20">Court 3</td>
-    </tr>
-    <tr>
-    <% @court3Slots.each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court3Bookings, :day => @day, :court_id => 3 %>
-	<% end %>
-  </tr>
-  <tr class="first">
-    <td class="first" colspan="20">Court 4</td>
-    </tr>
-    <tr>
-    <% @court4Slots.each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court4Bookings, :day => @day, :court_id => 4 %>
-	<% end %>
-  </tr>
-  <tr class="first">
-    <td class="first" colspan="20">Court 5</td>
-    </tr>
-    <tr>
-    <% @court5Slots.each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @court5Bookings, :day => @day, :court_id => 5 %>
-	<% end %>
-  </tr>
+ <% end %> 
 </table>

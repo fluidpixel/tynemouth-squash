@@ -1,8 +1,8 @@
 <td>
-	<% @booked = false %>
+	<% @booked = false %>	    
 	<% if bookings %>
 		<% bookings.each do |booking| %>
-			<% if booking.start_time.strftime("%H:%M") == timeSlot.time.strftime("%H:%M") %>
+			<% if booking.time_slot_id == timeSlot.id %>
 				<% @booked = true %>
 				<%if booking.player %>
 					<div class="booked">
@@ -16,10 +16,10 @@
 				<% else %>
 					<%= link_to booking.id, booking_path(booking) %>
 				<% end %>
-			<% else %>
 			<% end %>
 		<% end %>
 	<% end %>
+	
 	<% if !@booked && @day >=0 %>
 		<div class='time'><%= timeSlot.time.strftime("%H:%M")%></div>
 		<% if current_player %>
@@ -30,7 +30,7 @@
 			<%= link_to 'Login to Book', log_in_path, :class => 'login_to_book' %>
 		<% end %>
 	<% elsif @day < 0 %>
-		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
+		<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%H:%M")%></div>
 	<% else %>
 		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
 	<% end %>

@@ -14,4 +14,8 @@ class Booking < ActiveRecord::Base
 	  where(:court_id => court)
 	end	
 
+	def self.by_time_slot(time_slot)
+		return scoped unless time_slot.present?
+		where(:time_slot_id => time_slot.id)
+	end
 end
