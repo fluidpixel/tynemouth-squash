@@ -26,13 +26,13 @@ a {
 body {
 color: Azure;
 font-family:arial;
-background-color: #0f2f3b;
+background-color: #27444F;
 margin: 0px;
 }
 
 ul
 {
-	margin: 0;
+	margin: 7px 0px 0px 0px;
 	padding: 0;
 	text-align: center;
     list-style-type: none;
@@ -42,7 +42,8 @@ ul li { display: inline; }
 
 #user_nav{
 	text-align: right;
-	margin-top: -20px;
+	margin-top: -18px;
+	margin-right: 4px;
 }
 
 form
