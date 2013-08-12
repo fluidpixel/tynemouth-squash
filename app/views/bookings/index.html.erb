@@ -9,7 +9,7 @@
 <table>
 <% Court.all.each do |court| %>
   <tr class="first">
-    <td class="first" colspan="20" ><div class="first">Court <%= court.id %></div></td>
+    <td class="first" colspan="20" ><div>Court <%= court.id %></div></td>
     </tr>
     <tr>
     <% instance_variable_get("@#{'court' + court.id.to_s + 'Slots'}").each do |timeSlot| %>

@@ -20,6 +20,7 @@ position: fixed;
 left: 0;
 right: 0;
 top: 0;
+z-index: -2;
 }
 
 a {
@@ -48,6 +49,7 @@ ul
 	left: 0;
 	right: 0;
 	top: 0;
+	z-index: -2;
 }
 
 ul li { display: inline; }
@@ -58,6 +60,7 @@ ul li { display: inline; }
 	right: 4px;
 	float: right;
 	position: fixed;
+	z-index: -2;
 }
 
 form

@@ -5,6 +5,7 @@
 table {
 	border-collapse:collapse;
 	margin: 0 auto;
+	z-index: 20;
 }
 
 table, th, td {
@@ -51,12 +52,13 @@ tr {
 	left: 0;
 	right: 0;
 	top:60px;
-	z-index:-1;
+	z-index:-2;
 }
 
 .links {
 	position: fixed;
 	top: 60px;
+	z-index: -1;
 }
 .links a{
 	margin: 0px 10px;
