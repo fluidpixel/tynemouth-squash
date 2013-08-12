@@ -15,4 +15,8 @@ def self.authenticate(last_name, membership_number)
   end
 end
 
+def future_bookings
+	bookings.where('start_time >= ?', DateTime.now)
+end
+
 end

@@ -1,18 +1,21 @@
 <h1>Players Listing</h1>
  
-<p><%= link_to 'New Player', new_player_path %></p>
-
+<% if is_admin %>
+	<p><%= link_to 'New Player', new_player_path %></p>
+<% end %>
 <table>
   <tr>
   <th>Membership Number</th>
     <th>Player</th>
     <th>Tel</th>
+    <th>Bookings</th>
   </tr>
   <% @players.each do |player| %>
     <tr>
 		<td class="first"><%= player.membership_number %></td>
-		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id) %></td>
+		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id), :class => 'playerIndex' %></td>
 		<td><%= player.tel %></td>
+		<td><%= player.future_bookings.count %></td>
     </tr>
   <% end %>
 </table>

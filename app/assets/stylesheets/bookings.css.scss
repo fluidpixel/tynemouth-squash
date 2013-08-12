@@ -14,8 +14,9 @@ table, th, td {
 }
  
 td {
-	padding-top: 15px;
+	padding-top: 0px;
 	padding-bottom: 0px;
+	width: 120px;
 	text-align:center;
 	vertical-align:middle;
 	border-width: 0px 1px 1px 1px;
@@ -50,24 +51,25 @@ tr {
 }
 
 .book, .login_to_book {
- color: green;
- font-weight: bold;
- font-size: 11px;
- text-decoration: none;
- background: lightgreen;
- //padding: 5px 5px;
- z-index:1;
- position:relative;
+	 color: green;
+	 font-weight: bold;
+	 font-size: 11px;
+	 text-decoration: none;
+	 background: lightgreen;
+	 //padding: 5px 5px;
+	 z-index:1;
+	 position:relative;
 }
 
 .login_to_book{
-color: darkgrey;
-background: none;
+	color: darkgrey;
+	background: none;
 }
 
 .booked {
 	z-index: 3;
 	margin-top: -5px;
+	margin-bottom: -40px;
 }
 
 .booked a{
@@ -75,9 +77,9 @@ background: none;
 	font-size: 13px;
 }
 .paid {
-z-index: 4;
-position: absolute;
-margin-top: -60px;
+	z-index: 4;
+	position: absolute;
+	margin-top: -12px;
 }
 
 .paid a{
@@ -91,20 +93,20 @@ a.to_pay{
 }
 
 .time, .noTime{
-padding: 0px;
-position:relative;
-z-index:2;
-font-size: 18px;
+	padding: 0px;
+	position:relative;
+	z-index:2;
+	font-size: 18px;
 }
 
 .time{
-margin-top: 5px;
-margin-bottom: 6px;
+	margin-top: 5px;
+	margin-bottom: 6px;
 }
 
 .noTime{
-margin-top: -42px;
-color: #1A4656;
+	margin-top: -42px;
+	color: #1A4656;
 }
 
 .noTimeOrBooking{
