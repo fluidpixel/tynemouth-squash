@@ -15,7 +15,11 @@
  h1, h2{
 text-align: center;
 margin-bottom: 5px;
-margin-top: 0px;
+margin-top: 25px;
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
 }
 
 a {
@@ -30,20 +34,30 @@ background-color: #27444F;
 margin: 0px;
 }
 
+#clearfix {
+	clear: both;
+}
+
 ul
 {
 	margin: 7px 0px 0px 0px;
 	padding: 0;
 	text-align: center;
     list-style-type: none;
+    position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
 }
 
 ul li { display: inline; }
 
 #user_nav{
 	text-align: right;
-	margin-top: -18px;
-	margin-right: 4px;
+	top: 4px;
+	right: 4px;
+	float: right;
+	position: fixed;
 }
 
 form

@@ -4,19 +4,18 @@
 
 table {
 	border-collapse:collapse;
-	width: 100%;
+	margin: 0 auto;
 }
 
 table, th, td {
 	background-color: #2b748f;
 	border: 3px solid #95bac7;
-	margin-top: 10px;
+	margin-top: 90px;
 }
  
 td {
 	padding-top: 0px;
 	padding-bottom: 0px;
-	width: 120px;
 	text-align:center;
 	vertical-align:middle;
 	border-width: 0px 1px 1px 1px;
@@ -32,7 +31,14 @@ td.first {
 }
 
 tr.first {
-	height: 20px;
+	height: 27px;
+}
+
+div.first{
+	position:fixed;
+	left:0;
+	right:0;
+	margin-top: -6px
 }
 tr {
 	height: 65px;
@@ -41,12 +47,20 @@ tr {
 .date{
 	text-align: center;
 	font-size: 20px;	
-	margin-bottom: 0px;
-	margin-top: -22px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top:60px;
+	z-index:-1;
 }
 
+.links {
+	position: fixed;
+	top: 60px;
+}
 .links a{
 	margin: 0px 10px;
+	margin-top: 20px;
 	font-size: 20px;
 }
 
@@ -92,12 +106,14 @@ a.to_pay{
 	font-size:12px;
 }
 
-.time, .noTime{
+.time, .noTime, .noTimeOrBooking{
 	padding: 0px;
 	position:relative;
 	z-index:2;
 	font-size: 18px;
+	width: 90px;
 }
+
 
 .time{
 	margin-top: 5px;
@@ -110,7 +126,7 @@ a.to_pay{
 }
 
 .noTimeOrBooking{
-margin-top: -16px;
-color: #1A4656;
-font-size: 18px;
+	margin-top: -16px;
+	color: #1A4656;
+	font-size: 18px;
 }

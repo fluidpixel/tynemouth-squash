@@ -1,15 +1,15 @@
 <h1>Tynemouth Squash Court Bookings <%= @value %></h1>
-
+<div id="clearfix"></div>
 <div class="links"> 
 <%= link_to "Prev", :day => (@day - 1) %> 
 <%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
-<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :class => 'date' %><% end %>
+<% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
 </div>
 <div class="date"> <%= @bookingDay %></div>
 <table>
 <% Court.all.each do |court| %>
   <tr class="first">
-    <td class="first" colspan="20" >Court <%= court.id %></td>
+    <td class="first" colspan="20" ><div class="first">Court <%= court.id %></div></td>
     </tr>
     <tr>
     <% instance_variable_get("@#{'court' + court.id.to_s + 'Slots'}").each do |timeSlot| %>
