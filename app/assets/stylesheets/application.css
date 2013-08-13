@@ -12,7 +12,7 @@
  *= require_tree .
  */
  
- h1, h2{
+ h1{
 text-align: center;
 margin-bottom: 5px;
 margin-top: 25px;
@@ -21,6 +21,16 @@ left: 0;
 right: 0;
 top: 0;
 z-index: -2;
+}
+
+h2{
+text-align:center;
+margin-top: 60px;
+}
+
+h2.newPlayer{
+margin-top: 65px;
+margin-bottom: -65px;
 }
 
 a {
@@ -39,6 +49,9 @@ margin: 0px;
 	clear: both;
 }
 
+#center {
+	text-align: center;
+}
 ul
 {
 	margin: 7px 0px 0px 0px;
@@ -60,10 +73,19 @@ ul li { display: inline; }
 	right: 4px;
 	float: right;
 	position: fixed;
+	z-index: -1;
+}
+
+#flashnotice{
+	text-align: right;
+	top:24px;
+	right: 4px;
+	position: fixed;
 	z-index: -2;
 }
 
 form
 {
 	text-align: center;
+	margin-top:80px;
 }

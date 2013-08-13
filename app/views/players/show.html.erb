@@ -1,5 +1,7 @@
 <h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><h2><% if @player.admin %>Admin<% end %></h2>
+<div id="center">
 <h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3>
+
 <p>
   Tel: <%= @player.tel %>
 </p>
@@ -10,3 +12,4 @@
     <%= link_to booking.start_time.strftime("%H:%M on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %></strong>
   </p>
 <% end %>
+</div>
