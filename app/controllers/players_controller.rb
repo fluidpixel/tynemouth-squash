@@ -31,6 +31,14 @@ def update
     render 'edit'
   end
 end
+
+def list
+
+   @players = Player.order(:last_name).where('lower(last_name) like ?', "%#{params[:term].downcase}%")
+    #@players = Player.all
+    render json: @players.map(&:last_name)
+  end
+  
 private
   def player_params
     params.require(:player).permit(:first_name, :last_name, :tel, :membership_number, :admin)

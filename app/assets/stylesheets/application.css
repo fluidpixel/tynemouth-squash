@@ -10,12 +10,13 @@
  *
  *= require_self
  *= require_tree .
+
  */
  
  h1{
 text-align: center;
 margin-bottom: 5px;
-margin-top: 25px;
+margin-top: 28px;
 position: fixed;
 left: 0;
 right: 0;
@@ -52,7 +53,7 @@ margin: 0px;
 #center {
 	text-align: center;
 }
-ul
+ul.nav
 {
 	margin: 7px 0px 0px 0px;
 	padding: 0;
@@ -65,7 +66,7 @@ ul
 	z-index: -2;
 }
 
-ul li { display: inline; }
+ul.nav li.nav { display: inline; }
 
 #user_nav{
 	text-align: right;
@@ -89,3 +90,35 @@ form
 	text-align: center;
 	margin-top:80px;
 }
+
+#errorExplanation ul{
+ list-style: none;
+ color: Gold;
+}
+.ui-helper-hidden-accessible
+{
+	display:none;
+}
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+  background-color: #FFF;
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
+} 

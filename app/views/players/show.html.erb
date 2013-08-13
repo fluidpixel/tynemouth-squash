@@ -1,5 +1,6 @@
+<div id="center" class="players">
 <h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><h2><% if @player.admin %>Admin<% end %></h2>
-<div id="center">
+
 <h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3>
 
 <p>

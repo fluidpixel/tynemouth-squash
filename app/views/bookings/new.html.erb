@@ -1,21 +1,18 @@
-<h1>Book <%= @court.court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<h1>Book <%= @court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
 <%= form_for :booking, url: bookings_path do |f| %>
-  <p>
-  <%= f.hidden_field :court_id, :value => params[:court] %>
-    <!-- <%= f.collection_select :court_id, @courts.all, :id, :court_name, :selected => params[:court] %> -->
-  </p>
-  <% if current_player %>
-  <%= f.hidden_field :player_id, :value => current_player.id %>
-  <% else %>
+	<%= render "layouts/error_messages", :target => @booking %>
+  <% if is_admin %>
+	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>
+  <% elsif current_player %>
    <p>
-   <%= f.collection_select :player_id, @players.all, :id, :last_name %>
+    <%= f.hidden_field :player_id, :value => current_player.id %>
   </p>
   <% end %>
   <p>
-	  <%= f.hidden_field :start_time, :value => @time %>
-	  <%= f.hidden_field :days, :value => @days %>
-	  <%= f.hidden_field :time_slot_id, :value => params[:timeSlot] %>
-	  <%= f.hidden_field :court_time, :value => 40 %>
+	  <%= f.hidden_field :start_time %>
+	  <%= f.hidden_field :time_slot_id %>
+	  <%= f.hidden_field :court_time %>
+	  <%= f.hidden_field :court_id %>
 	   <!--Court Time: <%= number_field_tag :courtTime, 40, in: 40...400, step: 40 %>-->
   </p>
   <%= %>

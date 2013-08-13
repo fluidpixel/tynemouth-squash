@@ -1,24 +1,29 @@
 class BookingsController < ApplicationController
 
 def new
-	@courts = Court.all
-	@players = Player.all
+	@court = Court.find(params[:court]) if(params[:court])
+	@court_name = @court.court_name
+	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
+	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
 	
+    @booking = Booking.new	
+	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
+	@booking.time_slot_id = @timeSlot.id
+	@booking.court_time = 40
+	@booking.court_id = @court.id
 	
-	@court = Court.find(params[:court])
-	@timeSlot = TimeSlot.find(params[:timeSlot])
-	
-	@time = DateTime.parse(params[:hour] + ':' + params[:min])
-	@time = @time + (params[:days]).to_i.days
-	
-	@days = params[:days]
-    @booking = Booking.new
+	@days = params[:days] if(params[:days])
+	@booking.player_id = :last_name if(:last_name)
 end
 
 def create
 	@booking = Booking.new(booking_params)
-	@days = params[:booking][:days]
 	
+	@days = params[:booking][:days]
+
+	@court_name = @booking.court.court_name	
+	@time = @booking.start_time
+	@time_slot_id = @booking.time_slot_id
 	if @booking.save
 		redirect_to bookings_path(:day => @days)
 	else
@@ -97,7 +102,7 @@ end
 	
 private
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name)
   end
   respond_to :html, :js
 end

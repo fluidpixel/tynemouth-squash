@@ -1,0 +1,8 @@
+<% if target.errors.any? %>
+<div id="errorExplanation">
+  <!--<h2><%= pluralize(target.errors.count, "error") %> prohibited this record from being saved:</h2>-->
+  <ul>
+  <li><%= target.errors.first[1] %></li>
+  </ul>
+</div>
+<% end %>
