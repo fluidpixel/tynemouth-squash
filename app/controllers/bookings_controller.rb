@@ -25,7 +25,11 @@ def create
 	@time = @booking.start_time
 	@time_slot_id = @booking.time_slot_id
 	if @booking.save
-		redirect_to bookings_path(:day => @days)
+		if @days
+			redirect_to bookings_path(:day => @days)
+		else
+			redirect_to players_path
+		end
 	else
 		render 'new'
 	end
