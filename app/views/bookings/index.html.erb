@@ -1,4 +1,5 @@
 <h1>Tynemouth Squash Court Bookings</h1>
+
 <div id="clearfix"></div>
 <div class="links"> 
 	<%= link_to "Prev", :day => (@day - 1) %> 
@@ -6,9 +7,15 @@
 	<% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
 </div>
 
-<div class="date"><%= @bookingDay %></div>
+<div class="date">
+	<%= @bookingDay %>
+	
+</div>
 
 <table>
+<% if !@isBookingTime %>
+	<tr class="first"><td colspan="20">Court booking is not available until the Club opens for the day</td></tr>
+<% end %>
 <% Court.all.each do |court| %>
   <tr class="first">
     <td class="first" colspan="20" ><div>Court <%= court.id %></div></td>

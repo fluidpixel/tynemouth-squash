@@ -68,12 +68,13 @@ def index
 	else
 		@day = 0
 	end
-	@bookingDay = (DateTime.now + @day.days).strftime("%A %d %B")
+	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
 	
+
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
 	weekend = [6, 0] #[saturday, sunday]
-	if (weekend.include?((DateTime.now + @day.days).wday))
+	if (weekend.include?((DateTime.current + @day.days).wday))
 		@court1Slots = TimeSlot.where(:court_id => 1)
 		@court2Slots = TimeSlot.where(:court_id => 2)
 		@court3Slots = TimeSlot.where(:court_id => 3)
@@ -85,6 +86,12 @@ def index
 		@court3Slots = TimeSlot.where(:court_id => 3).where(:weekday => true)
 		@court4Slots = TimeSlot.where(:court_id => 4).where(:weekday => true)
 		@court5Slots = TimeSlot.where(:court_id => 5).where(:weekday => true)
+	end
+	
+	if (@day == 21)
+		@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+	else
+		@isBookingTime = true;
 	end
 	
 end
