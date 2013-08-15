@@ -78,7 +78,7 @@ ul.nav li.nav { display: inline; }
 	z-index: -1;
 }
 
-#flashalert{
+#flashalert, #flashnotice{
 	text-align: right;
 	top:24px;
 	right: 4px;
