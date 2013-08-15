@@ -14,3 +14,10 @@
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
 //= require_tree .
+
+$(document).on('click', 'a', function(e) {
+    if ($(this).attr('target') !== '_blank') {
+        e.preventDefault();
+        window.location = $(this).attr('href');
+    }
+});
