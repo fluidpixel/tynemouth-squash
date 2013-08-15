@@ -16,7 +16,8 @@
 //= require_tree .
 
 $(document).on('click', 'a', function(e) {
-    if ($(this).attr('target') !== '_blank') {
+    if ($(this).attr('target') !== '_blank' && event.target.href) 
+    {
         e.preventDefault();
         window.location = $(this).attr('href');
     }
