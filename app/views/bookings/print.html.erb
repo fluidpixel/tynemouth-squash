@@ -4,9 +4,6 @@
 <%= link_to "Prev", :day => (@day - 1) %> 
 <%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
 <% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
-
-<%= link_to 'print me', print_path %>
-
 </div>
 <div class="date"> <%= @bookingDay %></div>
 <table>

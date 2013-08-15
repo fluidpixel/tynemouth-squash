@@ -1,0 +1,9 @@
+<p><%= @greeting %>,</p>
+
+<% if @bookings %>
+		<% @bookings.each do |booking| %>
+			<p><%= booking.id %> | <%= booking.court.court_name %> | <%= booking.start_time.strftime("%H:%M") %> <%= booking.player.first_name %> <%= booking.player.last_name %></p>
+	<% end %>
+<% end %>
+
+<p>Print them for reference or 'just in case'</p>
