@@ -8,7 +8,7 @@ validates_uniqueness_of :membership_number
 
 def self.authenticate(last_name, membership_number)
   player = Player.where('lower(last_name) = ?', last_name.downcase).first
-  if player && player.membership_number == membership_number.to_i
+  if player && player.membership_number == membership_number
     player
   else
     nil

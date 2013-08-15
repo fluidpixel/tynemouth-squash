@@ -32,7 +32,7 @@ td.first {
 }
 
 tr.first {
-	height: 27px;
+	height: 30px;
 }
 
 div.first{
@@ -42,7 +42,7 @@ div.first{
 	margin-top: -6px
 }
 tr {
-	height: 65px;
+	height: 80px;
 }
 
 .date{
@@ -69,10 +69,10 @@ tr {
 .book, .login_to_book {
 	 color: green;
 	 font-weight: bold;
-	 font-size: 11px;
+	 font-size: 16px;
+	 line-height:18px;
 	 text-decoration: none;
 	 background: lightgreen;
-	 //padding: 5px 5px;
 	 z-index:1;
 	 position:relative;
 }
@@ -84,13 +84,14 @@ tr {
 
 .booked {
 	z-index: 3;
-	margin-top: -5px;
-	margin-bottom: -40px;
+	margin-top: 5px;
+	margin-bottom: -55px;
+	line-height: 15px;
+	font-size: 18px;
 }
 
 .booked a{
-	color: #D5E3E9;
-	font-size: 13px;
+	color: #D5E3E9;	
 }
 .paid {
 	z-index: 4;
@@ -112,13 +113,13 @@ a.to_pay{
 	padding: 0px;
 	position:relative;
 	z-index:2;
-	font-size: 18px;
+	font-size: 32px;
 	width: 90px;
 }
 
 
 .time{
-	margin-top: 5px;
+	margin-top: 20px;
 	margin-bottom: 6px;
 }
 
