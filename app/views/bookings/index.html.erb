@@ -1,14 +1,13 @@
 <h1>Tynemouth Squash Court Bookings</h1>
 <div id="clearfix"></div>
 <div class="links"> 
-<%= link_to "Prev", :day => (@day - 1) %> 
-<%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
-<% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
-
-<%= link_to 'print me', print_path %>
-
+	<%= link_to "Prev", :day => (@day - 1) %> 
+	<%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
+	<% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
 </div>
-<div class="date"> <%= @bookingDay %></div>
+
+<div class="date"><%= @bookingDay %></div>
+
 <table>
 <% Court.all.each do |court| %>
   <tr class="first">

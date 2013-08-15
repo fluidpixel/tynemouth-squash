@@ -89,8 +89,7 @@ def index
 	
 end
 
-
-def print
+def print1
 	if (params[:day])
 		@day = params[:day].to_i
 	else
@@ -106,6 +105,7 @@ def print
 	
 	redirect_to :back
 end
+helper_method :print1
 
 def toggle_paid  
 	@booking = Booking.find(params[:id])  

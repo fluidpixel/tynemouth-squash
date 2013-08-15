@@ -33,5 +33,4 @@ class Booking < ActiveRecord::Base
 			self.player_id = player.id
 		end
 	end
-
 end
