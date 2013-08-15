@@ -89,24 +89,6 @@ def index
 	
 end
 
-def print1
-	if (params[:day])
-		@day = params[:day].to_i
-	else
-		@day = 0
-	end
-	@bookingDay = (DateTime.now + @day.days).strftime("%A %d %B")
-	
-	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
-	
-	BookingMailer.daily_email.deliver
-
-	flash.now.alert = 'email sent'
-	
-	redirect_to :back
-end
-helper_method :print1
-
 def toggle_paid  
 	@booking = Booking.find(params[:id])  
 	@booking.toggle!(:paid)  

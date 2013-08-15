@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806081506) do
+ActiveRecord::Schema.define(version: 20130815100452) do
 
   create_table "bookings", force: true do |t|
     t.integer  "court_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20130806081506) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "tel"
-    t.integer  "membership_number"
+    t.string   "membership_number"
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"

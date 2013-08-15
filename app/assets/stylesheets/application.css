@@ -122,3 +122,10 @@ ul.ui-autocomplete {
     }
   }
 } 
+
+.hint{
+	font-style: italic;
+	font-weight: lighter;
+	font-family: sans-serif;
+	
+}

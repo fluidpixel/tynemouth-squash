@@ -1,28 +1,9 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Booking system for a squash (or any) club that has courts (or tables, or pitches, or lanes) and set time slots for those courts that can be booked.
 
-Things you may want to cover:
+Bookings can be made by members who login with their last name and membership numbers.
 
-* Ruby version
+Admins have rights to book courts under any players name, remove and change bookings.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Admins are also able to mark the court as paid/un paid upon collection of payment. 
