@@ -7,7 +7,11 @@
 <% end %>
 
 <%= form_for :booking, url: bookings_path do |f| %>
+<%if is_admin %>
 <%= link_to 'Change Player', edit_booking_path(@booking) %> | <%= link_to 'Remove Booking', booking_path(@booking),
                     method: :delete, data: { confirm: 'Are you sure?' } %>
+<% else %>
+Please contact the club to change or cancel a booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
+<% end %>
 
 <% end %>
