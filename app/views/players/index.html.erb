@@ -5,14 +5,14 @@
 <% end %>
 <table>
   <tr>
-  <th>Membership Number</th>
+	<%if is_admin %><th>Membership Number</th><% end %>
     <th>Player</th>
-    <th>Tel</th>
-    <th>Bookings</th>
+    <th>Telephone</th>
+    <th>Future Bookings</th>
   </tr>
   <% @players.each do |player| %>
     <tr>
-		<td class="first"><%= player.membership_number %></td>
+		<%if is_admin %><td class="first"><%= player.membership_number %></td><% end %>
 		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id), :class => 'playerIndex' %></td>
 		<td><%= player.tel %></td>
 		<td><%= player.future_bookings.count %></td>
