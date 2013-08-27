@@ -12,8 +12,8 @@ end
 resources :players
 resources :sessions
 
-get "print" => "bookings#print", :as => 'print'
-get 'playerlist' => 'players#list', as: :playerlist
+
+get 'playerlist' => 'players#list', :as => :playerlist
 get "log_in" => "sessions#new", :as => "log_in"
 get "log_out" => "sessions#destroy", :as => "log_out"
 get "sessions/new"

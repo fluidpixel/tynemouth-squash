@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require_tree .
 
+/*
 $(document).on('click', 'a', function(e) {
     if ($(this).attr('target') !== '_blank' && event.target.href) 
     {
@@ -22,3 +23,4 @@ $(document).on('click', 'a', function(e) {
         window.location = $(this).attr('href');
     }
 });
+*/
