@@ -104,6 +104,11 @@ form
 	margin-top:80px;
 }
 
+form a
+{
+	font-size:24px;
+	margin-bottom: 10px;
+}
 input, select
 {
 	width: 200px;
@@ -153,4 +158,9 @@ ul.ui-autocomplete {
 	font-weight: lighter;
 	font-family: sans-serif;
 	
+}
+
+p.paragraph{
+	text-align: center;
+	margin-top: 75px;
 }

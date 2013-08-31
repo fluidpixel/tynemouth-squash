@@ -38,6 +38,10 @@ end
 def show
   @booking = Booking.find(params[:id])
   @court = Court.find(@booking.court_id)
+  if (((Time.current + 2.days) <= @booking.start_time))
+    @cancellable = true
+    @timeLeft = (((Time.current + 2.days) - @booking.start_time)).to_i * -1
+  end
   if (!@booking.player_id.blank?)
 	  @player = Player.find(@booking.player_id)
   end
@@ -45,6 +49,13 @@ end
 
 def edit
 	@booking = Booking.find(params[:id])
+  
+  if (@booking.player_id == session[:player_id] || Player.find(session[:player_id]).admin)
+    @allowEdit = true
+  else
+    @allowEdit = false
+  end
+  
 	@courts = Court.all
 	@players = Player.all
 end

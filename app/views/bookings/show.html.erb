@@ -1,17 +1,21 @@
 <h1><%= @court.court_name %></h1>
-
 <% if @player %>
-<h2><%= @player.first_name %> <%= @player.last_name %> | <%= @booking.start_time.strftime("%H:%M on %A %Ith %B") %></h2>
+	<h2><%= @player.first_name.humanize %> <%= @player.last_name.humanize %> | <%= @booking.start_time.strftime("%H:%M on %A %Ith %B") %></h2>
 <% else %>
-<p>Book Court</p>
+	<p>Book Court</p>
 <% end %>
 
 <%= form_for :booking, url: bookings_path do |f| %>
-<%if is_admin %>
-<%= link_to 'Change Player', edit_booking_path(@booking) %> | <%= link_to 'Remove Booking', booking_path(@booking),
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
-<% else %>
-Please contact the club to change or cancel a booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
-<% end %>
+	<%if is_admin %>
+		<%= link_to 'Change Player', edit_booking_path(@booking) %> <br />
+	<% end %>
+	<% if @cancellable %>
+		<%= link_to 'Cancel Booking', booking_path(@booking),
+		                    method: :delete, data: { confirm: 'Are you sure?' } %>
+		<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
+		<p><i>(after this you could be subject to full court fees)</i></p>
+	<% else %>
+		Please contact the club to change or cancel this booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
+	<% end %>
 
 <% end %>
