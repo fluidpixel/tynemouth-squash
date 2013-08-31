@@ -2,6 +2,8 @@ class PlayersController < ApplicationController
 
 def new
     @player = Player.new
+    @membership_types = MembershipType.all
+    
   end
   
 def create
@@ -12,10 +14,16 @@ end
  
 def show
   @player = Player.find(params[:id])
+  @membership_type = MembershipType.find(@player.membership_type_id).membership_type
 end
 
 def index
   @players = Player.all
+  @membership_types = MembershipType.all
+  
+  #if (!Player.membership_type_id.blank?)
+	#  @membership_type = MembershipType.find(Player.membership_type_id)
+  #end
 end
 
 def edit
@@ -25,7 +33,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :tel, :membership_number, :admin))
+  if @player.update(params[:player].permit(:first_name, :last_name, :telephone, :membership_number, :admin))
     redirect_to @player
   else
     render 'edit'
@@ -42,7 +50,7 @@ def list
   
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :tel, :membership_number, :admin)
+    params.require(:player).permit(:first_name, :last_name, :telephone, :membership_number, :membership_type_id, :admin)
   end
 
 end

@@ -34,9 +34,19 @@ ActiveRecord::Schema.define(version: 20130815100452) do
   create_table "players", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "tel"
+    t.string   "telephone"
+    t.string   "email"
     t.string   "membership_number"
-    t.boolean  "admin"
+    t.integer  "membership_type_id"
+    t.boolean   "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+  
+  create_table "membership_types", force: true do |t|
+    t.string   "membership_type"
+    t.float    "court_cost"
+    t.float    "membership_cost"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

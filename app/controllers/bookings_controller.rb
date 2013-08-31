@@ -6,7 +6,7 @@ def new
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
 	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
 	
-    @booking = Booking.new	
+  @booking = Booking.new	
 	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
 	@booking.time_slot_id = @timeSlot.id
 	@booking.court_time = 40

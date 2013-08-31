@@ -6,8 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+MembershipType.create([
+  { membership_type: 'country', court_cost: '6.00', membership_cost: '1000'},
+  { membership_type: 'family', court_cost: '6.00', membership_cost: '1000'},
+  { membership_type: 'junior', court_cost: '3.00', membership_cost: '1000'},
+  { membership_type: 'couple', court_cost: '6.00', membership_cost: '1000'},
+])
+
 Player.create([
-{ first_name: 'Stuart', last_name: 'Varrall', tel: '0191', membership_number: '100', admin: 'true'}
+{ first_name: 'Stuart', last_name: 'Varrall', telephone: '0191', membership_number: '100', membership_type_id: '3', admin: 'true'}
 ])
 
 Court.create([
