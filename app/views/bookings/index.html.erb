@@ -9,21 +9,25 @@
 
 <div class="date">
 	<%= @bookingDay %>
-	
 </div>
 
 <table>
 <% if !@isBookingTime %>
 	<tr class="first"><td colspan="20">Court booking is not available until the Club opens for the day</td></tr>
 <% end %>
-<% Court.all.each do |court| %>
-  <tr class="first">
-    <td class="first" colspan="20" ><div>Court <%= court.id %></div></td>
-    </tr>
-    <tr>
-    <% instance_variable_get("@#{'court' + court.id.to_s + 'Slots'}").each do |timeSlot| %>
-		<%= render "timeSlots" , :timeSlot => timeSlot, :bookings => @daysBookings, :day => @day, :court_id => court.id %>
+<tr>
+	<% @courts.each do |court| %>
+	<th colspan="1"> Court <%= court.id %></th>
 	<% end %>
-  </tr>
+</tr>
+
+<% (1..@slots - 1).each do |i| %>
+<tr>
+	<td><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
+	<td><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>
+	<td><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 2 %></td>
+	<td><%= render "timeSlots" , :timeSlot => @court2Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 1 %></td>
+	<td><%= render "timeSlots" , :timeSlot => @court1Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 0 %></td>
+</tr>
  <% end %> 
 </table>

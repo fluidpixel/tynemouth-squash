@@ -1,4 +1,3 @@
-<td>
 	<% @booked = false %>	    
 	<% if bookings %>
 		<% bookings.each do |booking| %>
@@ -32,8 +31,11 @@
 			<% end %>
 		<% end %>
 	<% elsif @day < 0 %>
-		<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%H:%M")%></div>
+		<% if !@booked %>
+			<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%H:%M")%></div>
+			<% else %>
+				<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
+			<% end %>
 	<% else %>
 		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
 	<% end %>
-</td> 
