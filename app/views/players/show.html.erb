@@ -13,4 +13,11 @@
     <%= link_to booking.start_time.strftime("%H:%M on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= @vs_players[booking.vs_player_id - 1].first_name.capitalize %> <%= @vs_players[booking.vs_player_id - 1].last_name.capitalize %><% end %></strong>
   </p>
 <% end %>
+
+<h3><%= @vs_bookings.count %> Vs Bookings</h2>
+<% @vs_bookings.each do |booking| %>
+  <p>
+    <%= link_to booking.start_time.strftime("%H:%M on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= @vs_players[booking.vs_player_id - 1].first_name.capitalize %> <%= @vs_players[booking.vs_player_id - 1].last_name.capitalize %><% end %></strong>
+  </p>
+<% end %>
 </div>

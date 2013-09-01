@@ -16,6 +16,8 @@ def show
   @player = Player.find(params[:id])
   @vs_players = Player.all
   @membership_type = MembershipType.find(@player.membership_type_id + 1).membership_type
+  
+  @vs_bookings = Booking.where(:vs_player_id => @player.id)
 end
 
 def index
