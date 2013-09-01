@@ -2,9 +2,14 @@
 
 <div id="clearfix"></div>
 <div class="links"> 
-	<%= link_to "Prev", :day => (@day - 1) %> 
-	<%if @day < 21 %><%= link_to "Next", :day => (@day + 1) %><% else %> <%= link_to "No more courts", '' %><% end %>
-	<% if @day != 0 %><%= link_to "Today", { :day => 0 } %><% end %>
+	<%= link_to "Prev", {:day => (@day - 1)}, :id => 'change_day' %>
+	<% if is_admin %>
+		<%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %>
+	<% else %>
+		<%if @day < 21 %><%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '' %><% end %>
+	<% end %>
+	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day' %><% end %>
+	<% if @day != 21 %><%= link_to "Last Day", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
 </div>
 
 <div class="date">

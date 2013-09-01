@@ -16,20 +16,19 @@
  html {
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
  }
  
  body {
-color: Azure;
-font-family:arial;
-background-color: #27444F;
-margin: 0px;
-height: 100%;
-width: 100%;
-overflow-y: auto;
-overflow-x: auto;
-z-index: -100;
-position: absolute;
+	color: Azure;
+	font-family:arial;
+	background-color: #27444F;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: auto;
+	z-index: -100;
+	position: absolute;
 }
 
  h1{
@@ -55,7 +54,7 @@ margin-bottom: -65px;
 
 a {
  text-decoration: none;
- color: LightSlateGrey ;
+ color: LightSteelBlue ;
 }
 
 #clearfix {
