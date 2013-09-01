@@ -9,7 +9,7 @@
 					</div>
 					<% if is_admin %>
 					<div class="paid">
-						<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking), :remote => true, :id => "paid_link_#{booking.id}", :class => paid_link_class(booking) %>    
+						<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking), :remote => true, :id => "paid_link_#{booking.id}", :class => paid_link_class(booking), :title => membership_type_and_price(booking) %>    
 					</div>
 					<% end %>
 				<% else %>

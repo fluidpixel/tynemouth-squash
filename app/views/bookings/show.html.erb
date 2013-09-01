@@ -9,11 +9,15 @@
 	<%if is_admin %>
 		<%= link_to 'Change Player', edit_booking_path(@booking) %> <br />
 	<% end %>
-	<% if @cancellable %>
+	<% if @cancellable || is_admin %>
 		<%= link_to 'Cancel Booking', booking_path(@booking),
 		                    method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% if @timeLeft %>
 		<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
 		<p><i>(after this you could be subject to full court fees)</i></p>
+		<% else %>
+		<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+		<% end %>
 	<% else %>
 		Please contact the club to change or cancel this booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
 	<% end %>

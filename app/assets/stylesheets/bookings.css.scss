@@ -14,6 +14,10 @@ table, th, td {
 	margin-top: 90px;
 	width:768px;
 }
+
+th{
+		font-size: 30px;
+}
  
 td {
 	padding-top: 0px;
@@ -67,6 +71,9 @@ tr {
 	font-size: 20px;
 }
 
+.links a.last_day{
+	color: gold;
+}
 .book, .login_to_book {
 	 color: green;
 	 font-weight: bold;
@@ -108,12 +115,12 @@ tr {
 	font-size:12px;
 }
 
-a.to_pay_couple{
-	color: Gold ;
+a.to_pay_couple, a.to_pay_full, a.to_pay_life, a.to_pay_country{
+	color: gold ;
 }
 
-a.to_pay_country{
-	color:red;
+a.to_pay_junior, a.to_pay_student{
+	color: red;
 }
 
 .time, .noTime, .noTimeOrBooking{
