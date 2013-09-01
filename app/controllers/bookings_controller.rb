@@ -84,7 +84,7 @@ end
 def update
   @booking = Booking.find(params[:id])
 
-  if @booking.update(params[:booking].permit(:court_id, :player_id, :start_time, :court_time, :vs_player_name))
+  if @booking.update(params[:booking].permit(:court_id, :player_id, :last_name, :start_time, :court_time, :vs_player_name))
     redirect_to @booking
   else
     render 'edit'

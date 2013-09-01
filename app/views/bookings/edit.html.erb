@@ -16,10 +16,10 @@
   
 		<p>
 			<!--<%= f.collection_select :court_id, @courts.all, :id, :court_name %> -->
-			<%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: @player.last_name %>
+			<%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: @player.first_name + ' ' + @player.last_name %>
 			<br />
 			<% if @vs_player %>
-			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, value: @vs_player.last_name %>
+			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, value: @vs_player.first_name + ' ' + @vs_player.last_name %>
 			<% else %>
 			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
 			<% end %>

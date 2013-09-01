@@ -23,12 +23,13 @@ class Booking < ActiveRecord::Base
 	end
 	
 	def last_name
-		player.try(:last_name)
+		player.try(:first_name)
 	end
 	
 	def last_name=(last_name)
-		player = Player.where('lower(last_name) = ?', last_name.downcase).first if last_name.present?
-		
+    last_name = last_name.downcase
+    
+		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first if last_name.present?
 		if player
 			self.player_id = player.id
 		end
@@ -39,7 +40,9 @@ class Booking < ActiveRecord::Base
 	end
 	
 	def vs_player_name=(vs_player_name)
-		player = Player.where('lower(last_name) = ?', vs_player_name.downcase).first if vs_player_name.present?
+    vs_player_name = vs_player_name.downcase
+    
+		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', vs_player_name.split(" ")[0], vs_player_name.split(" ")[1]).first if vs_player_name.present?
 		
 		if player
 			self.vs_player_id = player.id

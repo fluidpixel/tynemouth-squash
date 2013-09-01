@@ -96,8 +96,8 @@ tr {
 	z-index: 3;
 	//margin-top: 5px;
 	//margin-bottom: -55px;
-	line-height: 24px;
-	font-size: 18px;
+	line-height: 18px;
+	//font-size: 18px;
 	float:right;
 }
 
@@ -107,7 +107,7 @@ tr {
 .paid {
 	z-index: 4;
 	position: absolute;
-	margin-top: 0px;
+	margin-top: -5px;
 }
 
 .paid a{
@@ -127,14 +127,14 @@ a.to_pay_junior, a.to_pay_student{
 	padding: 0px;
 	position:relative;
 	z-index:2;
-	font-size: 32px;
+	font-size: 30px;
 	//width: 90px;
 	float: left;
 }
 
 
 .time, .noTime, .noTimeOrBooking{
-	margin-top: 24px;
+	margin-top: 20px;
 	margin-left: 3px;
 	margin-bottom: 0px;
 }

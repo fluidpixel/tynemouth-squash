@@ -15,7 +15,7 @@ end
 def show
   @player = Player.find(params[:id])
   @vs_players = Player.all
-  @membership_type = MembershipType.find(@player.membership_type_id).membership_type
+  @membership_type = MembershipType.find(@player.membership_type_id + 1).membership_type
 end
 
 def index
@@ -44,9 +44,10 @@ end
 def list
    @players = Player.order(:last_name).where('lower(last_name) like ?', "%#{params[:term].downcase}%")
    @players = @players + Player.where('membership_number like ?', "%#{params[:term]}%")
-
+   @players = @players + Player.order(:first_name).where('lower(first_name) like ?', "%#{params[:term].downcase}%")
     #@players = Player.all
-    render json: @players.map(&:last_name)
+    render json: @players.map { |player| player.first_name + ' ' + player.last_name }
+    #render json: @players.map(&:last_name,&:first_name)
   end
   
 private
