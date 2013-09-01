@@ -33,4 +33,16 @@ class Booking < ActiveRecord::Base
 			self.player_id = player.id
 		end
 	end
+  
+	def vs_player_name
+		player.try(:vs_player_name)
+	end
+	
+	def vs_player_name=(vs_player_name)
+		player = Player.where('lower(last_name) = ?', vs_player_name.downcase).first if vs_player_name.present?
+		
+		if player
+			self.vs_player_id = player.id
+		end
+	end
 end

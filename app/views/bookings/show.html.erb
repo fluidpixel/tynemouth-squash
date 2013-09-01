@@ -1,13 +1,17 @@
 <h1><%= @court.court_name %></h1>
 <% if @player %>
-	<h2><%= @player.first_name.humanize %> <%= @player.last_name.humanize %> | <%= @booking.start_time.strftime("%H:%M on %A %Ith %B") %></h2>
+	<h2><%= @player.first_name.humanize %> <%= @player.last_name.humanize %> | <%= @booking.start_time.strftime("%H:%M on %A %Ith %B") %>
+		<% if @vs_player %>
+			<br />Against <%= @vs_player.first_name.humanize %> <%= @vs_player.last_name.humanize %>
+		<% end %>
+	</h2>
 <% else %>
 	<p>Book Court</p>
 <% end %>
 
 <%= form_for :booking, url: bookings_path do |f| %>
 	<%if is_admin %>
-		<%= link_to 'Change Player', edit_booking_path(@booking) %> <br />
+		<%= link_to 'Change Player(s)', edit_booking_path(@booking) %> <br />
 	<% end %>
 	<% if @cancellable || is_admin %>
 		<%= link_to 'Cancel Booking', booking_path(@booking),

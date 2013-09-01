@@ -14,6 +14,8 @@ def new
 	
 	@days = params[:days] if(params[:days])
 	@booking.player_id = :last_name if(:last_name)
+  @booking.vs_player_id = :vs_player_name if (:vs_player_name)
+  
 end
 
 def create
@@ -45,6 +47,10 @@ def show
   if (!@booking.player_id.blank?)
 	  @player = Player.find(@booking.player_id)
   end
+  if (!@booking.vs_player_id.blank?)
+    @vs_player = Player.find(@booking.vs_player_id)
+  end
+  
 end
 
 def edit
@@ -54,6 +60,14 @@ def edit
     @allowEdit = true
   else
     @allowEdit = false
+  end
+  
+  if (!@booking.player_id.blank?)
+	  @player = Player.find(@booking.player_id)
+  end
+  
+  if (!@booking.vs_player_id.blank?)
+    @vs_player = Player.find(@booking.vs_player_id)
   end
   
 	@courts = Court.all
@@ -70,7 +84,7 @@ end
 def update
   @booking = Booking.find(params[:id])
 
-  if @booking.update(params[:booking].permit(:court_id, :player_id, :start_time, :court_time))
+  if @booking.update(params[:booking].permit(:court_id, :player_id, :start_time, :court_time, :vs_player_name))
     redirect_to @booking
   else
     render 'edit'
@@ -127,7 +141,7 @@ end
 	
 private
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name)
   end
   respond_to :html, :js
 end

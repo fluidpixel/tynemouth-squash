@@ -2,13 +2,14 @@
 <%= form_for :booking, url: bookings_path do |f| %>
 	<%= render "layouts/error_messages", :target => @booking %>
   <% if is_admin %>
-	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: current_player.last_name %>
-	  <p class="hint">(search via name or membership number)</p>
+	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: current_player.last_name %>  
   <% elsif current_player %>
   <p>
     <%= f.hidden_field :player_id, :value => current_player.id %>
   </p>
   <% end %>
+   <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
+   <p class="hint">(search via name or membership number)</p>
   <p>
 	  <%= f.hidden_field :start_time %>
 	  <%= f.hidden_field :time_slot_id %>
