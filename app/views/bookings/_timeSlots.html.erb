@@ -27,7 +27,7 @@
 					<%= link_to 'Book<br />Court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'book' %>
 				</div>
 			<% else %>
-				<%= link_to 'Login to<br/> Book'.html_safe, log_in_path, :class => 'login_to_book' %>
+				<%= link_to 'Login to Book'.html_safe, log_in_path, :class => 'login_to_book' %>
 			<% end %>
 		<% end %>
 	<% elsif @day < 0 %>
