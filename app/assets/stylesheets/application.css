@@ -16,13 +16,13 @@
  html {
 	height: 100%;
 	width: 100%;
-	background-color: #27444F;
+	background-color: #0A4B81;
  }
  
  body {
 	color: Azure;
-	font-family:arial;
-	background-color: #27444F;
+	font-family: 'Lato', sans-serif;
+	background-color: #0A4B81;
 	margin: 0px;
 	height: 100%;
 	width: 100%;
@@ -45,7 +45,7 @@ z-index: -2;
 
 h2{
 text-align:center;
-margin-top: 60px;
+margin-top: 74px;
 }
 
 h2.newPlayer{
@@ -155,9 +155,7 @@ ul.ui-autocomplete {
 
 .hint{
 	font-style: italic;
-	font-weight: lighter;
-	font-family: sans-serif;
-	
+	font-weight: lighter;	
 }
 
 p.paragraph{

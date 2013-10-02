@@ -15,7 +15,7 @@
     <th>Future Bookings</th>
   </tr>
   <% @players.each do |player| %>
-    <tr>
+    <tr class = "playerIndex" >
 		<%if is_admin %>
 			<td class="first"><%= player.membership_number %></td>
 			<td><%= @membership_types[player.membership_type_id - 1].membership_type %></td>

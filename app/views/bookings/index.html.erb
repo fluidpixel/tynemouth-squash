@@ -1,20 +1,4 @@
-<h1>Tynemouth Squash Court Bookings</h1>
-
-<div id="clearfix"></div>
-<div class="links"> 
-	<%= link_to "Prev", {:day => (@day - 1)}, :id => 'change_day' %>
-	<% if is_admin %>
-		<%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %>
-	<% else %>
-		<%if @day < 21 %><%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '' %><% end %>
-	<% end %>
-	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day' %><% end %>
-	<% if @day != 21 %><%= link_to "Last Day", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
-</div>
-
-<div class="date">
-	<%= @bookingDay %>
-</div>
+<h1>Tynemouth Squash Rackets Club - Court Booking</h1>
 
 <table>
 <% if !@isBookingTime %>
@@ -36,3 +20,24 @@
 </tr>
  <% end %> 
 </table>
+
+<div id="clearfix"></div>
+
+<div class="links"> 
+	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day' %><% end %>
+	<% if @day != 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
+</div>
+
+<div class="date">
+	<%= link_to "<", {:day => (@day - 1)}, :id => 'change_day' %>
+	
+	<%= @bookingDay %>
+	
+	<% if is_admin %>
+		<%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %>
+	<% else %>
+		<%if @day < 21 %><%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '' %><% end %>
+	<% end %>
+</div>
+
+<div id="clearfix"></div>

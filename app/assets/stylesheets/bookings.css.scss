@@ -9,14 +9,13 @@ table {
 }
 
 table, th, td {
-	background-color: #2b748f;
-	border: 3px solid #95bac7;
-	margin-top: 90px;
-	width:768px;
+	//background-color: #0A4B81;
+	margin-top: 65px;
+	border-left:solid 10px #0A4B81;
 }
 
 th{
-		font-size: 30px;
+	font-size: 25px;
 }
  
 td {
@@ -24,8 +23,13 @@ td {
 	padding-bottom: 0px;
 	text-align:center;
 	vertical-align:middle;
-	border-width: 0px 1px 1px 1px;
+	//border-width: 0px 1px 1px 1px;
 	line-height: 13px;
+	width:250px;
+	background-color: #F2F6F9;
+	border-bottom: #F2F6F9;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
 }
 
 td.first {
@@ -47,22 +51,23 @@ div.first{
 	margin-top: -6px
 }
 tr {
-	height: 50px;
+	height: 40px;
 }
 
 .date{
 	text-align: center;
-	font-size: 20px;	
-	position: fixed;
+	font-size: 30px;	
+	//position: fixed;
 	left: 0;
 	right: 0;
-	top:60px;
+	//bottom:10px;
+	margin-top: -28px;
 	z-index:-2;
 }
 
 .links {
-	position: fixed;
-	top: 60px;
+	//position: fixed;
+	margin-top: 18px;
 	z-index: -1;
 }
 .links a{
@@ -74,17 +79,21 @@ tr {
 .links a.last_day{
 	color: gold;
 }
+
+.booking_link{
+	 color: #285784;
+}
 .book, .login_to_book {
-	 color: green;
 	 font-weight: bold;
 	 font-size: 16px;
-	 line-height:24px;
+	 line-height:20px;
 	 text-decoration: none;
-	 background: lightgreen;
+	 background: #DAE6F1;
 	 z-index:1;
 	 position:relative;
 	 float:right;
-	 width:60px;
+	 width:145px;
+	 margin-right:40px;
 }
 
 .login_to_book{
@@ -96,27 +105,37 @@ tr {
 	z-index: 3;
 	//margin-top: 5px;
 	//margin-bottom: -55px;
+
 	line-height: 18px;
-	//font-size: 18px;
+	background: #AAC9E4;
+	width:145px;
+	margin-right:40px;
+	
 	float:right;
 }
 
 .booked a{
-	color: #D5E3E9;	
+	 color: #285784;
 }
 .paid {
 	z-index: 4;
 	position: absolute;
-	margin-top: -5px;
+	margin-top: 9px;
+	margin-left: 215px;
 }
 
 .paid a{
-	color: lightgreen;
-	font-size:12px;
+	background-color: #0A4B81;
+	font-size:14px;
+	padding: 7px 2px;
+	border-radius: 20px;
 }
 
 a.to_pay_couple, a.to_pay_full, a.to_pay_life, a.to_pay_country{
-	color: gold ;
+	color: white ;
+	background-color: green;
+	border-radius: 20px;
+	padding: 7px 4px;
 }
 
 a.to_pay_junior, a.to_pay_student{
@@ -127,15 +146,17 @@ a.to_pay_junior, a.to_pay_student{
 	padding: 0px;
 	position:relative;
 	z-index:2;
-	font-size: 30px;
+	font-size: 22px;
+	font-weight: 200;
 	//width: 90px;
 	float: left;
+	color: #426B8C;
 }
 
 
 .time, .noTime, .noTimeOrBooking{
-	margin-top: 20px;
-	margin-left: 3px;
+	margin-top: 14px;
+	margin-left: 4px;
 	margin-bottom: 0px;
 }
 

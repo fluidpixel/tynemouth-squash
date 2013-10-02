@@ -99,7 +99,8 @@ def index
 	end
 	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
 	
-
+  @vs_players = Player.all
+  
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
   @courts = Court.all(:order => "created_at DESC")
