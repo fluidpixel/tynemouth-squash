@@ -76,5 +76,8 @@ jQuery(function($){
 });
 
 function show(id) {
-  document.getElementById(id).style.visibility = 'visible';
-}
+	if ( document.getElementById(id).style.visibility == 'visible')
+	  document.getElementById(id).style.visibility = 'hidden';
+	else
+	 document.getElementById(id).style.visibility = 'visible';
+};
