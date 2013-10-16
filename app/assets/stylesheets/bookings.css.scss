@@ -56,13 +56,27 @@ div.first{
 	right:0;
 	margin-top: -6px
 }
+
 tr {
 	height: 40px;
 }
 
 #select_date, #select_admin_date{
 	visibility: hidden;
-	position: fixed;
+	position: absolute;
+	margin-left: 40%;
+	margin-top: 400px;
+	z-index:10;
+}
+
+.ui-widget-header{
+	border: none !important;
+	background: none !important;
+}
+
+.ui-widget-content, .ui-datepicker-title, .ui-datepicker th, .ui-state-default{
+	color: #0A4B81 !important;
+	font-family: 'Lato', sans-serif;
 }
 .date{
 	text-align: center;
