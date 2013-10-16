@@ -1,11 +1,14 @@
 class BookingsController < ApplicationController
 
 def new
+  @error = params[:error] if(params[:error])
 	@court = Court.find(params[:court]) if(params[:court])
 	@court_name = @court.court_name
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
-	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
-	
+  if(params[:hour])
+  	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
+  end
+  
   @booking = Booking.new	
 	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
 	@booking.time_slot_id = @timeSlot.id
@@ -19,22 +22,33 @@ def new
 end
 
 def create
-	@booking = Booking.new(booking_params)
+  player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
+  if player
+  	@booking = Booking.new(booking_params)
 	
-	@days = params[:booking][:days]
+  	@days = params[:booking][:days]
 
-	@court_name = @booking.court.court_name	
-	@time = @booking.start_time
-	@time_slot_id = @booking.time_slot_id
-	if @booking.save
-		if @days
-			redirect_to bookings_path(:day => @days)
-		else
-			redirect_to players_path
-		end
-	else
-		render 'new'
-	end
+  	@court_name = @booking.court.court_name	
+  	@time = @booking.start_time
+    
+  	@time_slot_id = @booking.time_slot_id
+  	if @booking.save
+  		if @days
+  			redirect_to bookings_path(:day => @days)
+  		else
+  			redirect_to players_path
+  		end
+  	else
+  		render 'new'
+  	end
+  else
+    #render :nothing => true
+     #@time = DateTime.parse('13' + ':' + '05')
+     #flash.now.alert = "Invalid Surname or Membership Number"
+     @error = "Invalid Name (" + params[:booking][:last_name] + ") or membership number (" + params[:booking][:membership_number] + ")"
+    redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => '13', :min => '05', :timeSlot => '87', :error => @error)
+  end
+  
 end
 
 def show
@@ -123,7 +137,8 @@ def index
 	end
 	
 	if (@day == 21)
-		@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+		#@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+    @isBookingTime = (Time.current.strftime("%H") >= "12")
 	else
 		@isBookingTime = true;
 	end

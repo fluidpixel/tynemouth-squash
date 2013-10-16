@@ -24,10 +24,12 @@
 		<% if @isBookingTime %>
 			<% if current_player %>
 				<div class="book">
-					<%= link_to 'Touch to &nbsp<br />book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
+					<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
 				</div>
 			<% else %>
-				<%= link_to 'Login to Book'.html_safe, log_in_path, :class => 'login_to_book' %>
+			<div class="book">
+				<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
+			</div>
 			<% end %>
 		<% end %>
 	<% elsif @day < 0 %>

@@ -2,20 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table {
+table.booking {
 	border-collapse:collapse;
 	margin: 0 auto;
 	z-index: 20;
 }
 
-table, th, td {
+table.booking, th.booking, td.booking {
 	//background-color: #0A4B81;
 	margin-top: 65px;
 	border-left:solid 10px #0A4B81;
 }
 
-th{
+th.booking{
 	font-size: 25px;
+	background-color: #0A4B81;
 }
  
 td {
@@ -40,6 +41,11 @@ td.first {
 	width:110px;
 }
 
+td.nobookings{
+	color: gold;
+	background-color: #0A4B81;
+	border-color: #0A4B81;
+}
 tr.first {
 	height: 30px;
 }
@@ -54,6 +60,10 @@ tr {
 	height: 40px;
 }
 
+#select_date, #select_admin_date{
+	visibility: hidden;
+	position: fixed;
+}
 .date{
 	text-align: center;
 	font-size: 30px;	
@@ -61,10 +71,23 @@ tr {
 	left: 0;
 	right: 0;
 	//bottom:10px;
-	margin-top: -28px;
+	margin-top: 0px;
 	z-index:-2;
 }
 
+.date a.day{
+	color:azure;
+}
+.date a.last_day{
+	color: gold;
+	font-size: 20px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+
+.date a.today{
+	font-size: 20px;
+}
 .links {
 	//position: fixed;
 	margin-top: 18px;
@@ -94,6 +117,8 @@ tr {
 	 float:right;
 	 width:145px;
 	 margin-right:40px;
+	 height: 38px;
+	 line-height: 38px;
 }
 
 .login_to_book{

@@ -8,9 +8,27 @@ validates_presence_of :last_name
 validates_uniqueness_of :membership_number
 
 def self.authenticate(last_name, membership_number)
-  player = Player.where('lower(last_name) = ?', last_name.downcase).first
-  if player && player.membership_number == membership_number
-    player
+  if last_name && membership_number
+      player = Player.where('lower(last_name) = ?', last_name.downcase).first
+    if player && player.membership_number == membership_number
+      player
+    else
+      nil
+    end
+  else
+    nil
+  end
+end
+
+def self.authenticateFullName(name, membership_number)
+  if name && membership_number
+      last_name = name.split(" ")[1]
+      player = Player.where('lower(last_name) = ?', last_name.downcase).first
+    if player && player.membership_number == membership_number
+      player
+    else
+      nil
+    end
   else
     nil
   end

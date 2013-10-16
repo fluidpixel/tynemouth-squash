@@ -7,6 +7,17 @@
   <p>
     <%= f.hidden_field :player_id, :value => current_player.id %>
   </p>
+  <% else %>
+	  <p>
+		   <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>
+	  </p>
+	  <p>
+	    <%= f.label 'Membership Number:' %>
+	    <%= f.text_field :membership_number, :value => '' %>
+	  </p>
+	  <p id="errorExplanation">
+		  <%= @error %>
+	  </p>
   <% end %>
    <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
    <p class="hint">(search via name or membership number)</p>
