@@ -13,11 +13,11 @@
 
 <% (1..@slots - 1).each do |i| %>
 <tr>
-	<td class="booking"><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
-	<td class="booking"><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>
-	<td class="booking"><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 2 %></td>
-	<td class="booking"><%= render "timeSlots" , :timeSlot => @court2Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 1 %></td>
-	<td class="booking"><%= render "timeSlots" , :timeSlot => @court1Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 0 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 5 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court2Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 2 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court1Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 1 %></td>
 </tr>
  <% end %> 
 </table>
