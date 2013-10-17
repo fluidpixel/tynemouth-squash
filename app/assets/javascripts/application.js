@@ -81,3 +81,14 @@ function show(id) {
 	else
 	 document.getElementById(id).style.visibility = 'visible';
 };
+
+/*
+$(document).click(function (e)
+{
+    var container = $("#select_admin_date");
+    if (container.has(e.target).length === 0)
+    {
+        //container.hide();
+    }
+});
+*/
