@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815100452) do
+ActiveRecord::Schema.define(version: 20131103233817) do
 
   create_table "bookings", force: true do |t|
     t.integer  "court_id"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20130815100452) do
     t.datetime "updated_at"
   end
 
+  create_table "membership_types", force: true do |t|
+    t.string   "membership_type"
+    t.float    "court_cost"
+    t.float    "membership_cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "players", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -39,17 +47,10 @@ ActiveRecord::Schema.define(version: 20130815100452) do
     t.string   "email"
     t.string   "membership_number"
     t.integer  "membership_type_id"
-    t.boolean   "admin"
+    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-  
-  create_table "membership_types", force: true do |t|
-    t.string   "membership_type"
-    t.float    "court_cost"
-    t.float    "membership_cost"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "super_admin"
   end
 
   create_table "time_slots", force: true do |t|
