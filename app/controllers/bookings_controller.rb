@@ -48,7 +48,8 @@ def create
      #@time = DateTime.parse('13' + ':' + '05')
      #flash.now.alert = "Invalid Surname or Membership Number"
      @error = "Invalid Name: (" + params[:booking][:last_name] + ") or membership number (#{params[:booking][:membership_number]})"
-    redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => '13', :min => '05', :timeSlot => '87', :error => @error)
+     court_time = 
+    redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => params[:booking][:start_time].to_time.strftime('%H'), :min => params[:booking][:start_time].to_time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error)
   end
   
 end
