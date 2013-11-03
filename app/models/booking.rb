@@ -28,7 +28,6 @@ class Booking < ActiveRecord::Base
 	
 	def last_name=(last_name)
     last_name = last_name.downcase
-    
 		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first if last_name.present?
 		if player
 			self.player_id = player.id

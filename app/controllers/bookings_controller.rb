@@ -22,7 +22,9 @@ def new
 end
 
 def create
+  
   player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
+  
   if player
   	@booking = Booking.new(booking_params)
 	
@@ -45,7 +47,7 @@ def create
     #render :nothing => true
      #@time = DateTime.parse('13' + ':' + '05')
      #flash.now.alert = "Invalid Surname or Membership Number"
-     @error = "Invalid Name (" + params[:booking][:last_name] + ") or membership number (" + params[:booking][:membership_number] + ")"
+     @error = "Invalid Name: (" + params[:booking][:last_name] + ") or membership number (#{params[:booking][:membership_number]})"
     redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => '13', :min => '05', :timeSlot => '87', :error => @error)
   end
   

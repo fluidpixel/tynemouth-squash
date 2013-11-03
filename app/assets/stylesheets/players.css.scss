@@ -11,3 +11,17 @@
 .players{
 	background-color: #0A4B81;
 }
+
+.playerTable{
+	background-color: #0A4B81;
+	margin: 95px auto 10px auto;
+}
+
+h2.newPlayer{
+	margin-top: 65px;
+	margin-bottom: -65px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: -2;
+}
