@@ -1,8 +1,9 @@
 <h1><% if !current_player %>Quick <% end %>Book <%= @court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<% if @error %>
 <p id="errorExplanation">
   <%= @error %>
 </p>
-
+<% end %>
 <%= form_for :booking, url: bookings_path do |f| %>
 	<%= render "layouts/error_messages", :target => @booking %>
   <% if is_admin %>

@@ -5,7 +5,13 @@
 				<% @booked = true %>
 				<%if booking.player %>
 					<div class="booked">
+						<% @class = membership_type(booking) %>
+						<% if @class == "trial" %>
+						<%= link_to booking.player.first_name.capitalize + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_players[booking.vs_player_id - 1].first_name.capitalize[0,1] + ' ' +  @vs_players[booking.vs_player_id - 1].last_name.capitalize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<% else %>
+						<% @class %>
 						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_players[booking.vs_player_id - 1].first_name.capitalize[0,1] + ' ' +  @vs_players[booking.vs_player_id - 1].last_name.capitalize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<% end %>
 					</div>
 					<% if is_admin %>
 					<div class="paid">

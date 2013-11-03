@@ -119,6 +119,9 @@ label
 #errorExplanation{
  list-style: none;
  color: Gold;
+ text-align: center;
+ margin-top: 80px;
+ margin-bottom: -58px;
 }
 .ui-helper-hidden-accessible
 {
