@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
     
   def is_bank_holiday(day)
-    bankholidays = Array["2013-12-25", "2013-12-26", "2014-01-01", "2014-04-18", "2014-04-21", "2014-05-05", "2014-05-26"]
+    bankholidays = Array["2013-12-25", "2013-12-26", "2014-01-01", "2014-04-18", "2014-04-21", "2014-05-05", "2014-05-26", "2014-08-25", "2014-12-25", "2014-12-26"]
     date = day.to_time
     bankholidays.include?(date.strftime("%Y-%m-%d"))
   end
