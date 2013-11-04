@@ -1,4 +1,5 @@
 <h1>Tynemouth Squash Rackets Club - Court Booking</h1>
+<h2><%= @holiday %></h2>
 <div id="select_date"></div>
 <div id="select_admin_date"></div>
 <table class="booking">
@@ -11,7 +12,7 @@
 	<% end %>
 </tr>
 
-<% (1..@slots - 1).each do |i| %>
+<% (0..@slots - 1).each do |i| %>
 <tr>
 	<td class="booking"><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 5 %></td>
 	<td class="booking"><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>

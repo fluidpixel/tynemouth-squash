@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104104719) do
+ActiveRecord::Schema.define(version: 20131104120708) do
 
   create_table "bookings", force: true do |t|
     t.integer  "court_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20131104104719) do
     t.boolean  "weekday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "bank_holiday", default: true
   end
 
 end

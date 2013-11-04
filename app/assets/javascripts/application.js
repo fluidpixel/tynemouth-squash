@@ -68,10 +68,14 @@ jQuery(function($){
 });
 
 jQuery(function($){
-	$('#select_admin_date').datepicker({
+	$('#select_admin_date').datepicker({dateFormat: "dd/mm/yy",
 	    onSelect: function(dateText, inst) { 
-	        window.location = 'http://mysite/events/Pages/default.aspx?dt=' + dateText;
-	    }
+			var newDate = dateText.slice(0,2);
+			var newMonth = dateText.slice(3,5);
+			if (newMonth < "10") { newMonth = ("0" + newMonth.slice(0,1));};
+			var newYear = dateText.slice(6,11);
+			var expDate = newMonth + "/" + newDate + "/" + newYear;
+			updateDays(expDate, inst);}
 	});
 });
 
