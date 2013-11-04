@@ -116,7 +116,7 @@ label
 	padding-right: 20px;
 	display: inline-block;
 }
-#errorExplanation{
+#errorExplanation, #flashwarning{
  list-style: none;
  color: Gold;
  text-align: center;

@@ -19,13 +19,14 @@
     <%= f.label 'first name' %><%= f.text_field :first_name %><br>
     <%= f.label 'last name' %><%= f.text_field :last_name %><br>  
 	<%= f.label 'telephone' %><%= f.text_field :telephone %><br>
-	<% if is_admin %>
+	<% if is_super_admin %>
 		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
 		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %>
 	<% end %>	
   </p>
 
 	<p>
-		<%= f.submit %>
+		<%= f.submit %> <%= button_to 'Delete Player', player_path(@player),
+		                    method: :delete, data: { confirm: 'Are you sure?' } %>
 	</p>
 <% end %>

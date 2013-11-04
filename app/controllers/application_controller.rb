@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_player
   helper_method :is_admin
+  helper_method :is_super_admin
   
   private
   
@@ -22,4 +23,11 @@ class ApplicationController < ActionController::Base
    end
    end
   
+   def is_super_admin
+   if (session[:player_id])
+    if current_player.super_admin
+    	@is_super_admin ||= current_player
+    	end
+    end
+    end
 end

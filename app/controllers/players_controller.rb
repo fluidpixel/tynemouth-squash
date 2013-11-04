@@ -30,7 +30,20 @@ def index
 end
 
 def edit
-	@player = Player.find(params[:id])
+  if is_super_admin
+  	@player = Player.find(params[:id])
+  else
+    flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
+    @player = Player.find(params[:id])
+    redirect_to @player
+  end
+end
+
+def destroy
+  @player = Player.find(params[:id])
+  @player.destroy
+ 
+  redirect_to players_path
 end
 
 def update
