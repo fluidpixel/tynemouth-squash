@@ -25,6 +25,17 @@ def create
   
   player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
   
+  #if params[:booking][:guest_booking]
+   # flash.alert = "Guest!"
+    #if player
+      
+    #else
+      #create new guest player
+      
+      #end
+    
+  #end
+  
   if player
   	@booking = Booking.new(booking_params)
 	
@@ -160,7 +171,7 @@ end
 	
 private
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name, :guest_booking)
   end
   respond_to :html, :js
 end

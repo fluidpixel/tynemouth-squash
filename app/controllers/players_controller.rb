@@ -3,6 +3,7 @@ class PlayersController < ApplicationController
 def new
     @player = Player.new
     @membership_types = MembershipType.all
+    @trial_membership = MembershipType.where(:membership_type => "trial")
     
   end
   

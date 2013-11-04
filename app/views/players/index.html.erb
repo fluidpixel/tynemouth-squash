@@ -1,7 +1,9 @@
 <h1>Players Listing</h1>
  
-<% if is_admin %>
+<% if is_super_admin %>
 	<h2 class="newPlayer"><%= link_to 'New Player', new_player_path %></h2>
+<% elsif is_admin %>
+	<h2 class="newPlayer"><%= link_to 'New Guest', new_player_path %></h2>
 <% end %>
 
 <table class="playerTable">
