@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def is_admin
   if (session[:player_id])
-   if current_player.admin
+   if current_player.admin || current_player.super_admin
    	@is_admin ||= current_player
    	end
    end

@@ -185,21 +185,18 @@ a.to_pay_junior, a.to_pay_student{
 }
 
 .time, .noTime, .noTimeOrBooking{
-	padding: 0px;
-	position:relative;
+	padding-top: 14px;
+	padding-left: 4px;
+	padding-bottom: 14px;
+	padding-right: 4px;
+	position:absolute;
 	z-index:2;
 	font-size: 22px;
 	font-weight: 200;
 	//width: 90px;
 	float: left;
 	color: #426B8C;
-}
-
-
-.time, .noTime, .noTimeOrBooking{
-	margin-top: 14px;
-	margin-left: 4px;
-	margin-bottom: 0px;
+	background-color: #F2F6F9;
 }
 
 .noTime{

@@ -6,11 +6,11 @@
 				<%if booking.player %>
 					<div class="booked">
 						<% @class = membership_type(booking) %>
-						<% if @class == "trial" %>
-						<%= link_to booking.player.first_name.capitalize + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_player.first_name.humanize + ' ' +  @vs_player.last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
+						 <!-- if it's a team or zumba then use the whole name -->
+						<% if @class == "class" %><%= link_to booking.player.first_name.capitalize + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_players[booking.vs_player_id].first_name.humanize[0,1] + ' ' +  @vs_players[booking.vs_player_id].last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
 						<% else %>
 						<% @class %>
-						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_players[booking.vs_player_id].first_name.capitalize[0,1] + ' ' +  @vs_players[booking.vs_player_id].last_name.capitalize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
 						<% end %>
 					</div>
 					<% if is_admin %>

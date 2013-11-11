@@ -23,8 +23,11 @@ end
 
 def create
   
-  player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
-  
+  if !is_admin
+    player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
+  else
+    player = Player.authenticateFullName(params[:booking][:last_name], "xxx")
+  end
   #if params[:booking][:guest_booking]
    # flash.alert = "Guest!"
     #if player
@@ -38,8 +41,8 @@ def create
   
   if player
   	@booking = Booking.new(booking_params)
-	
-  	@days = params[:booking][:days]
+    
+    @days = params[:booking][:days]
 
   	@court_name = @booking.court.court_name	
   	@time = @booking.start_time
@@ -59,7 +62,7 @@ def create
      #@time = DateTime.parse('13' + ':' + '05')
      #flash.now.alert = "Invalid Surname or Membership Number"
      @error = "Invalid Name: (" + params[:booking][:last_name] + ") or membership number (#{params[:booking][:membership_number]})"
-     court_time = 
+     
     redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => params[:booking][:start_time].to_time.strftime('%H'), :min => params[:booking][:start_time].to_time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error)
   end
   

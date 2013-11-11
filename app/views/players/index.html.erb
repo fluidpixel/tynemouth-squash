@@ -13,7 +13,8 @@
 		<th>Membership Type</th>
 	<% end %>
     <th>Player</th>
-    <th>Telephone</th>
+    <th>Landline</th>
+	<th>Mobile</th>
     <th>Future Bookings</th>
   </tr>
   <% @players.each do |player| %>
@@ -23,7 +24,8 @@
 			<td><%= @membership_types[player.membership_type_id].membership_type %></td>
 		<% end %>
 		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id), :class => 'playerIndex' %></td>
-		<td><%= player.telephone %></td>
+		<td><%= player.landline %></td>
+		<td><%= player.mobile %></td>
 		<td><%= player.future_bookings.count %></td>
     </tr>
   <% end %>

@@ -1,5 +1,7 @@
 class PlayersController < ApplicationController
 
+helper_method :sort_column, :sort_direction
+
 def new
     @player = Player.new
     @membership_types = MembershipType.all
@@ -22,7 +24,7 @@ def show
 end
 
 def index
-  @players = Player.all
+  @players = Player.order(sort_column + " " + sort_direction)
   @membership_types = MembershipType.all
   
   #if (!Player.membership_type_id.blank?)
@@ -71,4 +73,12 @@ private
     params.require(:player).permit(:first_name, :last_name, :telephone, :membership_number, :membership_type_id, :admin, :super_admin)
   end
 
+  def sort_column
+    Player.column_names.include?(params[:sort]) ? params[:sort] : "last_name, first_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  
 end

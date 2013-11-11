@@ -5,7 +5,7 @@
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 
 <p>
-  Tel: <%= @player.telephone %> <br />
+  Tel: <%= @player.landline %> <br />
 </p>
 
 <h3><%= @player.bookings.count %> Bookings</h2>
@@ -18,7 +18,7 @@
 <h3><%= @vs_bookings.count %> Vs Bookings</h2>
 <% @vs_bookings.each do |booking| %>
   <p>
-    <%= link_to booking.start_time.strftime("%H:%M on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= @vs_players[booking.vs_player_id - 1].first_name.capitalize %> <%= @vs_players[booking.vs_player_id - 1].last_name.capitalize %><% end %></strong>
+    <%= link_to booking.start_time.strftime("%H:%M on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.player.first_name.humanize %> <%= booking.player.last_name.humanize %><% end %></strong>
   </p>
 <% end %>
 </div>
