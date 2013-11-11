@@ -1,12 +1,24 @@
-<h1>Book <%= @court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<h1><% if !current_player %>Quick <% end %>Book <%= @court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<% if @error %>
+<p id="errorExplanation">
+  <%= @error %>
+</p>
+<% end %>
 <%= form_for :booking, url: bookings_path do |f| %>
 	<%= render "layouts/error_messages", :target => @booking %>
   <% if is_admin %>
-	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: current_player.first_name + ' ' + current_player.last_name %>  
+	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>  <br />
   <% elsif current_player %>
   <p>
     <%= f.hidden_field :player_id, :value => current_player.id %>
   </p>
+  <% else %>
+	  <p>
+		   <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>
+	  </p>
+	  <p>
+	    <%= f.label 'Membership Number:' %><%= f.text_field :membership_number, :value => '' %>
+	  </p>
   <% end %>
    <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
    <p class="hint">(search via name or membership number)</p>

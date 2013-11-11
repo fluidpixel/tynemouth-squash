@@ -1,11 +1,14 @@
 class BookingsController < ApplicationController
 
 def new
+  @error = params[:error] if(params[:error])
 	@court = Court.find(params[:court]) if(params[:court])
 	@court_name = @court.court_name
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
-	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
-	
+  if(params[:hour])
+  	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
+  end
+  
   @booking = Booking.new	
 	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
 	@booking.time_slot_id = @timeSlot.id
@@ -19,22 +22,50 @@ def new
 end
 
 def create
-	@booking = Booking.new(booking_params)
-	
-	@days = params[:booking][:days]
+  
+  if !is_admin
+    player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
+  else
+    player = Player.authenticateFullName(params[:booking][:last_name], "xxx")
+  end
+  #if params[:booking][:guest_booking]
+   # flash.alert = "Guest!"
+    #if player
+      
+    #else
+      #create new guest player
+      
+      #end
+    
+  #end
+  
+  if player
+  	@booking = Booking.new(booking_params)
+    
+    @days = params[:booking][:days]
 
-	@court_name = @booking.court.court_name	
-	@time = @booking.start_time
-	@time_slot_id = @booking.time_slot_id
-	if @booking.save
-		if @days
-			redirect_to bookings_path(:day => @days)
-		else
-			redirect_to players_path
-		end
-	else
-		render 'new'
-	end
+  	@court_name = @booking.court.court_name	
+  	@time = @booking.start_time
+    
+  	@time_slot_id = @booking.time_slot_id
+  	if @booking.save
+  		if @days
+  			redirect_to bookings_path(:day => @days)
+  		else
+  			redirect_to players_path
+  		end
+  	else
+  		render 'new'
+  	end
+  else
+    #render :nothing => true
+     #@time = DateTime.parse('13' + ':' + '05')
+     #flash.now.alert = "Invalid Surname or Membership Number"
+     @error = "Invalid Name: (" + params[:booking][:last_name] + ") or membership number (#{params[:booking][:membership_number]})"
+     
+    redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => params[:booking][:start_time].to_time.strftime('%H'), :min => params[:booking][:start_time].to_time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error)
+  end
+  
 end
 
 def show
@@ -99,13 +130,21 @@ def index
 	end
 	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
 	
-
+  @vs_players = Player.all
+  
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
   @courts = Court.all(:order => "created_at DESC")
-      
-	weekend = [6, 0] #[saturday, sunday]
-	if (weekend.include?((DateTime.current + @day.days).wday))
+  weekend = [6, 0] #[saturday, sunday]
+  
+  if is_bank_holiday(DateTime.current + @day.days)
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true)
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true)
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true)
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true)
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true)
+    @slots = @court1Slots.count
+  elsif (weekend.include?((DateTime.current + @day.days).wday))
 		@court1Slots = TimeSlot.where(:court_id => 1)
 		@court2Slots = TimeSlot.where(:court_id => 2)
 		@court3Slots = TimeSlot.where(:court_id => 3)
@@ -122,7 +161,8 @@ def index
 	end
 	
 	if (@day == 21)
-		@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+		#@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+    @isBookingTime = (Time.current.strftime("%H") >= "12")
 	else
 		@isBookingTime = true;
 	end
@@ -138,10 +178,10 @@ def toggle_paid
     end
 	#render :nothing => true  
 end 
-	
+
 private
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name, :guest_booking)
   end
   respond_to :html, :js
 end

@@ -1,8 +1,11 @@
 class PlayersController < ApplicationController
 
+helper_method :sort_column, :sort_direction
+
 def new
     @player = Player.new
     @membership_types = MembershipType.all
+    @trial_membership = MembershipType.where(:membership_type => "trial")
     
   end
   
@@ -21,7 +24,7 @@ def show
 end
 
 def index
-  @players = Player.all
+  @players = Player.order(sort_column + " " + sort_direction)
   @membership_types = MembershipType.all
   
   #if (!Player.membership_type_id.blank?)
@@ -30,13 +33,26 @@ def index
 end
 
 def edit
-	@player = Player.find(params[:id])
+  if is_super_admin
+  	@player = Player.find(params[:id])
+  else
+    flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
+    @player = Player.find(params[:id])
+    redirect_to @player
+  end
+end
+
+def destroy
+  @player = Player.find(params[:id])
+  @player.destroy
+ 
+  redirect_to players_path
 end
 
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :telephone, :membership_number, :admin))
+  if @player.update(params[:player].permit(:first_name, :last_name, :telephone, :membership_number, :admin, :super_admin))
     redirect_to @player
   else
     render 'edit'
@@ -54,7 +70,15 @@ def list
   
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :telephone, :membership_number, :membership_type_id, :admin)
+    params.require(:player).permit(:first_name, :last_name, :telephone, :membership_number, :membership_type_id, :admin, :super_admin)
   end
 
+  def sort_column
+    Player.column_names.include?(params[:sort]) ? params[:sort] : "last_name, first_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+  
 end

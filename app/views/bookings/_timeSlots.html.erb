@@ -5,7 +5,13 @@
 				<% @booked = true %>
 				<%if booking.player %>
 					<div class="booked">
-						<%= link_to 'Booked', booking_path(booking) %><br /><%= link_to booking.player.last_name.capitalize, player_path(booking.player) %>
+						<% @class = membership_type(booking) %>
+						 <!-- if it's a team or zumba then use the whole name -->
+						<% if @class == "class" %><%= link_to booking.player.first_name.capitalize + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + @vs_players[booking.vs_player_id].first_name.humanize[0,1] + ' ' +  @vs_players[booking.vs_player_id].last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<% else %>
+						<% @class %>
+						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<% end %>
 					</div>
 					<% if is_admin %>
 					<div class="paid">
@@ -24,10 +30,12 @@
 		<% if @isBookingTime %>
 			<% if current_player %>
 				<div class="book">
-					<%= link_to 'Book<br />Court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'book' %>
+					<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
 				</div>
 			<% else %>
-				<%= link_to 'Login to<br/> Book'.html_safe, log_in_path, :class => 'login_to_book' %>
+			<div class="book">
+				<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
+			</div>
 			<% end %>
 		<% end %>
 	<% elsif @day < 0 %>

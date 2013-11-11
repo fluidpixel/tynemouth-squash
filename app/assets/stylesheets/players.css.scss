@@ -3,12 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .playerIndex{
-	color: azure ;
+	color: #285784 ;
 	font-size: 18px;
-	font-size: 24px;
 	font-weight: bold;
 }
 
 .players{
-	background-color: #27444F;
+	background-color: #0A4B81;
+}
+
+.playerTable{
+	background-color: #0A4B81;
+	margin: 95px auto 10px auto;
+}
+
+h2.newPlayer{
+	margin-top: 65px;
+	margin-bottom: -65px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: -2;
 }

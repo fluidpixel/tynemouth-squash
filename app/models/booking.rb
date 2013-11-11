@@ -2,8 +2,8 @@ class Booking < ActiveRecord::Base
 
 	belongs_to :player
 	belongs_to :court
-	belongs_to :timeSlot
-	
+	belongs_to :vs_player, :class_name => 'Player'
+  
 	validates_presence_of :player, :message => 'No player found'
 	validates_uniqueness_of :start_time, :scope => :time_slot_id, :message => 'The court has already been booked at that time'
 	
@@ -28,7 +28,6 @@ class Booking < ActiveRecord::Base
 	
 	def last_name=(last_name)
     last_name = last_name.downcase
-    
 		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first if last_name.present?
 		if player
 			self.player_id = player.id

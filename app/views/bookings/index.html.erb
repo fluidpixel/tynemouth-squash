@@ -1,38 +1,46 @@
-<h1>Tynemouth Squash Court Bookings</h1>
-
-<div id="clearfix"></div>
-<div class="links"> 
-	<%= link_to "Prev", {:day => (@day - 1)}, :id => 'change_day' %>
-	<% if is_admin %>
-		<%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %>
-	<% else %>
-		<%if @day < 21 %><%= link_to "Next", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '' %><% end %>
-	<% end %>
-	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day' %><% end %>
-	<% if @day != 21 %><%= link_to "Last Day", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
-</div>
-
-<div class="date">
-	<%= @bookingDay %>
-</div>
-
-<table>
+<h1>Tynemouth Squash Rackets Club - Court Booking</h1>
+<h2><%= @holiday %></h2>
+<div id="select_date"></div>
+<div id="select_admin_date"></div>
+<table class="booking">
 <% if !@isBookingTime %>
-	<tr class="first"><td colspan="20">Court booking is not available until the Club opens for the day</td></tr>
+	<tr class="first"><td colspan="20" class="nobookings">Court booking is not available until the Club opens for the day</td></tr>
 <% end %>
 <tr>
 	<% @courts.each do |court| %>
-	<th colspan="1"> Court <%= court.id %></th>
+	<th colspan="1" class="booking"> Court <%= court.id %></th>
 	<% end %>
 </tr>
 
-<% (1..@slots - 1).each do |i| %>
+<% (0..@slots - 1).each do |i| %>
 <tr>
-	<td><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
-	<td><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>
-	<td><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 2 %></td>
-	<td><%= render "timeSlots" , :timeSlot => @court2Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 1 %></td>
-	<td><%= render "timeSlots" , :timeSlot => @court1Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 0 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 5 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court2Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 2 %></td>
+	<td class="booking"><%= render "timeSlots" , :timeSlot => @court1Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 1 %></td>
 </tr>
  <% end %> 
 </table>
+
+<div id="clearfix"></div>
+
+<div class="date">
+	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day', :class => 'today' %><% end %>
+	
+	<%= link_to "<", {:day => (@day - 1)}, :id => 'change_day' %>
+	<% if is_admin %>
+		<a href="#" onclick="show('select_admin_date'); return false;" class="day"><%= @bookingDay %></a>
+	<% else %>
+		<a href="#" onclick="show('select_date'); return false;" class="day"><%= @bookingDay %></a>
+	<% end %>
+	<% if is_admin %>
+		<%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %>
+	<% else %>
+		<%if @day < 21 %><%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
+	<% end %>
+	
+	<% if @day <= 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
+</div>
+
+<div id="clearfix"></div>

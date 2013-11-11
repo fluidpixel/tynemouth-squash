@@ -13,7 +13,11 @@
   
   <p>
 	<%= f.label 'Membership Number' %><%= f.text_field :membership_number %><br>
-	<%= f.label 'Membership Type' %><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type %><br>
+	<% if is_super_admin %>
+		<%= f.label 'Membership Type' %><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type %><br>
+	<% elsif is_admin %>
+		<%= f.label 'Membership Type' %><%= f.collection_select :membership_type_id, @trial_membership.all, :id, :membership_type %><br>
+	<% end %>
     <%= f.label 'First Name' %><%= f.text_field :first_name %><br>
     <%= f.label 'Last Name' %><%= f.text_field :last_name %><br>  
 	<%= f.label 'Tel' %><%= f.text_field :telephone %><br>  
