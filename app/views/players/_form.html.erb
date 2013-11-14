@@ -17,7 +17,7 @@
 	<% end %>
     <%= f.label 'first name' %><%= f.text_field :first_name %><br>
     <%= f.label 'last name' %><%= f.text_field :last_name %><br>  
-	<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type, {:include_blank => 'Select Member...'} %><br/>
+	<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type, {:include_blank => 'Select Type...'} %><br/>
 	<%= f.label 'telephone' %><%= f.text_field :landline %><br>
 	<% if is_super_admin %>
 		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
