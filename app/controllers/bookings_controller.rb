@@ -9,6 +9,7 @@ def new
   	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
   end
   
+  
   @booking = Booking.new	
 	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
 	@booking.time_slot_id = @timeSlot.id
@@ -38,25 +39,39 @@ def create
       #end
     
   #end
+  #flash.alert = "booking slots: " + params[:booking][:booking_number]
   
   if player
-  	@booking = Booking.new(booking_params)
-    
+    #varibles if we fail to save
     @days = params[:booking][:days]
-
-  	@court_name = @booking.court.court_name	
-  	@time = @booking.start_time
+  	@time = params[:booking][:start_time].to_datetime
+  	@time_slot_id = params[:booking][:time_slot_id]
     
-  	@time_slot_id = @booking.time_slot_id
-  	if @booking.save
-  		if @days
-  			redirect_to bookings_path(:day => @days)
-  		else
-  			redirect_to players_path
-  		end
-  	else
-  		render 'new'
-  	end
+    @end = params[:booking][:booking_number].to_i
+    
+    
+    for i in 0..@end-1
+      @booking = Booking.new(booking_params)
+      @booking.time_slot_id = @booking.time_slot_id + i
+      
+    	if @booking.save
+        @saved = true
+      else
+        @saved = false
+        flash.alert = 'false'
+      end
+    end
+    
+    if @saved == true
+      if @days
+    		redirect_to bookings_path(:day => @days)
+    	else
+    		redirect_to players_path
+    	end
+    else
+      render 'new'
+    end
+    
   else
     #render :nothing => true
      #@time = DateTime.parse('13' + ':' + '05')
@@ -107,9 +122,17 @@ end
 
 def destroy
   @booking = Booking.find(params[:id])
+  
+  @days = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+  
   @booking.destroy
- 
-  redirect_to bookings_path
+  
+  if @days
+		redirect_to bookings_path(:day => @days)
+	else
+		redirect_to bookings_path
+	end
+	
 end
 
 def update

@@ -22,6 +22,11 @@
   <% end %>
    <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
    <p class="hint">(search via name or membership number)</p>
+   <% if is_admin %>
+	   <%= f.label 'Number of bookings: '%><%= f.number_field :booking_number, :value => 1 %>
+   <% else %>
+	   <%= f.hidden_field :booking_number, :value => 1%>
+   <% end %>
   <p>
 	  <%= f.hidden_field :start_time %>
 	  <%= f.hidden_field :time_slot_id %>

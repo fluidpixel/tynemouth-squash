@@ -185,9 +185,9 @@ a.to_pay_junior, a.to_pay_student{
 }
 
 .time, .noTime, .noTimeOrBooking{
-	padding-top: 14px;
+	padding-top: 13px;
 	padding-left: 4px;
-	padding-bottom: 14px;
+	padding-bottom: 13px;
 	padding-right: 4px;
 	position:absolute;
 	z-index:2;
@@ -204,6 +204,6 @@ a.to_pay_junior, a.to_pay_student{
 }
 
 .noTimeOrBooking{
-	margin-top: 11px;
 	color: #1A4656;
+	margin-top: -19px;
 }
