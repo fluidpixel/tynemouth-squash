@@ -18,7 +18,7 @@ end
 def show
   @player = Player.find(params[:id])
   @vs_players = Player.all
-  @membership_type = MembershipType.find(@player.membership_type_id + 1).membership_type
+  @membership_type = MembershipType.find(@player.membership_type_id).membership_type
   
   @vs_bookings = Booking.where(:vs_player_id => @player.id)
 end
@@ -35,6 +35,7 @@ end
 def edit
   if is_super_admin
   	@player = Player.find(params[:id])
+     @membership_types = MembershipType.all
   else
     flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
     @player = Player.find(params[:id])
@@ -52,7 +53,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :telephone, :membership_number, :admin, :super_admin))
+  if @player.update(params[:player].permit(:first_name, :last_name, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin))
     redirect_to @player
   else
     render 'edit'
@@ -70,7 +71,7 @@ def list
   
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :telephone, :membership_number, :membership_type_id, :admin, :super_admin)
+    params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin)
   end
 
   def sort_column

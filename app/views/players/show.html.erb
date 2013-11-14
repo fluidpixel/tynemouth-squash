@@ -5,7 +5,8 @@
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 
 <p>
-  Tel: <%= @player.landline %> <br />
+  Landline: <%= @player.landline %> <br />
+Mobile: <%= @player.mobile %> <br />
 </p>
 
 <h3><%= @player.bookings.count %> Bookings</h2>

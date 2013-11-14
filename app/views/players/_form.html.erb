@@ -1,0 +1,30 @@
+<%= form_for(@player) do |f| %>
+	<% if @player.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@player.errors.count, "error") %> prohibited
+		  this player from being saved:</h2>
+		<ul>
+		<% @player.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+  
+	<p>
+	<% if is_admin %>
+		<%= f.label 'membership Number' %><%= f.text_field :membership_number %><br>
+	<% end %>
+    <%= f.label 'first name' %><%= f.text_field :first_name %><br>
+    <%= f.label 'last name' %><%= f.text_field :last_name %><br>  
+	<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type, {:include_blank => 'Select Member...'} %><br/>
+	<%= f.label 'telephone' %><%= f.text_field :landline %><br>
+	<% if is_super_admin %>
+		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
+		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %>
+	<% end %>	
+  </p>
+  
+  <%= f.submit%>
+
+<% end %>

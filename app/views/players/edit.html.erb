@@ -1,33 +1,6 @@
 <h1>Edit Player</h1>
-<%= form_for :player, url: player_path(@player.id), method: :patch do |f| %>
-	<% if @player.errors.any? %>
-	  <div id="errorExplanation">
-		<h2><%= pluralize(@player.errors.count, "error") %> prohibited
-		  this player from being saved:</h2>
-		<ul>
-		<% @player.errors.full_messages.each do |msg| %>
-		  <li><%= msg %></li>
-		<% end %>
-		</ul>
-	  </div>
-	<% end %>
-  
-	<p>
-	<% if is_admin %>
-		<%= f.label 'membership Number' %><%= f.text_field :membership_number %><br>
-	<% end %>
-    <%= f.label 'first name' %><%= f.text_field :first_name %><br>
-    <%= f.label 'last name' %><%= f.text_field :last_name %><br>  
-	<%= f.label 'telephone' %><%= f.text_field :landline %><br>
-	<% if is_super_admin %>
-		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
-		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %>
-	<% end %>	
-  </p>
-  
-  <%= f.submit%>
 
-<% end %>
+<%= render 'form' %>
 
 <%= button_to 'Delete Player', player_path(@player),
                     method: :delete, data: { confirm: 'Are you sure?' } %>

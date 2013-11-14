@@ -1,6 +1,6 @@
 class Player < ActiveRecord::Base
 
-has_many :bookings
+has_many :bookings, :dependent => :destroy
 belongs_to  :membership_type
 
 validates_presence_of :membership_number, :on => :create
