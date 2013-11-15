@@ -9,9 +9,13 @@ validates_uniqueness_of :membership_number
 
 def self.authenticate(last_name, membership_number)
   if !last_name.blank? && !membership_number.blank?
-      player = Player.where('lower(last_name) = ?', last_name.downcase).first
-    if player && player.membership_number == membership_number
-      player
+      players = Player.where('lower(last_name) = ?', last_name.downcase)
+    if players
+      players.each do |player|
+        if player.membership_number.downcase == membership_number.downcase
+          return player
+        end
+      end
     else
       nil
     end
@@ -26,15 +30,17 @@ def self.authenticateFullName(name, membership_number)
     last_name = name.split(" ")[1]
     
     if !last_name.blank?
-      player = Player.where('lower(last_name) = ?', last_name.downcase).first
+      players = Player.where('lower(last_name) = ?', last_name.downcase)
       
-      if player
-        if player.membership_number.downcase == membership_number.downcase
-          player
-        elsif membership_number == "xxx"
-          player
-        else
-          nil
+      if players
+        players.each do |player|
+          if player.membership_number.downcase == membership_number.downcase
+            return player
+          elsif membership_number == "xxx"
+            return player
+          else
+            nil
+          end
         end
       else
         nil
