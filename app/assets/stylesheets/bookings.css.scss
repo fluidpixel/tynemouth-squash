@@ -11,7 +11,7 @@ table.booking {
 table.booking, th.booking, td.booking {
 	//background-color: #0A4B81;
 	margin-top: 65px;
-	border-left:solid 10px #0A4B81;
+	border-left:solid 4px #0A4B81;
 }
 
 th.booking{
@@ -26,7 +26,7 @@ td {
 	vertical-align:middle;
 	//border-width: 0px 1px 1px 1px;
 	line-height: 13px;
-	width:250px;
+	width:198px;
 	background-color: #F2F6F9;
 	border-bottom: #F2F6F9;
 	border-bottom-style: solid;
@@ -120,6 +120,11 @@ tr {
 .booking_link{
 	 color: #285784;
 }
+.book, .login_to_book, .booked{
+	margin-right:28px;
+	float:right;
+	width:116px;
+}
 .book, .login_to_book {
 	 font-weight: bold;
 	 font-size: 16px;
@@ -128,9 +133,6 @@ tr {
 	 background: #DAE6F1;
 	 z-index:1;
 	 position:relative;
-	 float:right;
-	 width:145px;
-	 margin-right:40px;
 	 height: 38px;
 	 line-height: 38px;
 }
@@ -142,15 +144,8 @@ tr {
 
 .booked {
 	z-index: 3;
-	//margin-top: 5px;
-	//margin-bottom: -55px;
-
 	line-height: 18px;
 	background: #AAC9E4;
-	width:145px;
-	margin-right:40px;
-	
-	float:right;
 }
 
 .booked a{
@@ -160,19 +155,20 @@ tr {
 	z-index: 4;
 	position: absolute;
 	margin-top: 9px;
-	margin-left: 215px;
+	margin-left: 171px;
 }
 
 .paid a{
 	background-color: #0A4B81;
-	font-size:14px;
-	padding: 7px 6px;
+	font-size:12px;
+	padding: 7px 4px;
 	border-radius: 20px;
 }
 
 a.has_paid{
 	background-color: green;
 	color: lightgreen;
+	padding: 7px 2px;
 }
 
 a.to_pay_couple, a.to_pay_full, a.to_pay_life, a.to_pay_country, a.to_pay_trial{
@@ -187,13 +183,13 @@ a.to_pay_junior, a.to_pay_student, a.to_pay_restricted, a.to_pay_team{
 
 .time, .noTime, .noTimeOrBooking{
 	padding-top: 13px;
-	padding-left: 4px;
+	padding-left: 0px;
 	padding-bottom: 13px;
-	padding-right: 4px;
+	padding-right: 1px;
 	position:absolute;
 	z-index:2;
-	font-size: 22px;
-	font-weight: 200;
+	font-size: 20px;
+	//font-weight: 200;
 	//width: 90px;
 	float: left;
 	color: #426B8C;
