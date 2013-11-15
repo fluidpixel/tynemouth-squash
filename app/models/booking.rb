@@ -11,7 +11,7 @@ class Booking < ActiveRecord::Base
   
 	def self.by_day(day)
 		return scoped unless day.present?
-		bookings = Booking.where('start_time BETWEEN ? AND ?', (DateTime.current + day.days).beginning_of_day, (DateTime.current + day.days).end_of_day).all
+		bookings = Booking.where('start_time BETWEEN ? AND ?', (DateTime.current + day.days).beginning_of_day, (DateTime.current + day.days).end_of_day).load
 	end
 
 	def self.by_court(court)

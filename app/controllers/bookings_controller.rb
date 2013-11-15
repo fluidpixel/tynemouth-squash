@@ -157,7 +157,7 @@ def index
   
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
-  @courts = Court.all(:order => "created_at DESC")
+  @courts = Court.order("created_at DESC")
   weekend = [6, 0] #[saturday, sunday]
   
   if is_bank_holiday(DateTime.current + @day.days)
