@@ -204,3 +204,12 @@ a.to_pay_junior, a.to_pay_student, a.to_pay_restricted, a.to_pay_team{
 	color: #1A4656;
 	margin-top: -19px;
 }
+
+button.clear{
+	position:absolute;
+	background:none;
+	color: red;
+	font-size: 14px;
+	border: none;
+	font-family: 'latolight', sans-serif;
+}

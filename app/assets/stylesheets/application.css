@@ -34,7 +34,7 @@
 
 h1, h2, h3, h4, h5, strong, b {
 	font-weight: normal;
-	font-family: 'latolight', serif;
+	font-family: 'latolight', sans-serif;
 }
  h1{
 	text-align: center;
@@ -91,10 +91,11 @@ ul.nav li.nav { display: inline; }
 
 #flashalert, #flashnotice{
 	text-align: right;
-	top:24px;
+	top:54px;
 	right: 4px;
 	position: fixed;
 	z-index: -5;
+	 color: Gold;
 }
 
 form

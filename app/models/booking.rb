@@ -37,6 +37,7 @@ class Booking < ActiveRecord::Base
 	end
   
 	def vs_player_name
+    #player ? player.vs_player_name : ""
 		player.try(:vs_player_name)
 	end
 	
@@ -47,6 +48,8 @@ class Booking < ActiveRecord::Base
 		
 		if player
 			self.vs_player_id = player.id
+    else
+      self.vs_player_id = nil
 		end
 	end
 end
