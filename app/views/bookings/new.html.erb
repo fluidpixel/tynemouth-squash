@@ -1,4 +1,4 @@
-<h1><% if !current_player %>Quick <% end %>Book <%= @court_name %> for <%=  @time.strftime("%H:%M") %> on <%= @time.strftime("%A") %> </h1>
+<h1><% if !current_player %>Quick <% end %>Book <%= @court_name %> for <%=  @time.strftime("%l:%M%P") %> on <%= @time.strftime("%A") %> </h1>
 <% if @error %>
 <p id="errorExplanation">
   <%= @error %>
@@ -40,3 +40,5 @@
     <%= f.submit 'Book Court' %>
   </p>
 <% end %>
+
+<h3 class='back'><%= link_to 'back to booking', bookings_path(:day => (params[:days])) %></h3>

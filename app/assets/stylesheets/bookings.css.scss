@@ -186,6 +186,7 @@ a.to_pay_junior, a.to_pay_student, a.to_pay_restricted, a.to_pay_team{
 	padding-left: 0px;
 	padding-bottom: 13px;
 	padding-right: 1px;
+	width:53px;
 	position:absolute;
 	z-index:2;
 	font-size: 20px;
@@ -197,14 +198,18 @@ a.to_pay_junior, a.to_pay_student, a.to_pay_restricted, a.to_pay_team{
 }
 
 .noTime{
-	color: #1A4656;
+	color: #426B8C;
 }
 
 .noTimeOrBooking{
-	color: #1A4656;
+	color: #426B8C;
 	margin-top: -19px;
 }
 
+h3.back, h3.back a{
+	text-align: center;
+	color: gold;
+}
 button.clear{
 	position:absolute;
 	background:none;

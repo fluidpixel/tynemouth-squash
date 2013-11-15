@@ -6,7 +6,7 @@
   </tr>
   <% @timeSlots.each do |timeSlot| %>
     <tr>
-		<td><%= timeSlot.time.strftime("%H:%M") %></td>
+		<td><%= timeSlot.time.strftime("%l:%M%P") %></td>
     </tr>
   <% end %>
 </table>
