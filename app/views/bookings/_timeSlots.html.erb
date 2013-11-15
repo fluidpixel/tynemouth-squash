@@ -40,11 +40,10 @@
 		<% end %>
 	<% elsif @day < 0 %>
 		<% if !@booked %>
-			<div class='noTimeOrBooking'>
+			<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%H:%M")%></div>
 			<% else %>
-				<div class='noTime'>
+				<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
 			<% end %>
 	<% else %>
-		<div class='noTime'>
+		<div class='noTime'><%= timeSlot.time.strftime("%H:%M")%></div>
 	<% end %>
-	<%= timeSlot.time.strftime("%H:%M")%></div>
