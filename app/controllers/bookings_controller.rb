@@ -125,14 +125,23 @@ def destroy
   
   @days = (@booking.start_time.to_date - DateTime.current.to_date).to_i
   
-  @booking.destroy
+  if @booking && params[:booking]
+    player = Player.authenticate(@booking.player.last_name, params[:booking][:membership_number])
+  end
   
-  if @days
-		redirect_to bookings_path(:day => @days)
-	else
-		redirect_to bookings_path
-	end
-	
+  if player || is_admin
+    @booking.destroy
+    flash.alert = "Removed Booking"
+    if @days
+  		redirect_to bookings_path(:day => @days)
+  	else
+  		redirect_to bookings_path
+  	end
+  else
+    respond_with @booking
+    flash.alert = "Valid Membership number required for cancelling booking" + params[:booking][:membership_number]
+  end
+  	
 end
 
 def update
