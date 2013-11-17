@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104120708) do
+ActiveRecord::Schema.define(version: 20131117232508) do
 
   create_table "bookings", force: true do |t|
     t.integer  "court_id"
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 20131104120708) do
     t.string   "mobile"
     t.string   "email"
     t.datetime "trial_date"
-    t.string "address_line1"
-    t.string "address_line2"
-    t.string "address_line3"
-    t.string "post_code"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "address_line3"
+    t.string   "post_code"
     t.string   "membership_number"
     t.integer  "membership_type_id"
     t.boolean  "admin"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20131104120708) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "bank_holiday", default: true
+    t.boolean  "sunday",       default: true
   end
 
 end
