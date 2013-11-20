@@ -56,6 +56,7 @@ def create
       
     	if @booking.save
         @saved = true
+        BookingMailer.create_booking_email(@booking).deliver
       else
         @saved = false
         flash.alert = 'false'
@@ -102,7 +103,7 @@ end
 def edit
 	@booking = Booking.find(params[:id])
   
-  if (@booking.player_id == session[:player_id] || Player.find(session[:player_id]).admin)
+  if (@booking.player_id == session[:player_id] || is_admin)
     @allowEdit = true
   else
     @allowEdit = false
@@ -130,7 +131,9 @@ def destroy
   end
   
   if player || is_admin
+    BookingMailer.cancel_booking_email(@booking).deliver
     @booking.destroy
+    
     flash.alert = "Removed Booking"
     if @days
   		redirect_to bookings_path(:day => @days)
@@ -148,6 +151,7 @@ def update
   @booking = Booking.find(params[:id])
   
   if @booking.update(params[:booking].permit(:court_id, :player_id, :last_name, :start_time, :court_time, :vs_player_name))
+    #booking changed, send email?
     redirect_to @booking
   else
     render 'edit'

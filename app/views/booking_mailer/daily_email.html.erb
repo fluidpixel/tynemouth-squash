@@ -2,7 +2,7 @@
 
 <% if @bookings %>
 		<% @bookings.each do |booking| %>
-			<p><%= booking.id %> | <%= booking.court.court_name %> | <%= booking.start_time.strftime("%l:%M%P") %> <%= booking.player.first_name %> <%= booking.player.last_name %><% if booking.vs_player_name %> vs <%= booking.vs_player_name %><% end %></p>
+			<p><%= booking.start_time.strftime("%l:%M%P") %> | <%= booking.court.court_name %> | <%= booking.player.first_name %> <%= booking.player.last_name %><% if booking.vs_player_name %> vs <%= booking.vs_player_name %><% end %></p>
 	<% end %>
 <% end %>
 
