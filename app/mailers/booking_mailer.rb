@@ -15,6 +15,7 @@ class BookingMailer < ActionMailer::Base
   @greeting = "Today's Bookings"
 	@bookings = Booking.order("start_time asc").by_day(0)
 	
+  if !@bookings.nil?
     mail to: "squash@fpstudios.com"
   end
   
