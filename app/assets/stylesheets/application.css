@@ -22,9 +22,9 @@
  body {
 	color: Azure;
 	font-family: 'latolight', sans-serif;
+	font-size: 20px;
 	background-color: #0A4B81;
 	margin: 0px;
-	height: 100%;
 	width: 100%;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -33,7 +33,7 @@
 }
 
 h1, h2, h3, h4, h5, strong, b {
-	font-weight: normal;
+	font-weight: bold;
 	font-family: 'latolight', sans-serif;
 }
  h1{
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, strong, b {
 
 h2{
 text-align:center;
-margin-top: 74px;
+margin-top: 34px;
 }
 
 a {
@@ -101,7 +101,7 @@ ul.nav li.nav { display: inline; }
 form
 {
 	text-align: center;
-	margin-top:80px;
+	margin-top:40px;
 }
 
 form a
@@ -109,9 +109,21 @@ form a
 	font-size:24px;
 	margin-bottom: 10px;
 }
-input, select
+input
 {
 	width: 200px;
+	height: 20px;
+	border: none;
+}
+
+input[type="submit"]
+{
+	height: 30px;
+	border: none;
+	font-style: bold;
+	font-size: 20px;
+	color: black;
+	background: gold;
 }
 
 label

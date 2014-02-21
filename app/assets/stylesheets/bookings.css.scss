@@ -10,7 +10,7 @@ table.booking {
 
 table.booking, th.booking, td.booking {
 	//background-color: #0A4B81;
-	margin-top: 65px;
+	margin-top: 25px;
 	border-left:solid 4px #0A4B81;
 }
 
@@ -80,12 +80,13 @@ tr {
 }
 .date{
 	text-align: center;
-	font-size: 30px;	
+	font-size: 40px;	
 	//position: fixed;
 	left: 0;
 	right: 0;
 	//bottom:10px;
-	margin-top: 0px;
+	margin-top: 5px;
+	margin-bottom: 10px;
 	z-index:-2;
 }
 
@@ -94,13 +95,13 @@ tr {
 }
 .date a.last_day{
 	color: gold;
-	font-size: 20px;
+	font-size: 30px;
 	padding-left: 5px;
 	padding-bottom: 5px;
 }
 
 .date a.today{
-	font-size: 20px;
+	font-size: 30px;
 }
 .links {
 	//position: fixed;
@@ -207,6 +208,8 @@ a.to_pay_junior, a.to_pay_student, a.to_pay_restricted, a.to_pay_team{
 }
 
 h3.back, h3.back a{
+	margin-top: 50px;
+	font-size: 20px;
 	text-align: center;
 	color: gold;
 }
