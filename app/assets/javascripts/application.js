@@ -34,59 +34,6 @@ $( "html" ).click(function()
 });
 */
 
-$(window).load(function()
-{
-     $("html,body").animate({scrollTop: $.cookie('scroll')}, 0);
-})
-
-function treatAsUTC(date) {
-    var result = new Date(date);
-    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-    return result;
-}
-
-function updateDays(expDate, inst) {
-    var now = new Date();
-    var startDate = now.toDateString('dd/MM/yyyy');
-    var expire = new Date(expDate);
-    var endDate = expire.toDateString('dd/MM/yyyy');
-    var millisecondsPerDay = 24 * 60 * 60 * 1000;
-    var totalDays = (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
-    $('#tbAddDays').val(totalDays);
-	window.location = '/?day=' + totalDays;
-}
-
-jQuery(function($){
-	$('#select_date').datepicker({minDate: 0, maxDate: +21, dateFormat: "dd/mm/yy", 
-	    onSelect: function(dateText, inst) {
-			var newDate = dateText.slice(0,2);
-			var newMonth = dateText.slice(3,5);
-			if (newMonth < "10") { newMonth = ("0" + newMonth.slice(0,1));};
-			var newYear = dateText.slice(6,11);
-			var expDate = newMonth + "/" + newDate + "/" + newYear;
-			updateDays(expDate, inst);}
-	});
-});
-
-jQuery(function($){
-	$('#select_admin_date').datepicker({dateFormat: "dd/mm/yy",
-	    onSelect: function(dateText, inst) { 
-			var newDate = dateText.slice(0,2);
-			var newMonth = dateText.slice(3,5);
-			if (newMonth < "10") { newMonth = ("0" + newMonth.slice(0,1));};
-			var newYear = dateText.slice(6,11);
-			var expDate = newMonth + "/" + newDate + "/" + newYear;
-			updateDays(expDate, inst);}
-	});
-});
-
-function show(id) {
-	if ( document.getElementById(id).style.visibility == 'visible')
-	  document.getElementById(id).style.visibility = 'hidden';
-	else
-	 document.getElementById(id).style.visibility = 'visible';
-};
-
 /*
 $(document).click(function (e)
 {
