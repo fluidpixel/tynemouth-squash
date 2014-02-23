@@ -1,6 +1,7 @@
 <h2><%= @holiday %></h2>
 <div id="select_date"></div>
 <div id="select_admin_date"></div>
+<%= link_to "❮", {:day => (@day - 1)}, :id => 'change_day_left' %>
 <table class="booking">
 <% if !@isBookingTime %>
 	<tr class="first"><td colspan="20" class="nobookings">Court booking is not available until the Club opens for the day</td></tr>
@@ -22,12 +23,14 @@
  <% end %> 
 </table>
 
+<%if @day < 21 %><%= link_to "❯", {:day => (@day + 1)}, :id => 'change_day_right' %><% end %>
+
 <div id="clearfix"></div>
 
 <div class="date">
 	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day', :class => 'today' %><% end %>
 	
-	<%= link_to "<", {:day => (@day - 1)}, :id => 'change_day' %>
+	<%= link_to "❮", {:day => (@day - 1)}, :id => 'change_day' %>
 	<% if is_admin %>
 		<a href="#" onclick="show('select_admin_date'); return false;" class="day"><%= @bookingDay %></a>
 	<% else %>
@@ -36,7 +39,7 @@
 	<% if is_admin %>
 		<%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %>
 	<% else %>
-		<%if @day < 21 %><%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
+		<%if @day < 21 %><%= link_to "❯", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
 	<% end %>
 	
 	<% if @day <= 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
