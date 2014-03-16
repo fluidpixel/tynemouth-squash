@@ -8,6 +8,6 @@
     <%= link_to "Log out", log_out_path %><br />
      Logged in as <%= link_to current_player.last_name, player_path(current_player) %>
   <% else %>
-    <%= link_to "Log in", log_in_path %>
+    <%= link_to "Admin Log in", log_in_path %>
   <% end %>
 </div>
