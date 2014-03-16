@@ -1,2 +1,3 @@
 $("#paid_link_<%= @booking.id %>").text("<%= paid_link_text(@booking) %>");
 $("#paid_link_<%= @booking.id %>").removeClass().addClass('<%= paid_link_class(@booking) %>');
+console.log('toggle paid');
