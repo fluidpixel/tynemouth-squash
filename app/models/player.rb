@@ -15,7 +15,6 @@ def self.authenticate(last_name, membership_number)
     else
       return nil
     end
-    end
   else
     nil
   end
