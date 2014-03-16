@@ -14,7 +14,7 @@
   </p>
   <% else %>
 	  <p>
-		   <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>
+		<%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>
 	  </p>
 	  <p>
 	    <%= f.label 'Membership Number:' %><%= f.text_field :membership_number, :value => '' %>
