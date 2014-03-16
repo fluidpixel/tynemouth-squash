@@ -218,7 +218,7 @@ def toggle_paid
 	@booking.toggle!(:paid)  
 	
 	respond_to do |f|
-      f.js
+      f.js { render :layout => false, :content_type => "text/javascript; charset=UTF-8" }
     end
 	#render :nothing => true  
 end 
