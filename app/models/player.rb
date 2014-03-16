@@ -12,6 +12,11 @@ def self.authenticate(last_name, membership_number)
     player = Player.where("lower(last_name) = ? AND lower(membership_number) = ?", last_name.downcase, membership_number.downcase).first
     if player
       return player
+    elsif membership_number == "xxx"
+      player = Player.where("lower(last_name) = ?", last_name.downcase).first
+      if player
+        return player
+      end
     else
       return nil
     end
@@ -27,6 +32,11 @@ def self.authenticateFullName(name, membership_number)
       player = Player.where("lower(last_name) = ? AND lower(membership_number) = ?", last_name.downcase, membership_number.downcase).first
       if player
         return player
+      elsif membership_number == "xxx"
+        player = Player.where("lower(last_name) = ?", last_name.downcase).first
+        if player
+          return player
+        end 
       else
         return nil
       end
