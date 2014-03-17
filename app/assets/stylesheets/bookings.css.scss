@@ -104,20 +104,29 @@ tr {
 	font-size: 30px;
 }
 
-a#change_day_left
+a#change_day_left, a#change_day_right
 {
+	visibility: hidden;
 	position: absolute;
-	top: 300px;
-	left: 50px;
-	font-size: 100px;
 }
 
-a#change_day_right
+@media (min-width:1165px)
 {
-	position: absolute;
-	top: 300px;
-	right: 50px;
-	font-size: 100px ;
+	a#change_day_left
+	{
+		visibility: visible;
+		top: 300px;
+		left: 2%;
+		font-size: 100px;
+	}
+
+	a#change_day_right
+	{
+		visibility: visible;
+		top: 300px;
+		right: 2%;
+		font-size: 100px ;
+	}
 }
 
 .links {
