@@ -37,7 +37,7 @@
 		<a href="#" onclick="show('select_date'); return false;" class="day"><%= @bookingDay %></a>
 	<% end %>
 	<% if is_admin %>
-		<%= link_to ">", {:day => (@day + 1)}, :id => 'change_day' %>
+		<%= link_to "❯", {:day => (@day + 1)}, :id => 'change_day' %>
 	<% else %>
 		<%if @day < 21 %><%= link_to "❯", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
 	<% end %>
