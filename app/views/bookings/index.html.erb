@@ -46,3 +46,18 @@
 </div>
 
 <div id="clearfix"></div>
+
+<script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+ <script type="text/javascript">
+ // If your Heroku application is within the EU region,
+ // uncomment the followling lines
+  //Pusher.host = 'ws-eu.pusher.com';
+  //Pusher.sockjs_host = 'sockjs-eu.pusher.com';
+
+ var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
+ var channel = pusher.subscribe('test_channel');
+ channel.bind('greet', function(data) {
+   location.reload(true)
+ });
+ </script>
+ 

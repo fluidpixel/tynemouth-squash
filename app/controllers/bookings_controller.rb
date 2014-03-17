@@ -64,6 +64,9 @@ def create
     end
     
     if @saved == true
+    Pusher['test_channel'].trigger('greet', {
+      :greeting => "New booking created!"
+    })
       if @days
     		redirect_to bookings_path(:day => @days)
     	else

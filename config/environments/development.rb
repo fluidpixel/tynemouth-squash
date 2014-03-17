@@ -29,4 +29,10 @@ Squash::Application.configure do
 
   config.assets.logger = false
   
+  require 'pusher'
+
+  Pusher.app_id = '68896'
+  Pusher.key    = '826fcc14d36b5a1cfe76'
+  Pusher.secret = '8d67f9cb692d1055d4cb'
+  
 end
