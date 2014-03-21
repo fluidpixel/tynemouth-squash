@@ -59,19 +59,5 @@
  channel.bind('greet', function(data) {
    location.reload(true)
  });
-  
- $(window).load(function () 
- {
-     $('body').trigger("click");
-	 
-     var e = $.Event("keypress");
-     e.keyCode = 27; // # Some key code value
-     $('body').trigger(e);
- });
- 
- $(document).keyup(function(e) {
-   if (e.keyCode == 27) { console.log('esc'); }   // esc
- });
- 
  </script>
  
