@@ -34,7 +34,7 @@
 
 h1, h2, h3, h4, h5, strong, b {
 	font-weight: bold;
-	font-family: 'latolight', sans-serif;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
  h1{
 	text-align: center;
