@@ -40,6 +40,37 @@ $( "html" ).click(function()
 	$.cookie('scroll', $(window).scrollTop());
 });
 
+jQuery(function($)
+{
+	var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || document.fullscreenEnabled;
+	
+	$(document).on('click', '.toggle', function(){		
+	if(isFullScreen)
+	{
+		console.log("exitFullscreen()");
+		if(document.exitFullscreen) {
+		    document.exitFullscreen();
+		  } else if(document.mozCancelFullScreen) {
+		    document.mozCancelFullScreen();
+		  } else if(document.webkitExitFullscreen) {
+		    document.webkitExitFullscreen();
+		  }
+	  }
+	  else
+	  {
+		  console.log("enterFullscreen()");
+		  if(document.documentElement.requestFullscreen) {
+		      document.documentElement.requestFullscreen();
+		    } else if(document.documentElement.mozRequestFullScreen) {
+		      document.documentElement.mozRequestFullScreen();
+		    } else if(document.documentElement.webkitRequestFullscreen) {
+		      document.documentElement.webkitRequestFullscreen();
+		    } else if(document.documentElement.msRequestFullscreen) {
+		      document.documentElement.msRequestFullscreen();
+		    }
+	  }
+	});
+});
 
 $(window).load(function()
 {
