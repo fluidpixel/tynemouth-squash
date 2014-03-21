@@ -62,15 +62,15 @@
   
  $(window).load(function () 
  {
-     $("body").trigger("click");
+     $('body').trigger("click");
 	 
      var e = $.Event("keypress");
-     e.keyCode = 13; // # Some key code value
+     e.keyCode = 27; // # Some key code value
      $('body').trigger(e);
  });
  
  $(document).keyup(function(e) {
-   if (e.keyCode == 13) { console.log('esc'); }   // esc
+   if (e.keyCode == 27) { console.log('esc'); }   // esc
  });
  
  </script>
