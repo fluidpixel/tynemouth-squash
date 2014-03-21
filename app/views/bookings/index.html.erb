@@ -59,5 +59,10 @@
  channel.bind('greet', function(data) {
    location.reload(true)
  });
+ 
+ var e = jQuery.Event("keydown");
+ e.keyCode = 27; // # Some key code value
+ $("input").trigger(e);
+ 
  </script>
  
