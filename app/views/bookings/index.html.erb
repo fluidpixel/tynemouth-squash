@@ -61,8 +61,12 @@
  });
  
  var e = jQuery.Event("keydown");
- e.keyCode = 27; // # Some key code value
+ e.which = 27; // # Some key code value
  $("input").trigger(e);
+ 
+ $(document).keyup(function(e) {
+   if (e.keyCode == 27) { console.log('esc'); }   // esc
+ });
  
  </script>
  
