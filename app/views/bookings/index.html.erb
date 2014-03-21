@@ -60,15 +60,17 @@
    location.reload(true)
  });
   
- $(window).load(function () {
-     debugger
+ $(window).load(function () 
+ {
+     $("body").trigger("click");
+	 
      var e = $.Event("keypress");
-     e.keyCode = 27; // # Some key code value
-     $('#body').trigger(e);
+     e.keyCode = 13; // # Some key code value
+     $('body').trigger(e);
  });
  
  $(document).keyup(function(e) {
-   if (e.keyCode == 27) { console.log('esc'); }   // esc
+   if (e.keyCode == 13) { console.log('esc'); }   // esc
  });
  
  </script>
