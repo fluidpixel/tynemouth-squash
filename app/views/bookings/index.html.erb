@@ -59,10 +59,12 @@
  channel.bind('greet', function(data) {
    location.reload(true)
  });
- 
- $(this).trigger({
-     type: 'keypress',
-     which: 27
+  
+ $(window).load(function () {
+     debugger
+     var e = $.Event("keypress");
+     e.keyCode = 13; // # Some key code value
+     $('#textbox').trigger(e);
  });
  
  $(document).keyup(function(e) {
