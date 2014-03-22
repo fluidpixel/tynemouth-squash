@@ -42,9 +42,9 @@ $( "html" ).click(function()
 
 jQuery(function($)
 {
+	$(document).on('click', '.toggle', function()
+	{
 	var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || document.fullscreenEnabled;
-	
-	$(document).on('click', '.toggle', function(){		
 	if(isFullScreen)
 	{
 		console.log("exitFullscreen()");
