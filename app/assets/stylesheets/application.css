@@ -89,6 +89,15 @@ ul.nav li.nav { display: inline; }
 	z-index: -1;
 }
 
+#toggleDiv{
+text-align: left;
+font-size:15px;
+top: 4px;
+left: 4px;
+float: left;
+position: fixed;
+z-index: -1;
+}
 #flashalert, #flashnotice{
 	text-align: right;
 	top:54px;

@@ -1,3 +1,8 @@
+<div id ="toggleDiv">
+	 <% if current_player %>
+	  <%= link_to 'toggle fullscreen', '', :id => 'toggle', :class => 'toggle' %>
+	  <%end%>
+</div>
 <ul class="nav">
 	<li class="nav"><%= link_to 'Court Booking', bookings_path %> |</li>
 	<li class="nav"><%= link_to 'Player List', players_path %></li>
@@ -6,8 +11,6 @@
 <div id="user_nav">
   <% if current_player %>
      Logged in as <%= link_to current_player.last_name, log_out_path %>
-	 <br />
-	 <%= link_to 'toggle fullscreen', '', :id => 'toggle', :class => 'toggle' %>
   <% else %>
     <%= link_to "Admin Log in", log_in_path %>
   <% end %> 
