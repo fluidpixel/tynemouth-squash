@@ -5,6 +5,7 @@
 			<br />Against <%= @vs_player.first_name.humanize %> <%= @vs_player.last_name.humanize %>
 		<% end %>
 	</h2>
+	<% if @booking.paid %><h4>Court Paid</h4><% end %>
 <% else %>
 	<p>Book Court</p>
 <% end %>

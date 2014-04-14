@@ -26,6 +26,7 @@
 	background-color: #0A4B81;
 	margin: 0px;
 	width: 100%;
+	min-height:800px;
 	overflow-y: auto;
 	overflow-x: auto;
 	z-index: -100;
@@ -52,6 +53,9 @@ text-align:center;
 margin-top: 84px;
 }
 
+h4{
+	text-align:center;
+}
 a {
  text-decoration: none;
  color: LightSteelBlue ;

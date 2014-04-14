@@ -17,6 +17,10 @@
 					<div class="paid">
 						<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking),  :id => "paid_link_#{booking.id}", :class => paid_link_class(booking), :title => membership_type_and_price(booking) %>    
 					</div>
+					<% elsif booking.paid %>
+					<div class="paid">
+						<%= link_to paid_link_text(booking), booking_path(booking), :id => "paid_link_#{booking.id}", :class => paid_link_class(booking), :title => membership_type_and_price(booking) %>    
+					</div>
 					<% end %>
 				<% else %>
 					<%= link_to booking.id, booking_path(booking) %>

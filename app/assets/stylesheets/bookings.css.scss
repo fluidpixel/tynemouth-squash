@@ -86,7 +86,7 @@ tr {
 	right: 0;
 	//bottom:10px;
 	margin-top: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 300px;
 	z-index:-2;
 }
 
@@ -149,11 +149,11 @@ a#change_day_left, a#change_day_right
 }
 .book, .login_to_book, .booked{
 	margin-right:28px;
+	font-size:16px;
 	float:right;
 	width:116px;
 }
 .book, .login_to_book {
-	 font-size: 16px;
 	 line-height:20px;
 	 text-decoration: none;
 	 background: #DAE6F1;
