@@ -173,16 +173,16 @@ def index
   
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
-  @courts = Court.order("created_at DESC")
+  @courts = Court.order("id DESC")
   saturday = [6] #[saturday]
   sunday = [0] #[sunday]
   
   if is_bank_holiday(DateTime.current + @day.days)
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true)
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true)
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true)
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true)
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true)
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true).order("time ASC")
     @slots = @court1Slots.count
   elsif (saturday.include?((DateTime.current + @day.days).wday))
 		@court1Slots = TimeSlot.where(:court_id => 1).order("time ASC")
@@ -192,18 +192,18 @@ def index
 		@court5Slots = TimeSlot.where(:court_id => 5).order("time ASC")
     @slots = @court1Slots.count
   elsif (sunday.include?((DateTime.current + @day.days).wday))
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:sunday => true)
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:sunday => true)
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:sunday => true)
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:sunday => true)
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:sunday => true)
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:sunday => true).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:sunday => true).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:sunday => true).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:sunday => true).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:sunday => true).order("time ASC")
     @slots = @court1Slots.count
 	else
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:weekday => true)
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:weekday => true)
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:weekday => true)
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:weekday => true)
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:weekday => true)
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:weekday => true).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:weekday => true).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:weekday => true).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:weekday => true).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:weekday => true).order("time ASC")
     @slots = @court1Slots.count
 	end
 	
