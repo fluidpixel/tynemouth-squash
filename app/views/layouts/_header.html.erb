@@ -12,6 +12,6 @@
   <% if current_player %>
      Logged in as <%= link_to current_player.last_name, log_out_path %>
   <% else %>
-    <%= link_to "Admin Log in", log_in_path %>
+    <%= link_to "Admin", log_in_path, :class => 'login' %>
   <% end %> 
 </div>

@@ -56,6 +56,10 @@ margin-top: 84px;
 h4{
 	text-align:center;
 }
+a.login {
+	color: LightSlateGray;
+}
+
 a {
  text-decoration: none;
  color: LightSteelBlue ;
@@ -91,6 +95,7 @@ ul.nav li.nav { display: inline; }
 	float: right;
 	position: fixed;
 	z-index: -1;
+	
 }
 
 #toggleDiv{
