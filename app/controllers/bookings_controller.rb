@@ -137,6 +137,10 @@ def destroy
     BookingMailer.cancel_booking_email(@booking).deliver
     @booking.destroy
     
+    Pusher['test_channel'].trigger('greet', {
+      :greeting => "Booking Removed!"
+    })
+    
     flash.alert = "Removed Booking"
     if @days
   		redirect_to bookings_path(:day => @days)
@@ -220,6 +224,10 @@ def toggle_paid
 	@booking = Booking.find(params[:id])  
 	@booking.toggle!(:paid)  
 	
+  Pusher['test_channel'].trigger('greet', {
+    :greeting => "Toggle Paid!"
+  })
+  
   redirect_to :back
   #redirect_to @booking
   # respond_to do |f|
