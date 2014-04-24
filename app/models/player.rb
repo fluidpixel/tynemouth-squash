@@ -28,8 +28,9 @@ end
 def self.authenticateFullName(name, membership_number)
   if !name.blank? && !membership_number.blank?
     last_name = name.split(" ")[1]
+    first_name = name.split(" ")[0]
     if !last_name.blank?
-      player = Player.where("lower(last_name) = ? AND lower(membership_number) = ?", last_name.downcase, membership_number.downcase).first
+      player = Player.where("lower(first_name) = ? AND lower(last_name) = ? AND lower(membership_number) = ?", first_name.downcase, last_name.downcase, membership_number.downcase).first
       if player
         return player
       elsif membership_number == "xxx"
