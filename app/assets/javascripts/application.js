@@ -44,7 +44,7 @@ jQuery(function($)
 {
 	$(document).on('click', '.toggle', function()
 	{
-	var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || document.fullscreenEnabled;
+	var isFullScreen = document.fullscreenEnabled || document.mozFullscreenEnabled || document.webkitFullscreenEnabled;
 	if(isFullScreen)
 	{
 		console.log("exitFullscreen()");
