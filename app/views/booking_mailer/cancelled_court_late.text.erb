@@ -2,4 +2,4 @@
 
 <%= @bookingDetails %>
 
-Booking Cancelled by <%= @current_player %> at <%= DateTime.current.to_date.strftime("%l:%M%P on %A %bth %B") %>
+Booking Cancelled by <%= @current_member.first_name + " " + @current_member.last_name %> at <%= @date %>
