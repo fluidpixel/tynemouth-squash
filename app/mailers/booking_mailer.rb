@@ -15,9 +15,24 @@ class BookingMailer < ActionMailer::Base
   @greeting = "Today's Bookings"
 	@bookings = Booking.order("start_time asc").by_day(0)
 	
-    if !@bookings.nil?
+    if !@bookings.empty?
       mail to: "squash@fpstudios.com"
     end
+  end
+  
+  def cancelled_court_late(booking, current_member)
+    @booking = booking
+    @court = Court.find(@booking.court_id)
+    @greeting = @court.court_name + " has been cancelled late"
+    
+    @message = @court.court_name + " has been cancelled with less than 48 hours notice. You need to check if it's not rebooked. If not then " + @booking.player.first_name + " " + @booking.player.last_name + " needs to be fined."
+    @date = DateTime.current.to_date.strftime("%l:%M%P on %A %Ith %B")
+    
+    @bookingDetails = @court.court_name + ", " + @booking.start_time.strftime("%l:%M%P on %A %Ith %B")
+    
+    @current_member = current_member
+     
+    mail(to: "squash@fpstudios.com", subject: @greeting)
   end
   
   def cancel_booking_email(booking)

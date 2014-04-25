@@ -141,8 +141,11 @@ def destroy
       :greeting => "Booking Removed!"
     })
     
-    flash.alert = "Removed Booking"
+    flash.alert = "Cancelled Booking"
     if @days
+      if @days < 2
+        BookingMailer.cancelled_court_late(@booking, current_player).deliver
+      end
   		redirect_to bookings_path(:day => @days)
   	else
   		redirect_to bookings_path
