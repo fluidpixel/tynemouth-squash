@@ -6,7 +6,7 @@
 <% if !@isBookingTime %>
 	<tr class="first"><td colspan="20" class="nobookings">Court booking is not available until the Club opens for the day</td></tr>
 <% else %>
-	<tr class="first"><td colspan="20" class="nobookings"><%= Time.now %></td></tr>
+	<tr class="first"><td colspan="20" class="nobookings"><%= Time.zone.now %></td></tr>
 <% end %>
 <tr>
 	<% @courts.each do |court| %>
