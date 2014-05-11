@@ -16,7 +16,7 @@ class BookingMailer < ActionMailer::Base
 	@bookings = Booking.order("start_time asc").by_day(0)
 	
     if !@bookings.empty?
-      mail to: "squash@fpstudios.com"
+      mail to: "squash@fpstudios.com,alanwall@tynemouthsquash.com"
     end
   end
   
@@ -32,7 +32,7 @@ class BookingMailer < ActionMailer::Base
     
     @current_member = current_member
      
-    mail(to: "squash@fpstudios.com", subject: @greeting)
+    mail(to: "squash@fpstudios.com,alanwall@tynemouthsquash.com", subject: @greeting)
   end
   
   def cancel_booking_email(booking)
