@@ -3,7 +3,7 @@ class Player < ActiveRecord::Base
 has_many :bookings, :dependent => :destroy
 belongs_to  :membership_type
 
-validates_presence_of :membership_number, :on => :create
+validates_presence_of :membership_number, :membership_type, :on => :create
 validates_presence_of :last_name
 validates_uniqueness_of :membership_number
 

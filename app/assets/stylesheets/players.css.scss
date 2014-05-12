@@ -25,3 +25,8 @@ h2.newPlayer{
 	right: 0;
 	z-index: -2;
 }
+
+form.new_player p, div.field_with_errors
+{
+	display: inline;
+}

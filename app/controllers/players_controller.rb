@@ -11,8 +11,15 @@ def new
   
 def create
 	@player = Player.new(player_params)
-	@player.save
-	redirect_to @player
+  @membership_types = MembershipType.all
+  @trial_membership = MembershipType.where(:membership_type => "trial")
+  
+  if @player.save
+  	redirect_to @player
+  else
+    render 'new'
+  end
+  
 end
  
 def show
