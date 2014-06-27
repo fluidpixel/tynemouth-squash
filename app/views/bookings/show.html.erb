@@ -15,11 +15,15 @@
 		<%= link_to 'Change Player(s)', edit_booking_path(@booking) %> <br />
 	<% end %>
 	<% if is_admin %>
-		<%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% if !@booking.cancelled %>
+			<%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% else %>
+			<br /><span class='hint'>(court cancelled less than 48 Hours)</span>
+		<% end %>
 		<% if @timeLeft %>
 			<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
 			<p><i>(after this the member should be subject to full court fees)</i></p>
-		<% else %>
+		<% elsif !@booking.cancelled %>
 			<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 		<% end %>
 	<% elsif @cancellable %>

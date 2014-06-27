@@ -147,7 +147,7 @@ a#change_day_left, a#change_day_right
 .booking_link{
 	 color: #285784;
 }
-.book, .login_to_book, .booked{
+.book, .login_to_book, .booked, .cancelled{
 	margin-right:28px;
 	font-size:16px;
 	float:right;
@@ -168,7 +168,7 @@ a#change_day_left, a#change_day_right
 	background: none;
 }
 
-.booked {
+.booked, .cancelled{
 	z-index: 3;
 	line-height: 18px;
 	background: #AAC9E4;
@@ -176,6 +176,10 @@ a#change_day_left, a#change_day_right
 
 .booked a{
 	 color: #285784;
+}
+
+.cancelled a{
+	color: firebrick;
 }
 .paid {
 	z-index: 4;
