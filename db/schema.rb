@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117232508) do
+ActiveRecord::Schema.define(version: 20140627083719) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bookings", force: true do |t|
     t.integer  "court_id"
@@ -24,6 +27,7 @@ ActiveRecord::Schema.define(version: 20131117232508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "guest_booking"
+    t.boolean  "cancelled"
   end
 
   create_table "courts", force: true do |t|
@@ -47,14 +51,14 @@ ActiveRecord::Schema.define(version: 20131117232508) do
     t.string   "landline"
     t.string   "mobile"
     t.string   "email"
+    t.string   "membership_number"
+    t.integer  "membership_type_id"
+    t.boolean  "admin"
     t.datetime "trial_date"
     t.string   "address_line1"
     t.string   "address_line2"
     t.string   "address_line3"
     t.string   "post_code"
-    t.string   "membership_number"
-    t.integer  "membership_type_id"
-    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "super_admin"
