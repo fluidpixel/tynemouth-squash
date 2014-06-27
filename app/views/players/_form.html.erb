@@ -21,7 +21,8 @@
 	<% else %>
 		<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.where(membership_type: 'guest'), :id, :membership_type %><br/>
 	<% end %>
-	<%= f.label 'telephone' %><%= f.text_field :landline %><br>
+	<%= f.label 'mobile' %><%= f.text_field :mobile %><br>
+	<%= f.label 'email' %><%= f.text_field :email %><br>
 	<% if is_super_admin %>
 		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
 		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %><br />
