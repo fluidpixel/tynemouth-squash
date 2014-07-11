@@ -26,7 +26,7 @@
 	background-color: #0A4B81;
 	margin: 0px;
 	width: 100%;
-	min-height:780px;
+	min-height:760px;
 	overflow-y: auto;
 	overflow-x: auto;
 	z-index: -100;
@@ -91,7 +91,7 @@ ul.nav li.nav { display: inline; }
 	text-align: right;
 	font-size:20px;
 	top: 4px;
-	right: 4px;
+	right: 14px;
 	float: right;
 	position: fixed;
 	z-index: -1;
@@ -110,11 +110,12 @@ z-index: -1;
 
 #flashalert, #flashnotice{
 	text-align: right;
-	top:54px;
-	right: 4px;
+	top: 24px;
+	right: 14px;
 	position: fixed;
-	z-index: -5;
-	 color: Gold;
+	z-index: 5;
+	color: Gold;
+	background-color: #0A4B81;
 }
 
 form
@@ -204,6 +205,10 @@ ul.ui-autocomplete {
 	font-style: italic;
 	font-weight: lighter;
 	font-size: 14px;
+}
+
+.red {
+ color: Firebrick;
 }
 
 p.paragraph{
