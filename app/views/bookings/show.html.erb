@@ -6,6 +6,7 @@
 		<% end %>
 	</h2>
 	<% if @booking.paid %><h4>Court Paid</h4><% end %>
+	<h4><%=membership_type_and_price(@booking)%></h4>
 <% else %>
 	<p>Book Court</p>
 <% end %>
