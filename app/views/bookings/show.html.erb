@@ -2,7 +2,7 @@
 <% if @player %>
 	<h2><%= link_to @player.first_name.humanize + " " + @player.last_name.humanize, @player %> | <%= @booking.start_time.strftime("%l:%M%P on %A %dth %B") %>
 		<% if @vs_player %>
-			<br />Against <%= @vs_player.first_name.humanize %> <%= @vs_player.last_name.humanize %>
+			<br />Against <%= link_to @vs_player.first_name.humanize + " " + @vs_player.last_name.humanize, @vs_player%>
 		<% end %>
 	</h2>
 	<% if @booking.paid %><h4>Court Paid</h4><% end %>
