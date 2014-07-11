@@ -18,7 +18,9 @@
 		<% if !@booking.cancelled %>
 			<%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' } %>
 		<% else %>
+			<br /><%= link_to 'Remove Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'red' %>
 			<br /><span class='hint'>(court cancelled less than 48 Hours)</span>
+			
 		<% end %>
 		<% if @timeLeft %>
 			<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>

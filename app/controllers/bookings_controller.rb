@@ -134,12 +134,26 @@ def destroy
   end
   
   if player || is_admin
-    if @days
+    if @booking.cancelled
+      #if we've already cancelled the court, then delete it now
+      BookingMailer.cancel_booking_email(@booking).deliver
+      @booking.destroy
+  
+      Pusher['test_channel'].trigger('greet', {
+        :greeting => "Booking Removed!"
+      })
+      
+      flash.alert = "Removed Cancelled Booking"
+      if @days
+        redirect_to bookings_path(:day => @days)
+      end
+      
+    elsif @days
       if @days < 2
         BookingMailer.cancelled_court_late(@booking, current_player).deliver
         @booking.cancelled = true;
         @booking.save
-        flash.alert = "too late to cancel!"
+        flash.alert = "Too late to remove!"
       else
         BookingMailer.cancel_booking_email(@booking).deliver
         @booking.destroy
@@ -148,7 +162,7 @@ def destroy
           :greeting => "Booking Removed!"
         })
     
-        flash.alert = "Cancelled Booking"
+        flash.alert = "Removed Booking"
       end
       
   		redirect_to bookings_path(:day => @days)
