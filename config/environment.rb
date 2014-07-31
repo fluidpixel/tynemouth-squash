@@ -1,5 +1,6 @@
 # Load the Rails application.
 require File.expand_path('../application', __FILE__)
+require 'dropbox-api'
 
 # Load the app's custom environment variables here, so that they are loaded before environments/*.rb
 app_environment_variables = File.join(Rails.root, 'config', 'app_environment_variables.rb')

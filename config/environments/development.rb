@@ -35,4 +35,8 @@ Squash::Application.configure do
   Pusher.key    = '826fcc14d36b5a1cfe76'
   Pusher.secret = '8d67f9cb692d1055d4cb'
   
+  require 'dropbox-api'
+  Dropbox::API::Config.app_key    = ENV['APP_TOKEN']
+  Dropbox::API::Config.app_secret = ENV['APP_SECRET']
+  
 end

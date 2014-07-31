@@ -43,6 +43,7 @@ end
 
 gem 'pusher'
 
+gem "dropbox-api"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

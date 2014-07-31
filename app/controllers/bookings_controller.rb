@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-
+  
 def new
   @error = params[:error] if(params[:error])
 	@court = Court.find(params[:court]) if(params[:court])
@@ -43,7 +43,7 @@ def create
   
   if player
     #varibles if we fail to save
-    @days = params[:booking][:days]
+    @day = params[:booking][:days]
   	@time = params[:booking][:start_time].to_datetime
   	@time_slot_id = params[:booking][:time_slot_id]
     
@@ -64,11 +64,27 @@ def create
     end
     
     if @saved == true
-    Pusher['test_channel'].trigger('greet', {
-      :greeting => "New booking created!"
-    })
-      if @days
-    		redirect_to bookings_path(:day => @days)
+      Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
+      
+      @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day.to_i).order("start_time ASC")
+      
+      Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
+      Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
+
+      @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
+
+      #render :action => 'index', :day => '-1', :formats => [:text]
+      #data = render_to_string( :action => :index, :formats => [:text], :params => {:day => '1'})
+      #render inline: data
+      @bookingDay = (DateTime.current + @day.to_i).strftime("%d_%B_%A") + '.text'
+
+      #data = render_to_string( :action => :index, :formats => [:text] )
+      data = render_to_string( :action => :text_booking, :formats => [:text], :layout => false, :params => [:day => 1, :booking => @booking])
+      @client.upload @bookingDay, data # => #<Dropbox::API::File>
+      
+      if @day
+        #render inline: data
+    		redirect_to bookings_path(:day => @day)
     	else
     		redirect_to players_path
     	end
@@ -195,6 +211,7 @@ def index
 	else
 		@day = 0
 	end
+  
 	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
 	
   @vs_players = Player.all
@@ -241,7 +258,7 @@ def index
 	else
 		@isBookingTime = true;
 	end
-	
+
 end
 
 def toggle_paid  

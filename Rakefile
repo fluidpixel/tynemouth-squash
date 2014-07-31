@@ -4,3 +4,7 @@
 require File.expand_path('../config/application', __FILE__)
 
 Squash::Application.load_tasks
+
+require "dropbox-api"
+require "dropbox-api/tasks"
+Dropbox::API::Tasks.install
