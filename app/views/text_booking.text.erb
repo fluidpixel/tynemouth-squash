@@ -1,0 +1,7 @@
+Bookings for <%= @booking.start_time.strftime("%A %d %B") %>
+
+<% if @daysBookings %>
+	<% @daysBookings.each do |booking| %>
+<%= booking.start_time.strftime("%l:%M%P") %> | <%= booking.court.court_name %> | <%= booking.player.first_name %> <%= booking.player.last_name %><% if booking.vs_player_name %> vs <%= booking.vs_player_name %><% end %>
+	<% end %>
+<% end %>

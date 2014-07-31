@@ -66,13 +66,7 @@ def create
     if @saved == true
       Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
       
-      @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day.to_i).order("start_time ASC")      
-      Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
-      Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
-      @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
-      @bookingDay = (DateTime.current + @day.to_i).strftime("%d_%B_%A") + '.text'
-      data = render_to_string( :action => :text_booking, :formats => [:text], :layout => false, :params => [:day => 1, :booking => @booking])
-      @client.upload @bookingDay, data # => #<Dropbox::API::File>
+      view_context.send_to_dropbox(@day)
       
       if @day
         #render inline: data
@@ -143,19 +137,13 @@ def destroy
   
   if player || is_admin
     
-    @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@days.to_i).order("start_time ASC")      
-    Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
-    Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
-    @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
-    @bookingDay = (DateTime.current + @days.to_i).strftime("%d_%B_%A") + '.text'
-    data = render_to_string( :action => :text_booking, :formats => [:text])
-    @client.upload @bookingDay, data # => #<Dropbox::API::File>
-    
     if @booking.cancelled
       #if we've already cancelled the court, then delete it now
       BookingMailer.cancel_booking_email(@booking).deliver
       @booking.destroy
   
+      view_context.send_to_dropbox(@days)
+      
       Pusher['test_channel'].trigger('greet', {
         :greeting => "Booking Removed!"
       })
@@ -175,6 +163,8 @@ def destroy
         BookingMailer.cancel_booking_email(@booking).deliver
         @booking.destroy
     
+        view_context.send_to_dropbox(@days)
+        
         Pusher['test_channel'].trigger('greet', {
           :greeting => "Booking Removed!"
         })
@@ -200,6 +190,9 @@ def update
   
   if @booking.update(params[:booking].permit(:court_id, :player_id, :last_name, :start_time, :court_time, :vs_player_name))
     #booking changed, send email?
+    @day = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+    view_context.send_to_dropbox(@day)
+    
     redirect_to @booking
   else
     render 'edit'

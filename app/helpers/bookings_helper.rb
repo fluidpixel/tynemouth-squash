@@ -39,6 +39,18 @@ def membership_type(booking)
   @membership_type.membership_type
 end
 
+def send_to_dropbox(day)
+  @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(day.to_i).order("start_time ASC")      
+  Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
+  Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
+  @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
+  @bookingDay = (DateTime.current + day.to_i).strftime("%d_%B_%A") + '.text'
+  
+  #ac = ActionController::Base.new()
+  @data = render( :template => :text_booking, :formats => [:text])
+  @client.upload @bookingDay, @data # => #<Dropbox::API::File>
+end
+
 def membership_type_and_price(booking)
   
   @player = Player.find(booking.player_id)
