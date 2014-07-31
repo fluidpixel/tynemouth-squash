@@ -66,19 +66,11 @@ def create
     if @saved == true
       Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
       
-      @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day.to_i).order("start_time ASC")
-      
+      @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day.to_i).order("start_time ASC")      
       Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
       Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
-
       @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
-
-      #render :action => 'index', :day => '-1', :formats => [:text]
-      #data = render_to_string( :action => :index, :formats => [:text], :params => {:day => '1'})
-      #render inline: data
       @bookingDay = (DateTime.current + @day.to_i).strftime("%d_%B_%A") + '.text'
-
-      #data = render_to_string( :action => :index, :formats => [:text] )
       data = render_to_string( :action => :text_booking, :formats => [:text], :layout => false, :params => [:day => 1, :booking => @booking])
       @client.upload @bookingDay, data # => #<Dropbox::API::File>
       
@@ -150,6 +142,15 @@ def destroy
   end
   
   if player || is_admin
+    
+    @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@days.to_i).order("start_time ASC")      
+    Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
+    Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
+    @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
+    @bookingDay = (DateTime.current + @days.to_i).strftime("%d_%B_%A") + '.text'
+    data = render_to_string( :action => :text_booking, :formats => [:text])
+    @client.upload @bookingDay, data # => #<Dropbox::API::File>
+    
     if @booking.cancelled
       #if we've already cancelled the court, then delete it now
       BookingMailer.cancel_booking_email(@booking).deliver
