@@ -147,6 +147,12 @@ input[type="submit"]
 	margin-top: 20px;
 }
 
+form span.guest
+{
+	position: absolute;
+	margin-left: 10px;
+}
+
 label
 {
 	width: 220px;
