@@ -7,7 +7,7 @@
 <%= form_for :booking, url: bookings_path do |f| %>
 	<%= render "layouts/error_messages", :target => @booking %>
   <% if is_admin %>
-	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %>  <br />
+	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %><span class='guest'>Guest? <%= f.check_box :guest_booking %></span> <br /> 
   <% elsif current_player %>
   <p>
     <%= f.hidden_field :player_id, :value => current_player.id %>
@@ -20,7 +20,7 @@
 	    <%= f.label 'Membership Number:' %><%= f.text_field :membership_number, :value => '' %>
 	  </p>
   <% end %>
-   <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
+   <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %><!-- <% if is_admin %><span class='guest'>Guest? <%= f.check_box :guest_booking %></span><% end %> -->
    <p class="hint">(search via name or membership number)</p>
    <% if is_admin %>
 	   <%= f.label 'Number of bookings: '%><%= f.number_field :booking_number, :value => 1, :options => {:min => 1, :step => 1} %>

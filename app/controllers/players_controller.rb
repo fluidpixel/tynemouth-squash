@@ -6,8 +6,7 @@ def new
     @player = Player.new
     @membership_types = MembershipType.all
     @trial_membership = MembershipType.where(:membership_type => "trial")
-    
-  end
+end
   
 def create
 	@player = Player.new(player_params)

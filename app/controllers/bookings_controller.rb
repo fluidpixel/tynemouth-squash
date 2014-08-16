@@ -29,19 +29,40 @@ def create
   else
     player = Player.authenticateFullName(params[:booking][:last_name], "xxx")
   end
-  #if params[:booking][:guest_booking]
-   # flash.alert = "Guest!"
-    #if player
+  
+  if params[:booking][:guest_booking] == "1" #true
+    if player
       
-    #else
+    else
       #create new guest player
+      #params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin, :email)
+      @nameArray = params[:booking][:last_name].split
+      #@nameArray = @fullname.
       
-      #end
-    
-  #end
+      @player = Player.new
+      @player.first_name = @nameArray[0]
+      @player.last_name = @nameArray[1]
+      @player.membership_number = "guest_" + (Player.last.id + 1).to_s
+      
+      @membershipType = MembershipType.where(:membership_type => "guest")
+      
+      @player.membership_type_id = @membershipType.first.id
+      
+      if @player.save
+        flash.alert = "guest_" + (Player.last.id + 1).to_s
+        player = @player
+      else
+        #flash.alert = "guest_" + (Player.last.id + 1).to_s
+        
+        flash.alert = @mem.first.id
+        #flash.alert = @player.first_name + " " + @player.last_name + " " + @player.membership_number + " " + @player.membership_type_id
+      end
+    end
+  end
+  
   #flash.alert = "booking slots: " + params[:booking][:booking_number]
   
-  if player
+  if player || @player
     #varibles if we fail to save
     @day = params[:booking][:days]
   	@time = params[:booking][:start_time].to_datetime
@@ -59,7 +80,7 @@ def create
         BookingMailer.create_booking_email(@booking).deliver
       else
         @saved = false
-        flash.alert = 'false'
+        #flash.alert = 'false'
       end
     end
     
