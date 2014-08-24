@@ -19,3 +19,5 @@ app_environment_variables.rb
 .env
 
 config/app_environment_variables.rb
+
+*.dump

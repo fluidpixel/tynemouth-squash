@@ -31,11 +31,21 @@ class Booking < ActiveRecord::Base
 	end
 	
 	def last_name=(last_name)
-    last_name = last_name.downcase
-		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first if last_name.present?
-		if player
-			self.player_id = player.id
-		end
+    if last_name.present?
+      @nameArray = last_name.downcase.split
+      if @nameArray.count > 1
+        last_name = last_name.downcase
+    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first
+    		if player
+    			self.player_id = player.id
+    		end
+      else
+    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', "guest", last_name.split(" ")[0]).first
+    		if player
+    			self.player_id = player.id
+    		end
+      end
+    end
 	end
   
 	def vs_player_name

@@ -40,8 +40,14 @@ def create
       #@nameArray = @fullname.
       
       @player = Player.new
-      @player.first_name = @nameArray[0]
-      @player.last_name = @nameArray[1]
+      if @nameArray.count > 1
+        @player.first_name = @nameArray[0]
+        @player.last_name = @nameArray[1]
+      else
+        @player.first_name = "guest"
+        @player.last_name = params[:booking][:last_name]
+      end
+      
       @player.membership_number = "guest_" + (Player.last.id + 1).to_s
       
       @membershipType = MembershipType.where(:membership_type => "guest")
@@ -53,8 +59,7 @@ def create
         player = @player
       else
         #flash.alert = "guest_" + (Player.last.id + 1).to_s
-        
-        flash.alert = @mem.first.id
+        #flash.alert = @mem.first.id
         #flash.alert = @player.first_name + " " + @player.last_name + " " + @player.membership_number + " " + @player.membership_type_id
       end
     end
@@ -87,7 +92,7 @@ def create
     if @saved == true
       Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
       
-      view_context.send_to_dropbox(@day)
+      #view_context.send_to_dropbox(@day)
       
       if @day
         #render inline: data
