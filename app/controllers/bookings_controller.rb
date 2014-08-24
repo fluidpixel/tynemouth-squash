@@ -234,8 +234,6 @@ def index
   
 	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
 	
-  @vs_players = Player.all
-  
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
   @courts = Court.order("id DESC")
@@ -272,7 +270,7 @@ def index
     @slots = @court1Slots.count
 	end
 	
-	if (@day == 21)
+	if (@day == 21 && !is_admin)
 		#@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
     @isBookingTime = (Time.current.strftime("%H") >= "12")
 	else
