@@ -5,13 +5,13 @@ def new
 	@court = Court.find(params[:court]) if(params[:court])
 	@court_name = @court.court_name
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
-  if(params[:hour])
-  	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
-  end
+  
+	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
+  @time += (params[:days]).to_i.days if(params[:days])
   
   
   @booking = Booking.new	
-	@booking.start_time = @time + (params[:days]).to_i.days if(params[:days])
+	@booking.start_time = @time
 	@booking.time_slot_id = @timeSlot.id
 	@booking.court_time = 40
 	@booking.court_id = @court.id
