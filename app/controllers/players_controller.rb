@@ -24,8 +24,8 @@ end
 def show
   @player = Player.find(params[:id])
   @membership_type = MembershipType.find(@player.membership_type_id).membership_type
-  
-  @vs_bookings = Booking.where(:vs_player_id => @player.id)
+    
+  @vs_bookings = Booking.where('start_time >= ?', DateTime.current).where(:vs_player_id => @player.id)
 end
 
 def index

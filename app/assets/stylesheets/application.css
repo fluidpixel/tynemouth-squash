@@ -217,6 +217,10 @@ ul.ui-autocomplete {
  color: Firebrick;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 p.paragraph{
 	text-align: center;
 	margin-top: 75px;

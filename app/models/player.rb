@@ -50,7 +50,9 @@ def self.authenticateFullName(name, membership_number)
 end
 
 def future_bookings
-	bookings.where('start_time >= ?', DateTime.current)
+  @future_unpaid = bookings.where('paid = false')
+	@future_unpaid += bookings.where('start_time >= ?', DateTime.current)
+  return @future_unpaid
 end
 
 end
