@@ -91,8 +91,7 @@ def create
     
     if @saved == true
       Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
-      
-      #view_context.send_to_dropbox(@day)
+      view_context.send_to_dropbox(@day)
       
       if @day
         #render inline: data

@@ -2,7 +2,7 @@ class BookingMailer < ActionMailer::Base
   
   require 'mail'
   address = Mail::Address.new "bookings@tynemouth-squash.herokuapp.com" # ex: "john@example.com"
-  address.display_name = "Tynemouth Squash" # ex: "John Doe"
+  address.display_name = "Tynemouth Squash Club" # ex: "John Doe"
   # Set the From or Reply-To header to the following:
   
   default from: address.format # returns "John Doe <john@example.com>"
@@ -16,7 +16,7 @@ class BookingMailer < ActionMailer::Base
 	@bookings = Booking.order("start_time asc").by_day(0)
 	
     if !@bookings.empty?
-      mail to: "alanwall@tynemouthsquash.com"
+      mail to: "courtbookings@tynemouthsquash.com"
     end
   end
   
@@ -32,7 +32,7 @@ class BookingMailer < ActionMailer::Base
     
     @current_member = current_member
      
-    mail(to: "alanwall@tynemouthsquash.com", subject: @greeting)
+    mail(to: "courtbookings@tynemouthsquash.com", subject: @greeting)
   end
   
   def cancel_booking_email(booking)
@@ -59,7 +59,7 @@ class BookingMailer < ActionMailer::Base
   	@message =  @court.court_name + ", " + @booking.start_time.strftime("%l:%M%P on %A %dth %B")
 	  
     if @booking.player.email
-      #mail(to: @booking.player.email, subject: @greeting, bcc: "squash@fpstudios.com")
+      mail(to: @booking.player.email, subject: @greeting)
     else
       #mail(to: "squash@fpstudios.com", subject: @greeting)
     end
