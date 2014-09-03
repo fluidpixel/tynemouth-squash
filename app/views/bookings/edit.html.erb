@@ -1,4 +1,5 @@
 <h1>Edit Booking</h1>
+<h2><%= @booking.time_slot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %></h2>
 
 <% if @allowEdit %>
 	<%= form_for :booking, url: booking_path(@booking.id), method: :patch do |f| %>
@@ -16,10 +17,14 @@
   
 		<p>
 			<!--<%= f.collection_select :court_id, @courts.all, :id, :court_name %> -->
+			<% if @editPlayer %>
 			<%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: @player.first_name + ' ' + @player.last_name %>
+			<% else %>
+			<%= f.label 'Player: ' %><%=f.text_field :last_name, :readonly => true, value: @player.first_name + ' ' + @player.last_name %>
+			<% end %>
 			<br />
 			<% if @vs_player %>
-			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, value: @vs_player.first_name + ' ' + @vs_player.last_name %><button type="button" onclick="clearFields();" class="clear">remove</button>
+			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, value: @vs_player.first_name + ' ' + @vs_player.last_name %><button type="button" onclick="clearFields();" class="clear">remove opponent</button>
 			<% else %>
 			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
 			<% end %>
@@ -38,13 +43,13 @@
 	<% end %>
 	
 	<script type="text/javascript">
-	function clearFields() {
-	    booking_vs_player_name.value="";
-		return false;
-	    //document.getElementById("textfield2").value=""
-	}
-	</script>
-	<%= button_to "clear", :onclick => "booking_vs_player_name.value = ''" %>
+		function clearFields() {
+		    booking_vs_player_name.value="";
+			return false;
+		    //document.getElementById("textfield2").value=""
+		}
+		</script>
+		
 <% else %>
 	<p class="paragraph">Please contact the club to make a change to this booking.</p>
 <% end %>

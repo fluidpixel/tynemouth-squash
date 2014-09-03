@@ -11,10 +11,9 @@
 	<p>Book Court</p>
 <% end %>
 
-<%= form_for :booking, url: booking_path(@booking.id), method: :delete do |f| %>
-	<%if is_admin %>
-		<%= link_to 'Change Player(s)', edit_booking_path(@booking) %> <br />
-	<% end %>
+
+<%= form_tag processform_path(@booking) do %>
+	<%= hidden_field_tag :id, @booking.id %>
 	<% if is_admin %>
 		<% if !@booking.cancelled %>
 			<%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -29,11 +28,16 @@
 		<% elsif !@booking.cancelled %>
 			<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 		<% end %>
-	<% elsif @cancellable %>
-	
-		<%= f.label 'Membership Number:' %><%= f.text_field :membership_number, :value => '' %>
 		
-		<p><%= f.submit :value => "Cancel Booking" %>
+		<p><%= submit_tag "Change Players" %>
+	<% else %>
+		<%= label_tag 'Membership Number:' %><%= text_field_tag :membership_number %>
+		<p><%= submit_tag "Change Opponent" %>
+	<% end %>
+	
+	<% if @cancellable %>
+	
+		<p><%= submit_tag "Cancel Booking" %>
 						</p>
 		<% if @timeLeft %>
 			<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>

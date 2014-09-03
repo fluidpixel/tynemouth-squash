@@ -247,10 +247,14 @@ h3.back, h3.back a{
 	color: gold;
 }
 button.clear{
+	margin-left: 10px;
+	margin-top: 5px;
 	position:absolute;
-	background:none;
-	color: red;
+	background:gold;
+	color: black;
+	font-weight: bold;
 	font-size: 14px;
 	border: none;
 	font-family: 'latolight', sans-serif;
+	height: 20px;
 }

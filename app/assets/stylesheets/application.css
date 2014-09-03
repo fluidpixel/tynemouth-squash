@@ -153,6 +153,15 @@ form span.guest
 	margin-left: 10px;
 }
 
+input[readonly="readonly"]
+{
+	font-style: italic;
+	height: 30px;
+	font-size:24px;
+	color: gold;
+    background-color:transparent;
+}
+
 label
 {
 	width: 220px;

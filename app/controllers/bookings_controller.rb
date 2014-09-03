@@ -133,13 +133,92 @@ def show
   
 end
 
+def processform
+  
+  @booking = Booking.find(params[:id])
+  
+  if params[:commit] == 'Cancel Booking'
+    @days = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+  
+    if @booking# && params[:booking]
+      player = Player.authenticate(@booking.player.last_name, params[:membership_number])
+    end
+  
+    if player || is_admin
+    
+      if @booking.cancelled
+        #if we've already cancelled the court, then delete it now
+        BookingMailer.cancel_booking_email(@booking).deliver
+        @booking.destroy
+  
+        view_context.send_to_dropbox(@days)
+      
+        Pusher['test_channel'].trigger('greet', {
+          :greeting => "Booking Removed!"
+        })
+      
+        flash.alert = "Removed Cancelled Booking"
+        if @days
+          redirect_to bookings_path(:day => @days)
+        end
+      
+      elsif @days
+        if @days < 2
+          BookingMailer.cancelled_court_late(@booking, current_player).deliver
+          @booking.cancelled = true;
+          @booking.save
+          flash.alert = "Too late to remove!"
+        else
+          BookingMailer.cancel_booking_email(@booking).deliver
+          @booking.destroy
+    
+          view_context.send_to_dropbox(@days)
+        
+          Pusher['test_channel'].trigger('greet', {
+            :greeting => "Booking Removed!"
+          })
+    
+          flash.alert = "Removed Booking"
+        end
+      
+    		redirect_to bookings_path(:day => @days)
+    	else
+    		redirect_to bookings_path
+    	end
+    else
+      redirect_to booking_path(:id => @booking.id)
+      flash.alert = "matching Membership number required for cancelling booking " + params[:membership_number]
+    end
+  else
+    if @booking# && params[:booking]
+      player = Player.authenticate(@booking.player.last_name, params[:membership_number])
+    end
+    
+    if is_admin
+      redirect_to edit_booking_path(:id => @booking.id)
+    elsif player
+      redirect_to edit_booking_path(:id => @booking.id, :allow_edit => true)
+    else
+      redirect_to booking_path(:id => @booking.id)
+      flash.alert = "matching Membership number required for changing booking " + params[:membership_number]
+    end
+    
+  end
+end
+
 def edit
 	@booking = Booking.find(params[:id])
   
-  if (@booking.player_id == session[:player_id] || is_admin)
+  if (@booking.player_id == session[:player_id] || is_admin || params[:allow_edit])
     @allowEdit = true
   else
     @allowEdit = false
+  end
+  
+  if params[:allow_edit]
+    @editPlayer = false
+  else
+    @editPlayer = true
   end
   
   if (!@booking.player_id.blank?)

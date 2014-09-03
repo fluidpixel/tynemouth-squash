@@ -28,7 +28,7 @@ class BookingMailer < ActionMailer::Base
     @message = @court.court_name + " has been cancelled with less than 48 hours notice. You need to check if it's not rebooked. If not then " + @booking.player.first_name + " " + @booking.player.last_name + " needs to be fined."
     @date = DateTime.current.to_date.strftime("%l:%M%P on %A %dth %B")
     
-    @bookingDetails = @court.court_name + ", " + @booking.start_time.strftime("%l:%M%P on %A %dth %B")
+    @bookingDetails = @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
     
     @current_member = current_member
      
@@ -41,7 +41,7 @@ class BookingMailer < ActionMailer::Base
     @greeting = @booking.player.first_name + " your booking has been cancelled"
     @court = Court.find(@booking.court_id)
 
-  	@message =  @court.court_name + ", " + @booking.start_time.strftime("%l:%M%P on %A %dth %B")
+  	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
 	  
     if @booking.player.email
       #mail(to: @booking.player.email, subject: @greeting, bcc: "squash@fpstudios.com")
@@ -56,7 +56,7 @@ class BookingMailer < ActionMailer::Base
     @greeting = @booking.player.first_name + " you've booked a squash court"
     @court = Court.find(@booking.court_id)
 
-  	@message =  @court.court_name + ", " + @booking.start_time.strftime("%l:%M%P on %A %dth %B")
+  	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
 	  
     if @booking.player.email
       mail(to: @booking.player.email, subject: @greeting)
