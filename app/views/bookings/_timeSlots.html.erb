@@ -25,7 +25,7 @@
 						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
 						<% end %>
 					</div>
-					<% if is_admin %>
+					<% if is_admin && @day <= 0 %>
 					<div class="paid">
 						<%= link_to paid_link_text(booking), toggle_paid_booking_path(booking),  :id => "paid_link_#{booking.id}", :class => paid_link_class(booking), :title => membership_type_and_price(booking) %>    
 					</div>
