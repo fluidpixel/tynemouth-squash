@@ -1,6 +1,6 @@
 <h1><%= @court.court_name %></h1>
 <% if @player %>
-	<h2><%= link_to @player.first_name.humanize + " " + @player.last_name.humanize, @player %> | <%= @booking.start_time.strftime("%l:%M%P on %A %dth %B") %>
+	<h2><%= link_to @player.first_name.humanize + " " + @player.last_name.humanize, @player %> | <%= @timeSlot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %>
 		<% if @vs_player %>
 			<br />Against <%= link_to @vs_player.first_name.humanize + " " + @vs_player.last_name.humanize, @vs_player%>
 		<% end %>

@@ -70,9 +70,9 @@ def create
   if player || @player
     #varibles if we fail to save
     @day = params[:booking][:days]
-  	@time = params[:booking][:start_time].to_datetime
+  	@time = Time.zone.parse(params[:booking][:start_time]).to_datetime
   	@time_slot_id = params[:booking][:time_slot_id]
-    
+
     @end = params[:booking][:booking_number].to_i
     
     
@@ -117,6 +117,9 @@ end
 
 def show
   @booking = Booking.find(params[:id])
+  
+  @timeSlot = TimeSlot.find(@booking.time_slot_id)
+  
   @court = Court.find(@booking.court_id)
   if (((Time.current + 2.days) <= @booking.start_time))
     @cancellable = true

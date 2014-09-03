@@ -9,8 +9,6 @@ class Booking < ActiveRecord::Base
 	
   attr_accessor :booking_number
   
- 
-    
 	def self.by_day(day)
 		return scoped unless day.present?
 		bookings = Booking.where('start_time BETWEEN ? AND ?', (DateTime.current + day.days).beginning_of_day, (DateTime.current + day.days).end_of_day).load
@@ -47,6 +45,10 @@ class Booking < ActiveRecord::Base
       end
     end
 	end
+  
+  def time_slot
+    time_slot = TimeSlot.find(self.time_slot_id)
+  end
   
 	def vs_player_name
     #player ? player.vs_player_name : ""

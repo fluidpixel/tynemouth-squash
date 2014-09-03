@@ -12,9 +12,9 @@ Mobile: <%= @player.mobile %> <br />
 <h3><%= @player.future_bookings.count %> Bookings</h2>
 <% @player.future_bookings.each do |booking| %>
 	<% if booking.paid == false %>
-		 <%= link_to booking.start_time.strftime("%l:%M%P on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %> <span class='red bold'>(unpaid)</span></strong>
+		 <%= link_to booking.by_time_slot.time.strftime("%l:%M%P on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %> <span class='red bold'>(unpaid)</span></strong>
 	<% else %>
-	    <%= link_to booking.start_time.strftime("%l:%M%P on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %></strong>
+	    <%= link_to booking.time_slot.time.strftime("%l:%M%P") + booking.start_time.strftime(" on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %></strong>
 	<% end %>
 	<br />
 <% end %>
