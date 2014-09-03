@@ -4,7 +4,7 @@ MembershipType.create([
   { membership_type: 'corporate', court_cost: '6.00', membership_cost: '1000'},
   { membership_type: 'family', court_cost: '6.00', membership_cost: '1000'},
   { membership_type: 'family_junior', court_cost: '3.00', membership_cost: '1000'},
-  { membership_type: 'student', court_cost: '3.00', membership_cost: '1000'},
+  { membership_type: 'student', court_cost: '6.00', membership_cost: '1000'},
   { membership_type: 'junior', court_cost: '3.00', membership_cost: '1000'},
   { membership_type: 'life', court_cost: '6.00', membership_cost: '1000'}, 
   { membership_type: 'gym', court_cost: '6.00', membership_cost: '1000'},
