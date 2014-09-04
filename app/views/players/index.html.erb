@@ -15,7 +15,9 @@
     <th>Player</th>
     <th>Landline</th>
 	<th>Mobile</th>
-    <th>Future Bookings</th>
+	<%if is_admin %>
+	    <th>Future Bookings</th>
+	<% end %>
   </tr>
   <% @players.each do |player| %>
     <tr class = "playerIndex" >
@@ -26,7 +28,9 @@
 		<td><%= link_to (player.first_name + ' ' + player.last_name), player_path(player.id), :class => 'playerIndex' %></td>
 		<td><%= player.landline %></td>
 		<td><%= player.mobile %></td>
-		<td><%= player.future_bookings.count %></td>
+		<%if is_admin %>
+			<td><%= player.future_bookings.count %></td>
+		<% end %>
     </tr>
   <% end %>
 </table>
