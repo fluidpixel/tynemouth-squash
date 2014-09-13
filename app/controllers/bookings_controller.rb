@@ -355,8 +355,8 @@ def index
 	end
 	
 	if (@day == 21 && !is_admin)
-		#@isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
-    @isBookingTime = (Time.current.strftime("%H") >= "12")
+    @isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
+    # @isBookingTime = (Time.current.strftime("%H") >= "12")
 	else
 		@isBookingTime = true;
 	end
