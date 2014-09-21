@@ -55,4 +55,21 @@ def future_bookings
   return @future_unpaid
 end
 
+def full_name
+  self.first_name + " " + self.last_name
+end
+
+def self.find_all_by_name_containing(text)
+  self.where("LOWER(first_name || ' ' || last_name) LIKE ?", "%#{text.downcase}%")
+end
+
+def self.search(search)  
+    if search  
+      
+      where('last_name || first_name ILIKE ?', "%#{search}%")  
+    else  
+      all  
+    end  
+end
+
 end

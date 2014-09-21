@@ -29,7 +29,9 @@ def show
 end
 
 def index
-  @players = Player.order(sort_column + " " + sort_direction)
+  @players = Player.order(sort_column + ' ' + sort_direction).search(params[:player_search])
+  
+  # @players = Player.order(sort_column + " " + sort_direction)
   @membership_types = MembershipType.all
   
   #if (!Player.membership_type_id.blank?)

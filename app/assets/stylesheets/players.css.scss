@@ -14,11 +14,11 @@
 
 .playerTable{
 	background-color: #0A4B81;
-	margin: 95px auto 10px auto;
+	margin: 15px auto 10px auto;
 }
 
 h2.newPlayer{
-	margin-top: 65px;
+	margin-top: 75px;
 	margin-bottom: -65px;
 	position: fixed;
 	left: 0;
@@ -29,4 +29,11 @@ h2.newPlayer{
 form.new_player p, div.field_with_errors
 {
 	display: inline;
+}
+
+#player_search_form {
+	
+}
+input.hidden {
+	display: none;
 }
