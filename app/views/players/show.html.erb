@@ -5,8 +5,9 @@
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 
 <p>
-  Landline: <%= @player.landline %> <br />
-Mobile: <%= @player.mobile %> <br />
+<% if !@player.landline.empty? %>Landline: <%= @player.landline %> <br /><% end %>
+<% if !@player.mobile.empty? %>Mobile: <%= @player.mobile %> <br /><% end %>
+<% if !@player.email.empty? %>Email: <%= @player.email %> <br /><% end %>
 </p>
 
 <h3><%= @player.future_bookings.count %> Bookings</h2>

@@ -40,7 +40,7 @@ end
 def edit
   if is_super_admin
   	@player = Player.find(params[:id])
-     @membership_types = MembershipType.all
+    @membership_types = MembershipType.all
   else
     flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
     @player = Player.find(params[:id])
@@ -58,7 +58,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin))
+  if @player.update(params[:player].permit(:first_name, :last_name, :email, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin))
     redirect_to @player
   else
     render 'edit'
