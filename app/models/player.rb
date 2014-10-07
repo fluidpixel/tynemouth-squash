@@ -64,7 +64,7 @@ def self.find_all_by_name_containing(text)
 end
 
 def isRestricted
-  if self.membership_type.membership_type = 'restricted'
+  if self.membership_type.membership_type == 'restricted'
     return true
   else
     return false
