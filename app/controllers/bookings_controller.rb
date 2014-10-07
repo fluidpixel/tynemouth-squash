@@ -70,12 +70,19 @@ def create
   if player || @player
     #varibles if we fail to save
     @day = params[:booking][:days]
-  	@time = Time.zone.parse(params[:booking][:start_time]).to_datetime
+    @time = ActiveSupport::TimeWithZone.new(nil, Time.zone, DateTime.parse(params[:booking][:start_time]))
+    
+    # @time = Time.zone.parse(params[:booking][:start_time]).to_datetime
   	@time_slot_id = params[:booking][:time_slot_id]
 
     @end = params[:booking][:booking_number].to_i
     
-    
+    if !@time.sunday? || !@time.saturday?
+      if @time.hour >= 17 && player.isRestricted
+        @error = "Restricted Membership, can't book after 5pm"
+        redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+      end
+    end 
     for i in 0..@end-1
       @booking = Booking.new(booking_params)
       @booking.time_slot_id = @booking.time_slot_id + i

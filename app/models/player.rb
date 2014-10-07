@@ -63,6 +63,14 @@ def self.find_all_by_name_containing(text)
   self.where("LOWER(first_name || ' ' || last_name) LIKE ?", "%#{text.downcase}%")
 end
 
+def isRestricted
+  if self.membership_type.membership_type = 'restricted'
+    return true
+  else
+    return false
+  end
+end
+
 def self.search(search)  
     if search  
       
