@@ -66,4 +66,9 @@ class Booking < ActiveRecord::Base
       self.vs_player_id = nil
 		end
 	end
+  
+  def day
+     (self.start_time.to_date - DateTime.current.to_date).to_i
+  end
+  
 end
