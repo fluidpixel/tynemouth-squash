@@ -158,7 +158,7 @@ def processform
     
       if @booking.cancelled
         #if we've already cancelled the court, then delete it now
-        BookingMailer.cancel_booking_email(@booking).deliver
+        # BookingMailer.cancel_booking_email(@booking).deliver
         @booking.destroy
   
         view_context.send_to_dropbox(@days)
@@ -179,7 +179,9 @@ def processform
           @booking.save
           flash.alert = "Too late to remove!"
         else
-          BookingMailer.cancel_booking_email(@booking).deliver
+          if @booking.player.email?
+            BookingMailer.cancel_booking_email(@booking).deliver
+          end
           @booking.destroy
     
           view_context.send_to_dropbox(@days)
@@ -256,7 +258,7 @@ def destroy
     
     if @booking.cancelled
       #if we've already cancelled the court, then delete it now
-      BookingMailer.cancel_booking_email(@booking).deliver
+      # BookingMailer.cancel_booking_email(@booking).deliver
       @booking.destroy
   
       view_context.send_to_dropbox(@days)
@@ -277,7 +279,10 @@ def destroy
         @booking.save
         flash.alert = "Too late to remove!"
       else
-        BookingMailer.cancel_booking_email(@booking).deliver
+        if @booking.player.email?
+          BookingMailer.cancel_booking_email(@booking).deliver
+        end
+        
         @booking.destroy
     
         view_context.send_to_dropbox(@days)

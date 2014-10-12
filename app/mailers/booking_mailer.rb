@@ -43,7 +43,7 @@ class BookingMailer < ActionMailer::Base
 
   	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
 	  
-    if @booking.player.email
+    if @booking.player.email?
       mail(to: @booking.player.email, subject: @greeting)
     else
       #mail(to: "squash@fpstudios.com", subject: @greeting)
@@ -58,7 +58,7 @@ class BookingMailer < ActionMailer::Base
 
   	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
 	  
-    if @booking.player.email
+    if @booking.player.email?
       mail(to: @booking.player.email, subject: @greeting)
     else
       #mail(to: "squash@fpstudios.com", subject: @greeting)
