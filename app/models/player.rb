@@ -34,7 +34,7 @@ def self.authenticateFullName(name, membership_number)
       if player
         return player
       elsif membership_number == "xxx"
-        player = Player.where("lower(last_name) = ?", last_name.downcase).first
+        player = Player.where("lower(first_name) = ? AND lower(last_name) = ?", first_name.downcase, last_name.downcase).first
         if player
           return player
         end 
