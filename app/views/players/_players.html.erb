@@ -5,8 +5,10 @@
 		<th>Membership Type</th>
 	<% end %>
     <th>Player</th>
-    <th>Landline</th>
-	<th>Mobile</th>
+	<% if current_player %>
+	    <th>Landline</th>
+		<th>Mobile</th>
+	<% end %>
 	<%if is_admin %>
 	    <th>Future Bookings</th>
 	<% end %>
@@ -18,8 +20,10 @@
 			<td><%= player.membership_type.membership_type %></td>
 		<% end %>
 		<td><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
-		<td><%= player.landline %></td>
-		<td><%= player.mobile %></td>
+		<% if current_player %>
+			<td><%= player.landline %></td>
+			<td><%= player.mobile %></td>
+		<% end %>
 		<%if is_admin %>
 			<td><%= player.future_bookings.count %></td>
 		<% end %>

@@ -4,11 +4,13 @@
 
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 
+<% if current_player %>
 <p>
 <% if !@player.landline.blank? %>Landline: <%= @player.landline %> <br /><% end %>
 <% if !@player.mobile.blank? %>Mobile: <%= @player.mobile %> <br /><% end %>
 <% if !@player.email.blank? %>Email: <%= @player.email %> <br /><% end %>
 </p>
+<% end %>
 
 <h3><%= @player.future_bookings.count %> Bookings</h2>
 <% @player.future_bookings.each do |booking| %>
