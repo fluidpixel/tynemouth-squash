@@ -44,24 +44,39 @@ class BookingMailer < ActionMailer::Base
   	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
 	  
     if @booking.player.email?
-      mail(to: @booking.player.email, subject: @greeting)
-    else
-      #mail(to: "squash@fpstudios.com", subject: @greeting)
+      mail(to: @booking.player.email, subject: @greeting) do |format|
+        format.text
+      end
     end
+    
+    if @booking.vs_player.email?
+      @greeting = "Squash booking against " + @booking.player.first_name + " has been cancelled"
+      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+      mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+        format.text
+      end
+    end
+    
   end
   
   def create_booking_email(booking)
     @booking = booking
-    
-    @greeting = @booking.player.first_name + " you've booked a squash court"
     @court = Court.find(@booking.court_id)
-
-  	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
-	  
+    
     if @booking.player.email?
-      mail(to: @booking.player.email, subject: @greeting)
-    else
-      #mail(to: "squash@fpstudios.com", subject: @greeting)
+      @greeting = @booking.player.first_name + " you've booked a squash court"
+      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+      mail(to: @booking.player.email, subject: @greeting) do |format|
+        format.text
+      end 
+    end
+    
+    if @booking.vs_player.email?
+      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+      @greeting = "You've been booked to play squash against " + @booking.player.first_name
+      mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+        format.text
+      end
     end
     
   end
