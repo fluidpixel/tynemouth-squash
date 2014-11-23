@@ -37,16 +37,14 @@ class BookingMailer < ActionMailer::Base
   
   def cancel_booking_email(booking)
     @booking = booking
-    
-    @greeting = @booking.player.first_name + " your booking has been cancelled"
     @court = Court.find(@booking.court_id)
 
-  	@message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
-	  
     if @booking.player.email?
+      @greeting = @booking.player.first_name + " your booking has been cancelled"
+      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
-      end
+      end.deliver
     end
     
     if @booking.vs_player.email?
@@ -54,7 +52,7 @@ class BookingMailer < ActionMailer::Base
       @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
       mail(to: @booking.vs_player.email, subject: @greeting) do |format|
         format.text
-      end
+      end.deliver
     end
     
   end
@@ -68,7 +66,7 @@ class BookingMailer < ActionMailer::Base
       @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
-      end 
+      end.deliver
     end
     
     if @booking.vs_player.email?
@@ -76,7 +74,7 @@ class BookingMailer < ActionMailer::Base
       @greeting = "You've been booked to play squash against " + @booking.player.first_name
       mail(to: @booking.vs_player.email, subject: @greeting) do |format|
         format.text
-      end
+      end.deliver
     end
     
   end

@@ -89,10 +89,7 @@ def create
       
     	if @booking.save
         @saved = true
-        if @booking.player.email?
-          #flash.alert = "email " + @booking.player.email
-          BookingMailer.create_booking_email(@booking).deliver
-        end
+        BookingMailer.create_booking_email(@booking).deliver
       else
         @saved = false
         #flash.alert = 'false'
@@ -179,9 +176,7 @@ def processform
           @booking.save
           flash.alert = "Too late to remove!"
         else
-          if @booking.player.email?
-            BookingMailer.cancel_booking_email(@booking).deliver
-          end
+          BookingMailer.cancel_booking_email(@booking).deliver
           @booking.destroy
     
           view_context.send_to_dropbox(@days)
@@ -279,10 +274,7 @@ def destroy
         @booking.save
         flash.alert = "Too late to remove!"
       else
-        if @booking.player.email?
-          BookingMailer.cancel_booking_email(@booking).deliver
-        end
-        
+        BookingMailer.cancel_booking_email(@booking).deliver
         @booking.destroy
     
         view_context.send_to_dropbox(@days)

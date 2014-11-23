@@ -29,24 +29,23 @@
 			<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 		<% end %>
 		
-		<p><%= submit_tag "Change Players" %>
+		<p><%= submit_tag "Change Players" %></p>
 	<% else %>
 		<%= label_tag 'Membership Number:' %><%= text_field_tag :membership_number %>
-		<p><%= submit_tag "Change Opponent" %>
-	<% end %>
+		<p><%= submit_tag "Change Opponent" %></p>
 	
-	<% if @cancellable %>
-	
-		<p><%= submit_tag "Cancel Booking" %>
-						</p>
-		<% if @timeLeft %>
-			<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
-			<p><i>(after this you could be subject to full court fees)</i></p>
+		<% if @cancellable %>
+
+			<p><%= submit_tag "Cancel Booking" %></p>
+			<% if @timeLeft %>
+				<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
+				<p><i>(after this you could be subject to full court fees)</i></p>
+			<% else %>
+				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+			<% end %>
 		<% else %>
-			<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+			Please contact the club to change or cancel this booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
 		<% end %>
-	<% else %>
-		Please contact the club to change or cancel this booking on 0191 257 3895. <br /><i>Bookings cancelled within 48 hours will be subject to full court fee.</i>
 	<% end %>
 
 <% end %>
