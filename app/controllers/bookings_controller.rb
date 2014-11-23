@@ -77,7 +77,7 @@ def create
 
     @end = params[:booking][:booking_number].to_i
     
-    if !@time.sunday? || !@time.saturday?
+    if !@time.sunday? && !@time.saturday?
       if @time.hour >= 17 && player.isRestricted
         @error = "Restricted Membership, can't book after 5pm"
         redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
