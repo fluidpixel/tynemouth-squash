@@ -47,14 +47,15 @@ class BookingMailer < ActionMailer::Base
       end.deliver
     end
     
-    if @booking.vs_player.email?
-      @greeting = "Squash booking against " + @booking.player.first_name + " has been cancelled"
-      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
-      mail(to: @booking.vs_player.email, subject: @greeting) do |format|
-        format.text
-      end.deliver
+    if @booking.vs_player?
+      if @booking.vs_player.email?
+        @greeting = "Squash booking against " + @booking.player.first_name + " has been cancelled"
+        @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+        mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+          format.text
+        end.deliver
+      end
     end
-    
   end
   
   def create_booking_email(booking)
@@ -68,14 +69,14 @@ class BookingMailer < ActionMailer::Base
         format.text
       end.deliver
     end
-    
-    if @booking.vs_player.email?
-      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
-      @greeting = "You've been booked to play squash against " + @booking.player.first_name
-      mail(to: @booking.vs_player.email, subject: @greeting) do |format|
-        format.text
-      end.deliver
+    if @booking.vs_player?
+      if @booking.vs_player.email?
+        @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+        @greeting = "You've been booked to play squash against " + @booking.player.first_name
+        mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+          format.text
+        end.deliver
+      end
     end
-    
   end
 end
