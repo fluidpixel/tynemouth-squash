@@ -171,14 +171,16 @@ def processform
       
       elsif @days
         if @days < 2
-          BookingMailer.cancelled_court_late(@booking, current_player).deliver
+          
           @booking.cancelled = true;
           @booking.save
+          
+          BookingMailer.cancelled_court_late(@booking, current_player).deliver
           flash.alert = "Too late to remove!"
         else
-          BookingMailer.cancel_booking_email(@booking).deliver
           @booking.destroy
-    
+          
+          BookingMailer.cancel_booking_email(@booking).deliver
           view_context.send_to_dropbox(@days)
         
           Pusher['test_channel'].trigger('greet', {
@@ -269,14 +271,17 @@ def destroy
       
     elsif @days
       if @days < 2
-        BookingMailer.cancelled_court_late(@booking, current_player).deliver
+        
         @booking.cancelled = true;
         @booking.save
+        
+        BookingMailer.cancelled_court_late(@booking, current_player).deliver
         flash.alert = "Too late to remove!"
       else
-        BookingMailer.cancel_booking_email(@booking).deliver
+        
         @booking.destroy
-    
+        
+        BookingMailer.cancel_booking_email(@booking).deliver
         view_context.send_to_dropbox(@days)
         
         Pusher['test_channel'].trigger('greet', {
