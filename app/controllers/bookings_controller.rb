@@ -333,7 +333,9 @@ def index
   saturday = [6] #[saturday]
   sunday = [0] #[sunday]
   
-  if is_bank_holiday(DateTime.current + @day.days)
+  if is_closed_day(DateTime.current + @day.days)
+    @slots = 0
+  elsif is_bank_holiday(DateTime.current + @day.days)
 		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC")
 		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true).order("time ASC")
 		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true).order("time ASC")

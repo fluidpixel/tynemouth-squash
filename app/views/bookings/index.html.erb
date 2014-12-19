@@ -2,6 +2,12 @@
 <div id="select_date"></div>
 <div id="select_admin_date"></div>
 <%= link_to "◀", {:day => (@day - 1)}, :id => 'change_day_left' %>
+
+<%if @slots == 0 %>
+<div>
+<h2>Sorry, we're closed for bookings today. <br />Please contact the Club for opening times.</h2>
+</div>
+<% else %>
 <table class="booking">
 <% if !@isBookingTime %>
 	<tr class="first"><td colspan="20" class="nobookings">Court booking is not available until the Club opens for the day</td></tr>
@@ -22,7 +28,7 @@
 </tr>
  <% end %> 
 </table>
-
+<% end %>
 <%if @day < 21 %><%= link_to "▶", {:day => (@day + 1)}, :id => 'change_day_right' %><% end %>
 
 <div id="clearfix"></div>
