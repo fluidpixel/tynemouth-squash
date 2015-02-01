@@ -79,4 +79,6 @@ ActiveRecord::Schema.define(version: 20150201224035) do
     t.boolean  "sunday",       default: true
   end
 
+  add_index "time_slots", ["time"], name: "index_time_slots_on_time", using: :btree
+
 end
