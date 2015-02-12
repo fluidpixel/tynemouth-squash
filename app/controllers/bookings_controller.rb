@@ -82,7 +82,13 @@ def create
         @error = "Restricted Membership, can't book after 5pm"
         redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
       end
-    end 
+    end
+    
+    if !player.isValidMember
+      @error = "Sorry, your 3 month Trial membership has expired. Please contact the club"
+      redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+    end
+    
     for i in 0..@end-1
       @booking = Booking.new(booking_params)
       @booking.time_slot_id = @booking.time_slot_id + i
