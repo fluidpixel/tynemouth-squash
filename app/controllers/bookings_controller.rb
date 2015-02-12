@@ -1,24 +1,23 @@
 class BookingsController < ApplicationController
   
 def new
-  @error = params[:error] if(params[:error])
+	@error = params[:error] if(params[:error])
 	@court = Court.find(params[:court]) if(params[:court])
 	@court_name = @court.court_name
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
   
-	@time = DateTime.parse(params[:hour] + ':' + params[:min]) if(params[:hour])
-  @time += (params[:days]).to_i.days if(params[:days])
+	@days = params[:days] ? (params[:days]) : 0
   
-  
-  @booking = Booking.new	
+	@time = ActiveSupport::TimeWithZone.new(nil, Time.zone, DateTime.parse(params[:hour] + ':' + params[:min])) if(params[:hour])
+	@time += @days.to_i.days
+	
+	@booking = Booking.new	
 	@booking.start_time = @time
 	@booking.time_slot_id = @timeSlot.id
 	@booking.court_time = 40
 	@booking.court_id = @court.id
-	
-	@days = params[:days] if(params[:days])
 	@booking.player_id = :last_name if(:last_name)
-  @booking.vs_player_id = :vs_player_name if (:vs_player_name)
+	@booking.vs_player_id = :vs_player_name if (:vs_player_name)
   
 end
 
