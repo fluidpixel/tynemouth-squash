@@ -67,7 +67,7 @@ class BookingMailer < ActionMailer::Base
       @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
-      end.deliver
+      end
     end
     
     if @booking.vs_player_id?
@@ -76,7 +76,7 @@ class BookingMailer < ActionMailer::Base
         @greeting = "You've been booked to play squash against " + @booking.player.first_name
         mail(to: @booking.vs_player.email, subject: @greeting) do |format|
           format.text
-        end.deliver
+        end
       end
     end
   end
