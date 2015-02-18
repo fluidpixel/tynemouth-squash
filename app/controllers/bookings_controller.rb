@@ -8,7 +8,7 @@ def new
   
 	@days = params[:days] ? (params[:days]) : 0
   
-	@time = ActiveSupport::TimeWithZone.new(nil, Time.zone, DateTime.parse(params[:hour] + ':' + params[:min])) if(params[:hour])
+	@time = ActiveSupport::TimeWithZone.new(nil, Time.zone, Time.zone.parse(params[:hour] + ':' + params[:min])) if(params[:hour])
 	@time += @days.to_i.days
 	
 	@booking = Booking.new	
@@ -69,7 +69,7 @@ def create
   if player || @player
     #varibles if we fail to save
     @day = params[:booking][:days]
-    @time = ActiveSupport::TimeWithZone.new(nil, Time.zone, DateTime.parse(params[:booking][:start_time]))
+    @time = ActiveSupport::TimeWithZone.new(nil, Time.zone, Time.zone.parse(params[:booking][:start_time]))
     
     # @time = Time.zone.parse(params[:booking][:start_time]).to_datetime
   	@time_slot_id = params[:booking][:time_slot_id]
@@ -150,7 +150,7 @@ def processform
   @booking = Booking.find(params[:id])
   
   if params[:commit] == 'Cancel Booking'
-    @days = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+    @days = (@booking.start_time.to_date - Date.current.to_date).to_i
   
     if @booking# && params[:booking]
       player = Player.authenticate(@booking.player.last_name, params[:membership_number])
@@ -250,7 +250,7 @@ end
 def destroy
   @booking = Booking.find(params[:id])
   
-  @days = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+  @days = (@booking.start_time.to_date - Date.current.to_date).to_i
   
   if @booking && params[:booking]
     player = Player.authenticate(@booking.player.last_name, params[:booking][:membership_number])
@@ -314,7 +314,7 @@ def update
   
   if @booking.update(params[:booking].permit(:court_id, :player_id, :last_name, :start_time, :court_time, :vs_player_name))
     #booking changed, send email?
-    @day = (@booking.start_time.to_date - DateTime.current.to_date).to_i
+    @day = (@booking.start_time.to_date - Date.current).to_i
     view_context.send_to_dropbox(@day)
     
     redirect_to @booking
@@ -330,7 +330,7 @@ def index
 		@day = 0
 	end
   
-	@bookingDay = (DateTime.current + @day.days).strftime("%A %d %B")
+	@bookingDay = (Date.current + @day.days).strftime("%A %d %B")
 	
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
 	
@@ -338,16 +338,16 @@ def index
   saturday = [6] #[saturday]
   sunday = [0] #[sunday]
   
-  if is_closed_day(DateTime.current + @day.days)
+  if is_closed_day(Date.current + @day.days)
     @slots = 0
-  elsif is_bank_holiday(DateTime.current + @day.days)
+  elsif is_bank_holiday(Date.current + @day.days)
 		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC")
 		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true).order("time ASC")
 		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true).order("time ASC")
 		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true).order("time ASC")
 		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true).order("time ASC")
     @slots = @court1Slots.count
-  elsif (saturday.include?((DateTime.current + @day.days).wday))
+  elsif (saturday.include?((Date.current + @day.days).wday))
 		@court1Slots = TimeSlot.where(:court_id => 1).order("time ASC")
 		@court2Slots = TimeSlot.where(:court_id => 2).order("time ASC")
 		@court3Slots = TimeSlot.where(:court_id => 3).order("time ASC")
