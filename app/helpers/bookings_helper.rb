@@ -44,7 +44,7 @@ def send_to_dropbox(day)
   Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
   Dropbox::API::Config.app_secret = ENV['DROPBOX_APPSECRET']
   @client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_USERTOKEN'], :secret => ENV['DROPBOX_USERSECRET'])
-  @bookingDay = (DateTime.current + day.to_i).strftime("%d_%B_%A") + '.text'
+  @bookingDay = (Date.current + day.to_i).strftime("%d_%B_%A") + '.text'
   
   #ac = ActionController::Base.new()
   @data = render( :template => :text_booking, :formats => [:text])

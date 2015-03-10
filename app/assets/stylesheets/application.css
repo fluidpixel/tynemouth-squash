@@ -147,6 +147,11 @@ input[type="submit"]
 	margin-top: 20px;
 }
 
+select[id^="player_trial_date"]
+{
+	width: 62px;
+	margin-right: 0px;
+}
 form span.guest
 {
 	position: absolute;
@@ -187,6 +192,9 @@ li
  text-align: center;
  margin-top: 80px;
  margin-bottom: 10px;
+ position:fixed;
+ left:0;
+ right:0;
 }
 .ui-helper-hidden-accessible
 {

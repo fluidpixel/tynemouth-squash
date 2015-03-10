@@ -150,7 +150,7 @@ def processform
   @booking = Booking.find(params[:id])
   
   if params[:commit] == 'Cancel Booking'
-    @days = (@booking.start_time.to_date - Date.current.to_date).to_i
+    @days = (@booking.start_time.to_date - Date.current).to_i
   
     if @booking# && params[:booking]
       player = Player.authenticate(@booking.player.last_name, params[:membership_number])
@@ -250,7 +250,7 @@ end
 def destroy
   @booking = Booking.find(params[:id])
   
-  @days = (@booking.start_time.to_date - Date.current.to_date).to_i
+  @days = (@booking.start_time.to_date - Date.current).to_i
   
   if @booking && params[:booking]
     player = Player.authenticate(@booking.player.last_name, params[:booking][:membership_number])
@@ -354,7 +354,7 @@ def index
 		@court4Slots = TimeSlot.where(:court_id => 4).order("time ASC")
 		@court5Slots = TimeSlot.where(:court_id => 5).order("time ASC")
     @slots = @court1Slots.count
-  elsif (sunday.include?((DateTime.current + @day.days).wday))
+  elsif (sunday.include?((Date.current + @day.days).wday))
 		@court1Slots = TimeSlot.where(:court_id => 1).where(:sunday => true).order("time ASC")
 		@court2Slots = TimeSlot.where(:court_id => 2).where(:sunday => true).order("time ASC")
 		@court3Slots = TimeSlot.where(:court_id => 3).where(:sunday => true).order("time ASC")

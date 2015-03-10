@@ -1,6 +1,9 @@
 <div id="center" class="players">
 <h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><h2><% if @player.admin %>Admin<% end %></h2>
 <h3><%= @membership_type %> member</h3>
+<% if @membership_type == "trial" %>
+<h4><%= @player.trialExpires %></h4>
+<% end %>
 
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 

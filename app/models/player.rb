@@ -50,7 +50,7 @@ def self.authenticateFullName(name, membership_number)
 end
 
 def future_bookings
-  @future_unpaid = bookings.where('paid = false OR start_time >= ?', DateTime.current).order("start_time ASC")
+  @future_unpaid = bookings.where('paid = false OR start_time >= ?', Date.current).order("start_time ASC")
   return @future_unpaid
 end
 
@@ -63,13 +63,31 @@ def self.find_all_by_name_containing(text)
 end
   
 def isValidMember
-  if self.membership_type.membership_type == 'trial' && self.created_at < 3.months.ago
+  if !self.trial_date
+    self.trial_date = self.created_at
+  end
+  
+  if self.membership_type.membership_type == 'trial' && self.trial_date < 1.day.ago
     return false
   else
     return true
   end
 end
-  
+
+def trialExpires
+  if self.membership_type.membership_type == 'trial' 
+    if !self.trial_date
+      self.trial_date = self.created_at + 3.months
+    end    
+    difference = (Date.current - self.trial_date.to_date).to_i #trial is 90 days long
+    if difference > 0
+      return "(Trial expired " + difference.abs.to_s + " days ago)"
+    else
+      return "(Trial expires in " + difference.abs.to_s + " days time)"
+    end
+  end
+end
+
 def isRestricted
   if self.membership_type.membership_type == 'restricted'
     return true
@@ -81,7 +99,6 @@ end
   
 def self.search(search)  
     if search  
-      
       where('last_name || first_name ILIKE ?', "%#{search}%")  
     else  
       all  

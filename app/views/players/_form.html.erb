@@ -18,6 +18,7 @@
     <%= f.label 'last name' %><%= f.text_field :last_name %><br>
 	<% if is_super_admin %>
 		<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type, {:include_blank => 'Select Type...'} %><br/>
+		<%= f.label 'Trial Expires'%><%= f.date_select :trial_date, :start_year => @player.created_at.year, :end_year => Time.now.year %><br />
 	<% else %>
 		<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.where(membership_type: 'guest'), :id, :membership_type %><br/>
 	<% end %>
