@@ -371,10 +371,21 @@ def index
 	end
 	
 	if (@day == 21 && !is_admin)
-    @isBookingTime = (Time.current.strftime("%H") >= @court1Slots.first.time.strftime("%H"))
-    # @isBookingTime = (Time.current.strftime("%H") >= "12")
-	else
-		@isBookingTime = true;
+    if is_closed_day(Date.current)
+      @isBookingTime = false
+    elsif is_bank_holiday(Date.current)
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC").first.time.strftime("%H"))
+    elsif saturday.include?(Date.current.wday)
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).order("time ASC").first.time.strftime("%H"))      
+    elsif sunday.include?(Date.current.wday)
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:sunday => true).order("time ASC").first.time.strftime("%H"))      
+    else
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:weekday => true).order("time ASC").first.time.strftime("%H"))
+    end
+  elsif (@day > 21 && !is_admin)
+		@isBookingTime = false
+  else
+    @isBookingTime = true
 	end
 
 end
