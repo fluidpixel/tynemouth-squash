@@ -46,6 +46,7 @@ def edit
       @player.trial_date = @player.created_at + 3.months
     end
     @membership_types = MembershipType.all
+    @membership_type = MembershipType.find(@player.membership_type_id).membership_type
     
   else
     flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
