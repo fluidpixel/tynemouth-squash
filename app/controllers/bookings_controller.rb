@@ -84,7 +84,12 @@ def create
     end
     
     if !player.isValidMember
-      @error = "Sorry, your 3 month Trial membership has expired. Please contact the club"
+      if player.isArchived
+        @error = 'Your account has been deactived. If this has been a mistake, please contact the club'
+      else
+        @error = "Sorry, your 3 month Trial membership has expired. Please contact the club"
+      end
+      
       redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
     end
     

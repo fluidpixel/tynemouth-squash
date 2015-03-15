@@ -59,7 +59,7 @@ def full_name
 end
 
 def self.find_all_by_name_containing(text)
-  self.where("LOWER(first_name || ' ' || last_name) LIKE ?", "%#{text.downcase}%")
+  self.where("LOWER(first_name || ' ' || last_name) LIKE ? AND NOT archived", "%#{text.downcase}%")
 end
   
 def isValidMember
@@ -67,11 +67,15 @@ def isValidMember
     self.trial_date = self.created_at
   end
   
-  if self.membership_type.membership_type == 'trial' && self.trial_date < 1.day.ago
+  if (self.membership_type.membership_type == 'trial' && self.trial_date < 1.day.ago) || self.archived
     return false
   else
     return true
   end
+end
+
+def isArchived
+  return self.archived
 end
 
 def trialExpires
@@ -99,7 +103,7 @@ end
   
 def self.search(search)  
     if search  
-      where('last_name || first_name ILIKE ?', "%#{search}%")  
+      where('last_name || first_name ILIKE ? AND NOT archived', "%#{search}%")  
     else  
       all  
     end  

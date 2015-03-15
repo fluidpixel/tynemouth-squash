@@ -23,13 +23,17 @@ end
  
 def show
   @player = Player.find(params[:id])
-  @membership_type = MembershipType.find(@player.membership_type_id).membership_type
+  if @player.archived
+    @membership_type = 'Archived'
+  else
+    @membership_type = MembershipType.find(@player.membership_type_id).membership_type
+  end
     
   @vs_bookings = Booking.where('start_time >= ?', Date.current).where(:vs_player_id => @player.id)
 end
 
 def index
-  @players = Player.order(sort_column + ' ' + sort_direction).search(params[:player_search])
+  @players = Player.where('NOT archived').order(sort_column + ' ' + sort_direction).search(params[:player_search])
   
   # @players = Player.order(sort_column + " " + sort_direction)
   @membership_types = MembershipType.all
@@ -73,7 +77,7 @@ def update
 end
 
 def list
-   @players = Player.order(:last_name).where('lower(last_name) like ? OR membership_number like ? OR lower(first_name) like ?', "%#{params[:term].downcase}%", "%#{params[:term]}%", "%#{params[:term].downcase}%")
+   @players = Player.order(:last_name).where('lower(last_name) like ? OR membership_number like ? OR lower(first_name) like ? AND NOT archived', "%#{params[:term].downcase}%", "%#{params[:term]}%", "%#{params[:term].downcase}%")
     #@players = Player.all
     render json: @players.map { |player| player.first_name + ' ' + player.last_name }
     #render json: @players.map(&:last_name,&:first_name)
