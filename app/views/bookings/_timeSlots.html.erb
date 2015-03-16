@@ -53,6 +53,9 @@
 				<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
 			</div>
 			<% end %>
+			
+		<% else %>
+			<div class ="book">&nbsp</div>
 		<% end %>
 	<% elsif @day < 0 %>
 		<% if !@booked %>
