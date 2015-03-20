@@ -13,6 +13,10 @@ def create
   @membership_types = MembershipType.all
   @trial_membership = MembershipType.where(:membership_type => "trial")
   
+  if MembershipType.find(@player.membership_type_id).membership_type == 'trial'
+    @player.trial_date = Date.current + 3.months
+  end
+  
   if @player.save
   	redirect_to @player
   else
