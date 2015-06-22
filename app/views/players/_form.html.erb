@@ -1,4 +1,4 @@
-<%= form_for(@player) do |f| %>
+<%= form_for @player, html: {class: "player"} do |f| %>
 	<% if @player.errors.any? %>
 	  <div id="errorExplanation">
 		<h2><%= pluralize(@player.errors.count, "error") %> prohibited

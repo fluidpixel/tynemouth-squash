@@ -23,7 +23,7 @@
 <% end %>
 
 <h1>Edit Booking</h1>
-<%= form_for :booking, url: booking_path(@booking.id), method: :patch do |f| %>
+<%= form_for :booking, url: booking_path(@booking.id), method: :patch, html: {class: "booking"} do |f| %>
 	<% if @booking.errors.any? %>
 	  <div id="errorExplanation">
 		<h2><%= pluralize(@booking.errors.count, "error") %> prohibited

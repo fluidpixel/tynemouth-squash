@@ -14,8 +14,6 @@
  */
  
  html {
-	
-	
 	background-color: #0A4B81;
  }
  
@@ -37,7 +35,8 @@ h1, h2, h3, h4, h5, strong, b {
 	font-weight: bold;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
- h1{
+
+h1{
 	text-align: center;
 	margin-bottom: 5px;
 	margin-top: 28px;
@@ -118,12 +117,14 @@ z-index: -1;
 	background-color: #0A4B81;
 }
 
-form
+form.booking, form.player
 {
 	text-align: center;
 	margin-top:120px;
 }
-
+form.delete {
+	text-align: center;
+}
 form a
 {
 	font-size:24px;

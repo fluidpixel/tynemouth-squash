@@ -19,12 +19,12 @@ th.booking{
 	background-color: #0A4B81;
 }
  
-td {
+td.booking, td.player {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	text-align:center;
 	vertical-align:middle;
-	//border-width: 0px 1px 1px 1px;
+/*	border-width: 0px 1px 1px 1px;*/
 	line-height: 13px;
 	width:198px;
 	background-color: #F2F6F9;
@@ -151,7 +151,7 @@ a#change_day_left, a#change_day_right
 	margin-right:28px;
 	font-size:16px;
 	float:right;
-	width:116px;
+	width:118px;
 }
 .book, .login_to_book {
 	 line-height:20px;
@@ -170,7 +170,7 @@ a#change_day_left, a#change_day_right
 
 .booked, .cancelled{
 	z-index: 3;
-	line-height: 18px;
+	line-height: 20px;
 	background: #AAC9E4;
 }
 
@@ -229,6 +229,7 @@ a.to_pay_guest{
 	float: left;
 	color: #426B8C;
 	background-color: #F2F6F9;
+	letter-spacing: -3px;
 }
 
 .noTime{

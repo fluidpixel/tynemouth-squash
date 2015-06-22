@@ -4,7 +4,7 @@
   <%= @error %>
 </p>
 <% end %>
-<%= form_for :booking, url: bookings_path do |f| %>
+<%= form_for :booking, url: bookings_path, html: {class: "booking"} do |f| %>
 	<%= render "layouts/error_messages", :target => @booking %>
   <% if is_admin %>
 	  <%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path} %><span class='guest'>Guest? <%= f.check_box :guest_booking %></span> <br /> 

@@ -6,7 +6,7 @@
 	<h2 class="newPlayer"><%= link_to 'New Guest', new_player_path %></h2>
 <% end %>
 
-<%= form_tag players_path, :method => 'get', :id => "player_search_form" do %>
+<%= form_tag players_path, :method => 'get', :id => "player_search_form", :class => "player" do %>
   <p>
 	  <%= text_field_tag 'player_search', nil, :class => 'search-query ui-autocomplete-input', :placeholder => 'Player Search', data: {autocomplete_source: playerlist_path} %>
 	  <!-- <%= text_field_tag :search, nil, data: {autocomplete_source: playerlist_path} %> -->

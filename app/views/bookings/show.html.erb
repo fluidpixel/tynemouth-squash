@@ -12,7 +12,7 @@
 <% end %>
 
 
-<%= form_tag processform_path(@booking) do %>
+<%= form_tag processform_path(@booking), :class => "booking" do %>
 	<%= hidden_field_tag :id, @booking.id %>
 	<% if is_admin %>
 		<% if !@booking.cancelled %>

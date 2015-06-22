@@ -1,5 +1,5 @@
 <h1>Enter a new Court</h1>
-<%= form_for :court, url: courts_path do |f| %>
+<%= form_for :court, url: courts_path, html: {class: "booking"} do |f| %>
   <p>
     <%= f.label :court_name %><br>
     <%= f.text_field :court_name %>

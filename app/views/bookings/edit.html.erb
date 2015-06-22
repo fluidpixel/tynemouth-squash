@@ -2,7 +2,7 @@
 <h2><%= @booking.time_slot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %></h2>
 
 <% if @allowEdit %>
-	<%= form_for :booking, url: booking_path(@booking.id), method: :patch do |f| %>
+	<%= form_for :booking, url: booking_path(@booking.id), method: :patch, html: {class: "booking"} do |f| %>
 		<% if @booking.errors.any? %>
 		  <div id="errorExplanation">
 			<h2><%= pluralize(@booking.errors.count, "error") %> prohibited

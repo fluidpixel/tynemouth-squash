@@ -2,5 +2,4 @@
 
 <%= render 'form' %>
 
-<%= button_to 'Delete Player', player_path(@player),
-                    method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= button_to 'Delete Player', player_path(@player), method: :delete, data: { confirm: 'Are you sure?' }, form_class: "delete" %>
