@@ -63,17 +63,27 @@ class BookingMailer < ActionMailer::Base
     @court = Court.find(@booking.court_id)
     
     if @booking.player.email?
-      @greeting = @booking.player.first_name + " you've booked a squash court"
+      if @booking.vs_player_id?
+        @greeting = "Squash vs " + @booking.vs_player.first_name + " " + @booking.vs_player.last_name.first
+      else
+        @greeting = "Squash Booking"
+      end
+      
       @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
       end
     end
-    
+  end
+  
+  def vs_booking_email(booking)
+    @booking = booking
+    @court = Court.find(@booking.court_id)
+        
     if @booking.vs_player_id?
       if @booking.vs_player.email?
         @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
-        @greeting = "You've been booked to play squash against " + @booking.player.first_name
+        @greeting = "Squash vs " + @booking.player.first_name + " " + @booking.player.last_name.first
         mail(to: @booking.vs_player.email, subject: @greeting) do |format|
           format.text
         end

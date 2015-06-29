@@ -100,6 +100,7 @@ def create
     	if @booking.save
         @saved = true
         BookingMailer.create_booking_email(@booking).deliver
+        BookingMailer.vs_booking_email(@booking).deliver
       else
         @saved = false
         #flash.alert = 'false'
