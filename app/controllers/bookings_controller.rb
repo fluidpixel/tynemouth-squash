@@ -134,6 +134,8 @@ end
 def show
   @booking = Booking.find(params[:id])
   
+  @days = (@booking.start_time.to_date - Date.current).to_i
+  
   @timeSlot = TimeSlot.find(@booking.time_slot_id)
   
   @court = Court.find(@booking.court_id)
