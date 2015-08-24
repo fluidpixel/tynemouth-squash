@@ -89,7 +89,11 @@ def create
       else
         @error = "Sorry, your 3 month Trial membership has expired. Please contact the club"
       end
-      
+      redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+    end
+    
+    if player.unpaid_bookings.count >= 2
+      @error = 'Sorry, you cannot book with 2 or more outstanding unpaid courts'
       redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
     end
     

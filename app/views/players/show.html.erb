@@ -15,7 +15,9 @@
 </p>
 <% end %>
 
-<h3><%= @player.future_bookings.count %> Bookings</h2>
+<h3><%= @player.future_bookings.count %> Bookings
+<% if @player.unpaid_bookings.count > 0 %></br><span class='red bold'>(<%= @player.unpaid_bookings.count %> Unpaid)</span><% end %></h3>
+
 <% @player.future_bookings.each do |booking| %>
 	<% if booking.paid == false %>
 		<%= link_to booking.time_slot.time.strftime("%l:%M%P") + booking.start_time.strftime(" on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= link_to booking.court.court_name, bookings_path(:day => booking.day) %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %> <span class='red bold'>(unpaid)</span></strong>
@@ -25,10 +27,11 @@
 	<br />
 <% end %>
 
-<h3><%= @vs_bookings.count %> Vs Bookings</h2>
+<h3><%= @vs_bookings.count %> Vs Bookings</h3>
 <% @vs_bookings.each do |booking| %>
   <p>
     <%= link_to booking.start_time.strftime("%l:%M%P on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.player.first_name.humanize %> <%= booking.player.last_name.humanize %><% end %></strong>
   </p>
 <% end %>
+
 </div>
