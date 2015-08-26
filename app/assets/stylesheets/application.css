@@ -240,7 +240,11 @@ ul.ui-autocomplete {
 }
 
 .red {
- color: Firebrick;
+ color: Crimson;
+}
+
+.gold {
+ color: Gold;
 }
 
 .bold {
