@@ -50,6 +50,14 @@ class Booking < ActiveRecord::Base
     time_slot = TimeSlot.find(self.time_slot_id)
   end
   
+  def incurs_fine
+    if (self.start_time.to_date - Date.current).to_i < 0 && !self.paid
+      return true
+    else
+      return false
+    end
+  end
+  
 	def vs_player_name
     #player ? player.vs_player_name : ""
 		player.try(:vs_player_name)

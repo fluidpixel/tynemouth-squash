@@ -41,7 +41,7 @@
 		<% end %>
 	<% end %>
 
-	<% if !@booked && @day >=0 %>
+	<% if !@booked && @day >=-10 %>
 		<div class='time'><%= timeSlot.time.strftime("%l:%M")%></div>
 		<% if @isBookingTime %>
 			<% if current_player %>

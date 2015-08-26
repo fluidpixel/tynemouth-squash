@@ -144,9 +144,9 @@ def show
   @timeSlot = TimeSlot.find(@booking.time_slot_id)
   
   @court = Court.find(@booking.court_id)
-  if (((Time.current + 2.days) <= @booking.start_time))
+  if ((Time.current + 2.days) <= @booking.start_time) || @booking.start_time.hour < 17
     @cancellable = true
-    @timeLeft = (((Time.current + 2.days) - @booking.start_time)).to_i * -1
+    @timeLeft = (((Time.current) - @booking.start_time)).to_i * -1
   end
   if (!@booking.player_id.blank?)
 	  @player = Player.find(@booking.player_id)
@@ -163,58 +163,7 @@ def processform
   
   if params[:commit] == 'Cancel Booking'
     @days = (@booking.start_time.to_date - Date.current).to_i
-  
-    if @booking# && params[:booking]
-      player = Player.authenticate(@booking.player.last_name, params[:membership_number])
-    end
-  
-    if player || is_admin
-    
-      if @booking.cancelled
-        #if we've already cancelled the court, then delete it now
-        # BookingMailer.cancel_booking_email(@booking).deliver
-        @booking.destroy
-  
-        view_context.send_to_dropbox(@days)
-      
-        Pusher['test_channel'].trigger('greet', {
-          :greeting => "Booking Removed!"
-        })
-      
-        flash.alert = "Removed Cancelled Booking"
-        if @days
-          redirect_to bookings_path(:day => @days)
-        end
-      
-      elsif @days
-        if @days < 2
-          
-          @booking.cancelled = true;
-          @booking.save
-          
-          BookingMailer.cancelled_court_late(@booking, current_player).deliver
-          flash.alert = "Too late to remove!"
-        else
-          @booking.destroy
-          
-          BookingMailer.cancel_booking_email(@booking).deliver
-          view_context.send_to_dropbox(@days)
-        
-          Pusher['test_channel'].trigger('greet', {
-            :greeting => "Booking Removed!"
-          })
-    
-          flash.alert = "Removed Booking"
-        end
-      
-    		redirect_to bookings_path(:day => @days)
-    	else
-    		redirect_to bookings_path
-    	end
-    else
-      redirect_to booking_path(:id => @booking.id)
-      flash.alert = "matching Membership number required for cancelling booking " + params[:membership_number]
-    end
+    cancel_court(params)
   else
     if @booking# && params[:booking]
       player = Player.authenticate(@booking.player.last_name, params[:membership_number])
@@ -260,63 +209,7 @@ def edit
 end
 
 def destroy
-  @booking = Booking.find(params[:id])
-  
-  @days = (@booking.start_time.to_date - Date.current).to_i
-  
-  if @booking && params[:booking]
-    player = Player.authenticate(@booking.player.last_name, params[:booking][:membership_number])
-  end
-  
-  if player || is_admin
-    
-    if @booking.cancelled
-      #if we've already cancelled the court, then delete it now
-      # BookingMailer.cancel_booking_email(@booking).deliver
-      @booking.destroy
-  
-      view_context.send_to_dropbox(@days)
-      
-      Pusher['test_channel'].trigger('greet', {
-        :greeting => "Booking Removed!"
-      })
-      
-      flash.alert = "Removed Cancelled Booking"
-      if @days
-        redirect_to bookings_path(:day => @days)
-      end
-      
-    elsif @days
-      if @days < 2
-        
-        @booking.cancelled = true;
-        @booking.save
-        
-        BookingMailer.cancelled_court_late(@booking, current_player).deliver
-        flash.alert = "Too late to remove!"
-      else
-        
-        @booking.destroy
-        
-        BookingMailer.cancel_booking_email(@booking).deliver
-        view_context.send_to_dropbox(@days)
-        
-        Pusher['test_channel'].trigger('greet', {
-          :greeting => "Booking Removed!"
-        })
-    
-        flash.alert = "Removed Booking"
-      end
-      
-  		redirect_to bookings_path(:day => @days)
-  	else
-  		redirect_to bookings_path
-  	end
-  else
-    respond_with @booking
-    flash.alert = "Valid Membership number required for cancelling booking" + params[:booking][:membership_number]
-  end
-  	
+  cancel_court(params)
 end
 
 def update
@@ -419,6 +312,69 @@ def toggle_paid
 end 
 
 private
+
+  def cancel_court(params)
+    @booking = Booking.find(params[:id])
+  
+    @days = (@booking.start_time.to_date - Date.current).to_i
+  
+    if @booking
+      player = Player.authenticate(@booking.player.last_name, params[:membership_number])
+    end
+    
+    if player || is_admin
+    
+      if @booking.cancelled
+        #if we've already cancelled the court, then delete it now
+        # BookingMailer.cancel_booking_email(@booking).deliver
+        @booking.destroy
+  
+        view_context.send_to_dropbox(@days)
+      
+        Pusher['test_channel'].trigger('greet', {
+          :greeting => "Booking Removed!"
+        })
+      
+        flash.alert = "Removed Cancelled Booking"
+        if @days
+          redirect_to bookings_path(:day => @days)
+        end
+      
+      elsif @days
+        if @days < 2 && @booking.start_time.hour >= 17 && !@booking.start_time.saturday? && !@booking.start_time.sunday?
+        
+          @booking.cancelled = true;
+          @booking.save
+        
+          BookingMailer.cancelled_court_late(@booking, current_player).deliver
+          flash.alert = "Peak Court cancelled too late to remove!"
+        else
+        
+          @booking.destroy
+        
+          Thread.new do
+            BookingMailer.cancel_booking_email(@booking).deliver
+            view_context.send_to_dropbox(@days)
+            ActiveRecord::Base.connection.close
+          end
+                
+          Pusher['test_channel'].trigger('greet', {
+            :greeting => "Booking Removed!"
+          })
+    
+          flash.alert = "Removed Booking"
+        end
+      
+    		redirect_to bookings_path(:day => @days)
+    	else
+    		redirect_to bookings_path
+    	end
+    else
+      redirect_to booking_path(:id => @booking.id)
+      flash.alert = "Valid Membership number required for cancelling booking"
+    end
+  end
+  
   def booking_params
     params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name, :guest_booking)
   end
