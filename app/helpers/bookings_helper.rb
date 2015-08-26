@@ -48,7 +48,11 @@ def send_to_dropbox(day)
   
   #ac = ActionController::Base.new()
   @data = render( :template => :text_booking, :formats => [:text])
-  response = @client.upload @bookingDay, @data # => #<Dropbox::API::File>
+  begin
+    response = @client.upload @bookingDay, @data # => #<Dropbox::API::File>
+  rescue
+    puts "error sending to dropbox"
+  end
 end
 
 def membership_type_and_price(booking)
