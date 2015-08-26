@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315215442) do
+ActiveRecord::Schema.define(version: 20150826083719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20150315215442) do
     t.integer  "time_slot_id"
     t.datetime "start_time"
     t.integer  "court_time"
-    t.boolean  "paid"
+    t.boolean  "paid",          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "guest_booking"
-    t.boolean  "cancelled"
+    t.boolean  "cancelled",     default: false
   end
 
   add_index "bookings", ["paid"], name: "index_bookings_on_paid", where: "(paid = false)", using: :btree
@@ -54,14 +54,14 @@ ActiveRecord::Schema.define(version: 20150315215442) do
     t.string   "landline"
     t.string   "mobile"
     t.string   "email"
-    t.string   "membership_number"
-    t.integer  "membership_type_id"
-    t.boolean  "admin"
     t.datetime "trial_date"
     t.string   "address_line1"
     t.string   "address_line2"
     t.string   "address_line3"
     t.string   "post_code"
+    t.string   "membership_number"
+    t.integer  "membership_type_id"
+    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "super_admin"
