@@ -40,6 +40,8 @@ $( "html" ).click(function()
 	$.cookie('scroll', $(window).scrollTop());
 });
 
+document.oncontextmenu = new Function("return false");
+
 jQuery(function($)
 {
 	$(document).on('click', '.toggle', function()
