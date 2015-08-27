@@ -66,5 +66,11 @@ class ApplicationController < ActionController::Base
     date = day.to_time
     closedDays.include?(date.strftime("%Y-%m-%d"))
   end
+  
+  def mobile_device?  
+    request.user_agent =~ /Mobile|webOS/  
+  end  
+  helper_method :mobile_device?
+    
       
 end

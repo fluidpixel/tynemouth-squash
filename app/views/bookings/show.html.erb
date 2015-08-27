@@ -1,12 +1,14 @@
 <h1><%= @court.court_name %></h1>
 <% if @player %>
-	<h2><%= link_to @player.first_name.humanize + " " + @player.last_name.humanize, @player %> | <%= @timeSlot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %>
+	<h2><%= @timeSlot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %>
+		<% if @booking.cancelled %><br /><span class='red'>Booking Cancelled</span><% end %>
+		<br /> <%= link_to @player.first_name.humanize + " " + @player.last_name.humanize, @player %>
 		<% if @vs_player %>
 			<br />Against <%= link_to @vs_player.first_name.humanize + " " + @vs_player.last_name.humanize, @vs_player%>
 		<% end %>
 	</h2>
 	<% if @booking.paid %><h4>Court Paid</h4><% end %>
-	<h4><%=membership_type_and_price(@booking)%></h4>
+	<h4><%=membership_type_and_price(@booking).capitalize%></h4>
 <% else %>
 	<p>Book Court</p>
 <% end %>
@@ -15,13 +17,13 @@
 	<%= hidden_field_tag :id, @booking.id %>
 	<% if is_admin %>
 		<% if @booking.incurs_fine %>
-			<p><%= link_to 'PAY FINE', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'gold' %>
+			<p><%= link_to 'PAY FINE', toggle_paid_booking_path(@booking), :id => "paid_link_#{@booking.id}", :class => "gold", :title => membership_type_and_price(@booking) %>
 			<br /><span class="red">There is a fine due on this court</span></p>
 		<% else %>
-			<% if !@booking.cancelled %>
-				<%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure you wish to cancel this booking?' } %>
-			<% else %>
+			<% if @booking.cancelled %>
 				<br /><%= link_to 'Remove Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure you wish to remove this booking?' } %>
+			<% else %>
+				<br /><%= link_to 'Cancel Booking', booking_path(@booking), method: :delete, data: { confirm: 'Are you sure you wish to cancel this booking?' } %>
 			<%end%>
 		<%end%>
 		<% if @timeLeft %>
@@ -33,7 +35,13 @@
 			<% end %>
 		<% end %>
 		
-		<% if !@booking.incurs_fine %><p><%= submit_tag "Change Players" %></p><% end %>
+		<% if !@booking.incurs_fine %>
+			<% if @booking.cancelled %>
+				<p><%= submit_tag "Rebook Court" %></p>
+			<% else %>
+				<p><%= submit_tag "Change Players" %></p>
+			<% end %>
+		<% end %>
 	<% else %>
 		<%= label_tag 'Membership Number:' %><%= text_field_tag :membership_number %>
 		<p><%= submit_tag "Change Opponent" %></p>
