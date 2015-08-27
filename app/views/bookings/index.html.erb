@@ -8,6 +8,7 @@
 <h2>Sorry, we're closed for bookings today. <br />Please contact the Club for opening times.</h2>
 </div>
 <% else %>
+<div class="overflowTable">
 <table class="booking">
 <% if !@isBookingTime %>
 	<tr class="first"><td colspan="20" class="nobookings">Court booking is not available until the Club opens for the day</td></tr>
@@ -28,6 +29,7 @@
 </tr>
  <% end %> 
 </table>
+</div>
 <% end %>
 <%if @day < 21 %><%= link_to "▶", {:day => (@day + 1)}, :id => 'change_day_right' %><% end %>
 
@@ -38,6 +40,7 @@
 	
 	<%= link_to "◀", {:day => (@day - 1)}, :id => 'change_day' %>
 	<% if is_admin %>
+		<!-- <a href="#" onclick="show('select_admin_date(#{@day})'); return false;" class="day"><%= @bookingDay %></a> -->
 		<a href="#" onclick="show('select_admin_date'); return false;" class="day"><%= @bookingDay %></a>
 	<% else %>
 		<a href="#" onclick="show('select_date'); return false;" class="day"><%= @bookingDay %></a>

@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require_tree ./common
  *= require jquery.ui.datepicker
  */
  
@@ -32,6 +32,8 @@
 }
 
 h1, h2, h3, h4, h5, strong, b {
+	width: 100%;
+	background-color: #0A4B81;
 	font-weight: bold;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }

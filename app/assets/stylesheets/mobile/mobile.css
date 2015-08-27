@@ -1,0 +1,46 @@
+body {
+	background-color: #000000;
+	position: relative;
+	overflow-x: hidden;
+}
+
+.date {
+	font-size: 20px;
+}
+
+.date a.last_day {
+	font-size: 15px;
+}
+
+table.booking, th.booking, td.booking {
+	margin-top: 65px;
+}
+
+#user_nav {
+	position:relative;
+}
+ul.nav, li.nav {
+	display: list-item;
+	position: relative;
+	width:100px;
+}
+
+.overflowTable {
+	width: 100%;
+	overflow-x:scroll;
+}
+
+.time, .noTime, .noTimeOrBooking {
+	position:relative;
+}
+
+#select_date, #select_admin_date {
+	margin-left:10px;
+/*	margin-bottom:80px;*/
+	margin-top:0px;
+	position: fixed;
+}
+
+div.ui-datepicker{
+ font-size:16px;
+}
