@@ -97,7 +97,8 @@ function updateDays(expDate, inst) {
 }
 
 jQuery(function($){
-	$('#select_date').datepicker({minDate: 0, maxDate: +21, dateFormat: "dd/mm/yy", 
+	var days = getParameterByName('day');
+	$('#select_date').datepicker({minDate: 0, maxDate: +21, firstDay: 1, defaultDate: +days, dateFormat: "dd/mm/yy", 
 	    onSelect: function(dateText, inst) {
 			var newDate = dateText.slice(0,2);
 			var newMonth = dateText.slice(3,5);
@@ -119,6 +120,13 @@ jQuery(function($){
 			updateDays(expDate, inst);}
 	});
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 function show(id) {
 	if ( document.getElementById(id).style.visibility == 'visible')
