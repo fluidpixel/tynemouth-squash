@@ -144,10 +144,15 @@ def show
   @timeSlot = TimeSlot.find(@booking.time_slot_id)
   
   @court = Court.find(@booking.court_id)
-  if ((Time.current + 2.days) <= @booking.start_time) || @booking.start_time.hour < 17
+  
+  if (Time.current + 2.days) <= @booking.start_time
     @cancellable = true
-    @timeLeft = (((Time.current) - @booking.start_time)).to_i * -1
+    @timeLeft = ((Time.current + 2.days) - @booking.start_time).to_i * -1
+  elsif @booking.start_time.hour < 17 && @booking.start_time > Time.current
+    @timeLeft = (Time.current - @booking.start_time).to_i * -1
+    @cancellable = true
   end
+  
   if (!@booking.player_id.blank?)
 	  @player = Player.find(@booking.player_id)
   end
