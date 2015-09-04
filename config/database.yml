@@ -3,6 +3,7 @@ development:
   encoding: utf8
   database: project_development
   pool: 5
+  host: localhost
 
 test: &TEST
   adapter: postgresql
@@ -15,3 +16,5 @@ production:
   encoding: utf8
   database: project_production
   pool: 5
+  
+  
