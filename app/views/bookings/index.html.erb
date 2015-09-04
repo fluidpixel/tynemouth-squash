@@ -1,4 +1,4 @@
-<h3><%= @holiday %></h3>
+<% if @holiday %><h3 class="holiday"><%= @holiday %></h3><% end %>
 <div id="select_date"></div>
 <div id="select_admin_date"></div>
 <%= link_to "◀", {:day => (@day - 1)}, :id => 'change_day_left' %>
@@ -37,7 +37,7 @@
 
 <div class="date">
 	<% if @day != 0 %><%= link_to "Today", { :day => 0 }, :id => 'change_day', :class => 'today' %><% end %>
-	
+	<span class="datePicker">
 	<%= link_to "◀", {:day => (@day - 1)}, :id => 'change_day' %>
 	<% if is_admin %>
 		<!-- <a href="#" onclick="show('select_admin_date(#{@day})'); return false;" class="day"><%= @bookingDay %></a> -->
@@ -50,7 +50,7 @@
 	<% else %>
 		<%if @day < 21 %><%= link_to "▶", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
 	<% end %>
-	
+	</span>
 	<% if @day <= 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
 </div>
 

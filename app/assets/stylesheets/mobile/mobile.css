@@ -1,28 +1,63 @@
 body {
-	background-color: #000000;
+/*	background-color: #000000;*/
 	position: relative;
 	overflow-x: hidden;
+	min-height: 0px;
+	font-size: 15px;
+}
+
+h1 {
+	position: relative;
+	font-size: 26px;
+}
+h2 {
+	margin-top: 0px;
+}
+h3.holiday {
+	font-size: 20px;
+}
+
+#toggleDiv{ 
+	display:none;
+}
+#errorExplanation, #flashwarning{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	position:relative;
 }
 
 .date {
 	font-size: 20px;
+	position: fixed;
+	z-index: 200;
+	padding-top:10px;
+	bottom: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: #0A4B81;
+	margin-bottom:0px;
 }
 
 .date a.last_day {
+	display: none;
+}
+
+#change_day {
 	font-size: 15px;
 }
 
-table.booking, th.booking, td.booking {
-	margin-top: 65px;
+table.booking {
+	margin-top: 10px;
+	margin-bottom: 40px;
 }
 
 #user_nav {
 	position:relative;
+	display:none;
 }
 ul.nav, li.nav {
 	display: list-item;
 	position: relative;
-	width:100px;
 }
 
 .overflowTable {
@@ -34,13 +69,60 @@ ul.nav, li.nav {
 	position:relative;
 }
 
+.book, .login_to_book, .booked, .cancelled {
+	float: none;
+	line-height:18px;
+	font-size: 16px;
+	text-overflow:ellipsis;
+	width:124px;
+	white-space: nowrap;
+/*	  overflow: hidden;*/
+}
+
+.booked a {
+	font-size: 12px;
+}
+
+.paid {
+	position: relative;
+	float: right;
+	margin-top: -28px;
+	margin-left: 0px;
+}
+
+.unpaid {
+	display: none;
+}
+
 #select_date, #select_admin_date {
-	margin-left:10px;
-/*	margin-bottom:80px;*/
-	margin-top:0px;
+	margin-left:20px;
+	bottom:70px;
 	position: fixed;
+}
+
+a#change_day.today {
+	float:left;
+	margin-left: 20px;
+}
+
+a#change_day.last_day {
+	display:block;
+	margin-top: -48px;
+	margin-right:20px;
+	float:right;
+}
+
+.datePicker {
+	display:block;
+	float:none;
+	margin-top: 20px;
 }
 
 div.ui-datepicker{
  font-size:16px;
+}
+
+/*BOOKING PAGE*/
+form.booking, form.player {
+	margin-top: 20px;
 }
