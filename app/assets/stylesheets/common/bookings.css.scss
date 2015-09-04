@@ -160,7 +160,6 @@ a#change_day_left, a#change_day_right
 	 z-index:1;
 	 position:relative;
 	 height: 38px;
-	 line-height: 38px;
 }
 
 .login_to_book{
@@ -175,7 +174,10 @@ a#change_day_left, a#change_day_right
 }
 
 .booked a{
-	 color: #285784;
+	color: #285784;
+ 	display:block;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
 }
 
 .cancelled a{
