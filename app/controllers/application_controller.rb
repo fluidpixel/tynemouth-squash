@@ -57,13 +57,13 @@ class ApplicationController < ActionController::Base
                         "2015-12-25",
                         "2015-12-28"]
                         
-    date = day.to_time
+    date = day.in_time_zone
     bankholidays.include?(date.strftime("%Y-%m-%d"))
   end
   
   def is_closed_day(day)
     closedDays = Array["2014-12-25", "2014-12-26", "2015-01-01"]
-    date = day.to_time
+    date = day.in_time_zone
     closedDays.include?(date.strftime("%Y-%m-%d"))
   end
   
