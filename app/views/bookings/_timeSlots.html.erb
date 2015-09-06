@@ -1,4 +1,38 @@
-	<% @booked = false %>	    
+	<% @booked = false %>
+	<% if bookings %>
+		<% bookings.each do |booking| %>
+			<% if booking.time_slot_id == timeSlot.id %>
+				<% @booked = true %>
+			<% end %>
+		<% end %>
+	<% end %>
+	
+	<% if !@booked && @day >=-10 %>
+		<div class='time'><%= timeSlot.time.strftime("%l:%M")%></div>
+		<% if @isBookingTime %>
+			<% if current_player %>
+				<div class="book">
+					<%= link_to 'book<br />court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
+				</div>
+			<% else %>
+			<div class="book">
+				<%= link_to 'book<br />court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
+			</div>
+			<% end %>
+			
+		<% else %>
+			<div class ="book">&nbsp</div>
+		<% end %>
+	<% elsif @day < 0 %>
+		<% if !@booked %>
+			<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%l:%M")%></div>
+			<% else %>
+				<div class='noTime'><%= timeSlot.time.strftime("%l:%M")%></div>
+			<% end %>
+	<% else %>
+		<div class='noTime'><%= timeSlot.time.strftime("%l:%M")%></div>
+	<% end %>
+	
 	<% if bookings %>
 		<% bookings.each do |booking| %>
 			<% if booking.time_slot_id == timeSlot.id %>
@@ -9,20 +43,20 @@
 					<% else %>
 					<div class="booked">
 					<% end %>
-					
 						<% @class = membership_type(booking) %>
 						 <!-- if it's a team or zumba then use the whole name -->
 						<% if @class == "class" or @class == "team" %>
-							<%= link_to booking.player.first_name.capitalize + ' ' + booking.player.last_name.capitalize, booking_path(booking) %>
-							<br />
+							<%= link_to (booking.player.first_name.capitalize + '<br />' + booking.player.last_name.capitalize).html_safe, booking_path(booking) %>
 							<% if booking.vs_player_id %>
 								<%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %>
 							<% else %>
-								&nbsp
+							
 							<% end %>
 						<% else %>
 						<% @class %>
-						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %><br /><% if booking.vs_player_id %><%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %><% else %>&nbsp<% end %>
+						<%= link_to booking.player.first_name.capitalize[0,1] + ' ' + booking.player.last_name.capitalize, booking_path(booking) %>
+							<% if booking.vs_player_id %><%= link_to ' vs ' + booking.vs_player.first_name.humanize[0,1] + ' ' +  booking.vs_player.last_name.humanize, booking_path(booking) %>
+							<% else %>&nbsp<% end %>
 						<% end %>
 					</div>
 					<% if is_admin && @day <= 0 %>
@@ -39,30 +73,4 @@
 				<% end %>
 			<% end %>
 		<% end %>
-	<% end %>
-
-	<% if !@booked && @day >=-10 %>
-		<div class='time'><%= timeSlot.time.strftime("%l:%M")%></div>
-		<% if @isBookingTime %>
-			<% if current_player %>
-				<div class="book">
-					<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
-				</div>
-			<% else %>
-			<div class="book">
-				<%= link_to 'book court'.html_safe, new_booking_path(:court => court_id, :timeSlot => timeSlot.id, :hour => timeSlot.time.strftime("%H"), :min => timeSlot.time.strftime("%M"), :days => @day), :class => 'booking_link' %>
-			</div>
-			<% end %>
-			
-		<% else %>
-			<div class ="book">&nbsp</div>
-		<% end %>
-	<% elsif @day < 0 %>
-		<% if !@booked %>
-			<div class='noTimeOrBooking'><%= timeSlot.time.strftime("%l:%M")%></div>
-			<% else %>
-				<div class='noTime'><%= timeSlot.time.strftime("%l:%M")%></div>
-			<% end %>
-	<% else %>
-		<div class='noTime'><%= timeSlot.time.strftime("%l:%M")%></div>
 	<% end %>
