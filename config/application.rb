@@ -22,6 +22,6 @@ module Squash
     config.encoding = "utf-8"
     
     config.time_zone = 'London'
-    config.active_record.default_timezone = :local
+    # config.active_record.default_timezone = :local
   end
 end
