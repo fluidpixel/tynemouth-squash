@@ -7,6 +7,8 @@ class Booking < ActiveRecord::Base
 	validates_presence_of :player, :message => 'No player found'
 	validates_uniqueness_of :start_time, :scope => :time_slot_id, :message => 'The court has already been booked at that time'
 	
+  # before_create :check_date_uniqueness, :mess
+  
   attr_accessor :booking_number
   
 	def self.by_day(day)
