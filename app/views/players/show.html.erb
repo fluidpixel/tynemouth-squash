@@ -1,5 +1,5 @@
 <div id="center" class="players">
-<h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><h2><% if @player.admin %>Admin<% end %></h2>
+<h1> <%= @player.first_name.capitalize %> <%= @player.last_name.capitalize %></h1><% if @player.admin %><h2>Admin</h2><% end %>
 <h3><%= @membership_type %> member</h3>
 <% if @membership_type == "trial" %>
 <h4><%= @player.trialExpires %></h4>
@@ -17,17 +17,19 @@
 
 <h3><%= @player.future_bookings.count %> Bookings
 <% if @player.unpaid_bookings.count > 0 %></br><span class='red bold'>(<%= @player.unpaid_bookings.count %> Unpaid)</span><% end %></h3>
-
 <% @player.future_bookings.each do |booking| %>
-		<%= link_to booking.time_slot.time.strftime("%l:%M%P") + booking.start_time.strftime(" on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= link_to booking.court.court_name, bookings_path(:day => booking.day) %><% if booking.vs_player_id %> | Against <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %></strong>
-		<% if booking.paid != true && booking.start_time < Date.current %><span class='red bold'>(unpaid)</span><% end %>
-	<br />
+		<%= link_to booking.time_slot.time.strftime("%l:%M%P") + booking.start_time.strftime(" on %a #{booking.start_time.day.ordinalize} %b "), booking_path(booking) %>
+		<br /><%= link_to booking.court.court_name, bookings_path(:day => booking.day) %>
+		<% if booking.vs_player_id %> vs <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %>
+		<% if booking.paid != true && booking.start_time < Date.current %><span class='red bold unpaid'>(unpaid)</span><% end %>
+		<br />
 <% end %>
 
 <h3><%= @vs_bookings.count %> Vs Bookings</h3>
 <% @vs_bookings.each do |booking| %>
   <p>
-    <%= link_to booking.start_time.strftime("%l:%M%P on %A #{booking.start_time.day.ordinalize} %B "), booking_path(booking) %> | <%= booking.court.court_name %><% if booking.vs_player_id %> | Against <%= booking.player.first_name.humanize %> <%= booking.player.last_name.humanize %><% end %></strong>
+    <%= link_to booking.start_time.strftime("%l:%M%P on %a #{booking.start_time.day.ordinalize} %b "), booking_path(booking) %>
+	<br /><%= link_to booking.court.court_name, bookings_path(:day => booking.day) %><% if booking.vs_player_id %> vs <%= booking.player.first_name.humanize %> <%= booking.player.last_name.humanize %><% end %>
   </p>
 <% end %>
 

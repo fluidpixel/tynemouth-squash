@@ -91,7 +91,7 @@ ul.nav, li.nav {
 }
 
 .unpaid {
-	display: none;
+/*	display: none;*/
 }
 
 #select_date, #select_admin_date {
