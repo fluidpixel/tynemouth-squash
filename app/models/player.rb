@@ -1,7 +1,11 @@
 class Player < ActiveRecord::Base
 
 has_many :bookings, :dependent => :destroy
-belongs_to  :membership_type
+has_many :fixtures, :dependent => :destroy
+has_many :results, through: :fixtures
+
+belongs_to :league
+belongs_to :membership_type
 
 validates_presence_of :membership_number, :membership_type, :on => :create
 validates_presence_of :last_name
@@ -59,7 +63,9 @@ def unpaid_bookings
 end
 
 def full_name
-  self.first_name + " " + self.last_name
+  if self.first_name && self.last_name
+    self.first_name + " " + self.last_name
+  end
 end
 
 def self.find_all_by_name_containing(text)

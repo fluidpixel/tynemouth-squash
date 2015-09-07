@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826083719) do
+ActiveRecord::Schema.define(version: 20150906141531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20150826083719) do
   create_table "courts", force: true do |t|
     t.string   "court_name"
     t.integer  "time_slot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fixtures", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leagues", force: true do |t|
+    t.integer  "league_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,9 +77,18 @@ ActiveRecord::Schema.define(version: 20150826083719) do
     t.datetime "updated_at"
     t.boolean  "super_admin"
     t.boolean  "archived",           default: false
+    t.integer  "league_id"
   end
 
   add_index "players", ["last_name"], name: "index_players_on_last_name", using: :btree
+  add_index "players", ["league_id"], name: "index_players_on_league_id", using: :btree
+
+  create_table "scores", force: true do |t|
+    t.integer  "first"
+    t.integer  "second"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "time_slots", force: true do |t|
     t.time     "time"
