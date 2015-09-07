@@ -1,0 +1,26 @@
+<%= form_for @league, html: {class: "player"} do |f| %>
+	<% if @league.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@league.errors.count, "error") %> prohibited
+		  this league from being saved:</h2>
+		<ul>
+		<% @league.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+    <p>
+      <%= f.label :league_number %><br>
+      <%= f.text_field :league_number %>
+    </p>
+	
+	<%= f.fields_for :players do |builder| %>
+		<%= render "player_fields", :f => builder %>
+	<% end %>
+	
+	<p><%= link_to_add_fields "Add New Player", f, :players %></p>
+	
+  <%= f.submit %>
+  
+<% end %>

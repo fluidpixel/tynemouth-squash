@@ -1,0 +1,47 @@
+
+.leagueTable{
+	background-color: #0A4B81;
+	margin: 15px auto 10px auto;
+}
+
+h1.league {
+	position: relative;
+}
+
+td.league {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align:center;
+	vertical-align:middle;
+	line-height: 13px;
+	min-width:50px;
+	background-color: #F2F6F9;
+	border-bottom: #F2F6F9;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}
+
+td.nonLeague {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	text-align:center;
+	vertical-align:middle;
+	line-height: 13px;
+	min-width:50px;
+	color: Azure;
+}
+
+td.contact {
+/*	color: LightSteelBlue;*/
+	color: Azure;
+	font-weight: normal;
+	font-size: 14px;
+/*	border-left:#F2F6F9;
+	border-left-style: solid;
+	border-left-width: 2px;
+	padding-left: 15px;*/
+}
+
+table tr td:empty {
+    width: 50px;
+}

@@ -1,0 +1,9 @@
+<p>
+	<% if @player_count == @league.players.count %>
+		<%= f.label :full_name, "New Player " %><br />
+	<% else %>
+		<%= f.label :full_name, "Player " + (@player_count+1).to_s26.capitalize %><br />
+	<% end %>
+	<%=f.text_field :full_name, data: {autocomplete_source: playerlist_path} %>
+	<% @player_count = @player_count+1 %>
+</p>

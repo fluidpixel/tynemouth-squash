@@ -1,0 +1,4 @@
+<h1>Edit League</h1>
+<%= render 'form' %>
+
+<%= button_to 'Delete League', league_path(@league), method: :delete, data: { confirm: 'Are you sure?' }, form_class: "delete" %>

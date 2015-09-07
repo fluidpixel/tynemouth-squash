@@ -55,7 +55,7 @@ def edit
     end
     @membership_types = MembershipType.all
     @membership_type = MembershipType.find(@player.membership_type_id).membership_type
-    
+    @leagues = League.all.order(:league_number)
   else
     flash[:warning] = "You need to be logged in as a Super Admin to edit a player"
     @player = Player.find(params[:id])
@@ -73,7 +73,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :email, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin, :trial_date))
+  if @player.update(params[:player].permit(:first_name, :last_name, :email, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin, :trial_date, :league_id))
     redirect_to @player
   else
     render 'edit'
@@ -89,7 +89,7 @@ def list
   
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin, :email, :trial_date)
+    params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin, :email, :trial_date, :league_id)
   end
 
   def sort_column

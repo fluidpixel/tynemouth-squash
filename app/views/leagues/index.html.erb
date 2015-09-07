@@ -1,0 +1,15 @@
+<h1>Leagues</h1>
+
+<p>&nbsp</p>
+<table class="playerTable">
+  <tr>
+    <th>League Number</th>
+  </tr>
+  <% @leagues.each do |league| %>
+    <tr class = "playerIndex" >
+		<td class = "player"><%= link_to (league.league_name), league_path(league.id), :class => 'playerIndex' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2><%= link_to 'New League', new_league_path %></h2>
