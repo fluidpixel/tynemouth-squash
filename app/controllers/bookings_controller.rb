@@ -346,7 +346,7 @@ private
         end
       
       elsif @days
-        if @days < 2 && @booking.start_time.hour >= 17 && !@booking.start_time.saturday? && !@booking.start_time.sunday?
+        if @days < 2 && @booking.incurs_fine
         
           @booking.cancelled = true;
           @booking.save
