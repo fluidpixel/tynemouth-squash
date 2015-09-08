@@ -3,4 +3,7 @@ class Fixture < ActiveRecord::Base
   belongs_to :league
   belongs_to :playerA, class_name: "Player"
   belongs_to :playerB, class_name: "Player"
+  
+  accepts_nested_attributes_for :score
+  
 end

@@ -26,7 +26,7 @@ class LeaguesController < ApplicationController
           if vsIndex <= playerIndex
             #do nothing as we don't want to set up a fixture against ourselves, or repeat an existing fixture
           else
-            @fixture = Fixture.new(playerA:player, playerB:vsPlayer, start_date:Date.current, end_date:Date.current+30.days)
+            @fixture = Fixture.new(playerA:player, playerB:vsPlayer, start_date:Date.current, end_date:Date.current+30.days, score:Score.new())
             @fixture.save
             @league.fixtures << @fixture
           end
