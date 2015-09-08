@@ -7,6 +7,8 @@ class Booking < ActiveRecord::Base
 	validates_presence_of :player, :message => 'No player found'
 	validates_uniqueness_of :start_time, :scope => :time_slot_id, :message => 'The court has already been booked at that time'
 	
+  # before_create :check_date_uniqueness, :mess
+  
   attr_accessor :booking_number
   
 	def self.by_day(day)
@@ -51,7 +53,7 @@ class Booking < ActiveRecord::Base
   end
   
   def incurs_fine
-    if (self.start_time.to_date - Date.current).to_i < 0 && !self.paid
+    if (self.start_time.to_date - Date.current).to_i < 0 && !self.paid && self.start_time.hour >= 17 && self.start_time.hour < 20 && !self.start_time.saturday? && !self.start_time.sunday?
       return true
     else
       return false
