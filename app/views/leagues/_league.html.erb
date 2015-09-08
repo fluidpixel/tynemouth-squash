@@ -14,14 +14,12 @@
 	  <tr class="playerIndex">
 		  <td class="contact"><%= player.mobile %></td>
 		  <td></td>
-		  <td class="player"><%= player.full_name %></td>
-			<td class="nonLeague"><%= (index+1).to_s26.capitalize %></td>
+		  <td class="player"><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
+			<td class="nonLeague"><%= link_to (index+1).to_s26.capitalize, player_path(player.id), :title => player.full_name %></td>
 	  		<% league.players.each_with_index do |p, i| %>
-	  		<% if i == index %><td class="nonLeague"> &nbsp </td> <% else %><td class="league"> 0 </td><% end %>
+	  		<% if i == index %><td class="nonLeague"> &nbsp </td> <% else %><td class="league resultScore"> 0 </td><% end %>
 	  		<% end %>
-			<td class="nonLeague">0</td>
-			
-			
+			<td class="nonLeague totalScore">0</td>
 	  </tr>
 	<% end %>
 </table>

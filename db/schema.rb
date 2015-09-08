@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 20150906141531) do
   end
 
   create_table "fixtures", force: true do |t|
+    t.integer  "league_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -86,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150906141531) do
   create_table "scores", force: true do |t|
     t.integer  "first"
     t.integer  "second"
+    t.integer  "fixture_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
