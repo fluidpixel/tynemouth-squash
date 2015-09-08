@@ -10,11 +10,12 @@
 		</ul>
 	  </div>
 	<% end %>
+	<% if !@league.league_number%>
     <p>
       <%= f.label :league_number %><br>
       <%= f.text_field :league_number %>
     </p>
-	
+	<% end %>
 	<%= f.fields_for :players do |builder| %>
 		<%= render "player_fields", :f => builder %>
 	<% end %>
