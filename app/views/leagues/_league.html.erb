@@ -1,0 +1,27 @@
+<table class="leagueTable">
+	<tr>
+		<th></th>
+		<th></th>
+		<th>Players</th>
+		<th>vs</th>
+		<% league.players.each_with_index do |player, index| %>
+		<th><%= link_to (index+1).to_s26.capitalize, '#', :title => player.full_name %></th>
+		<% end %>
+		<th>TOTAL</th>
+		
+	</tr>
+	<% league.players.each_with_index do |player, index| %>
+	  <tr class="playerIndex">
+		  <td class="contact"><%= player.mobile %></td>
+		  <td></td>
+		  <td class="player"><%= player.full_name %></td>
+			<td class="nonLeague"><%= (index+1).to_s26.capitalize %></td>
+	  		<% league.players.each_with_index do |p, i| %>
+	  		<% if i == index %><td class="nonLeague"> &nbsp </td> <% else %><td class="league"> 0 </td><% end %>
+	  		<% end %>
+			<td class="nonLeague">0</td>
+			
+			
+	  </tr>
+	<% end %>
+</table>

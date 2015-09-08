@@ -137,6 +137,11 @@ function show(id) {
 	 document.getElementById(id).style.visibility = 'visible';
 };
 
+function remove_fields(link) {
+        $(link).prev("input[type=hidden]").val(true);
+        $(link).closest(".fields").hide();
+}
+
 jQuery(function($){
 	$(document).on("click", "a.link_to_add_fields", function(e){
 		e.preventDefault();

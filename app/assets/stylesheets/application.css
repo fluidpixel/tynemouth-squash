@@ -39,8 +39,8 @@ h1, h2, h3, h4, h5, strong, b {
 h1{
 	text-align: center;
 	margin-bottom: 5px;
-	margin-top: 28px;
-	position: fixed;
+	margin-top: 40px;
+/*	position: fixed;*/
 	left: 0;
 	right: 0;
 	top: 0;
@@ -120,7 +120,7 @@ z-index: 1;
 form.booking, form.player
 {
 	text-align: center;
-	margin-top:120px;
+	margin-top:50px;
 }
 form.delete {
 	text-align: center;
