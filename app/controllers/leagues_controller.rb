@@ -1,7 +1,7 @@
 class LeaguesController < ApplicationController
 
   def new
-      @league = League.new
+      @league = League.new(league_number:League.count.to_s)
       @player_count = 0
   end
   
