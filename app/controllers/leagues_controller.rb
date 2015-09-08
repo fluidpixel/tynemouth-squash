@@ -13,15 +13,26 @@ class LeaguesController < ApplicationController
           @player = Player.authenticateFullName(value[:full_name], "xxx")
           if @player
             if value[:_destroy] == "true"
-              @player.league_id = nil
+              @league.players.delete(@player)
             else
-              @player.league_id = @league.id
+              @league.players << @player              
             end
-          
-            @player.save
           end
         end
       end
+      
+      @league.players.each.with_index do |player, playerIndex|
+        @league.players.each.with_index do |vsPlayer, vsIndex|
+          if vsIndex <= playerIndex
+            #do nothing as we don't want to set up a fixture against ourselves, or repeat an existing fixture
+          else
+            @fixture = Fixture.new(playerA:player, playerB:vsPlayer, start_date:Date.current, end_date:Date.current+30.days)
+            @fixture.save
+            @league.fixtures << @fixture
+          end
+        end
+      end
+      
   		redirect_to @league
   	else
   		render 'new'
@@ -63,9 +74,8 @@ class LeaguesController < ApplicationController
     @league = League.find_by_id(params[:id])
     
     if @league
-      @league.players.each do |player|
-        player.league = nil
-      end
+      @league.players.clear
+      # @league.fixtures.clear
       @league.destroy
     end
     
