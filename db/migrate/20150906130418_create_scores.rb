@@ -3,6 +3,7 @@ class CreateScores < ActiveRecord::Migration
     create_table :scores do |t|
       t.integer :first
       t.integer :second
+      t.belongs_to :fixture
       t.timestamps
     end
   end

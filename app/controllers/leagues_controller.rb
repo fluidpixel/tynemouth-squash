@@ -46,11 +46,10 @@ class LeaguesController < ApplicationController
           @player = Player.authenticateFullName(value[:full_name], "xxx")
           if @player
             if value[:_destroy] == "true"
-              @player.league_id = nil
+              @player.league = nil
             else
-              @player.league_id = params[:id]
+              @player.league = @league
             end
-            
             @player.save
           end
         end
@@ -65,9 +64,8 @@ class LeaguesController < ApplicationController
     
     if @league
       @league.players.each do |player|
-        player.league_id = nil
+        player.league = nil
       end
-    
       @league.destroy
     end
     

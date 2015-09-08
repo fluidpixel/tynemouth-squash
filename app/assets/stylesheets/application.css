@@ -81,8 +81,8 @@ a {
 
 ul.nav
 {
-	margin: 7px 0px 0px 0px;
-	padding: 0;
+	margin: 0px;
+	padding: 10px 0px 0px 0px;
 	text-align: center;
     list-style-type: none;
     position: fixed;
@@ -90,6 +90,7 @@ ul.nav
 	right: 0;
 	top: 0;
 	z-index: 2;
+	background-color:#0A4B81;
 }
 
 ul.nav li.nav { display: inline; }
@@ -97,7 +98,7 @@ ul.nav li.nav { display: inline; }
 #user_nav{
 	text-align: right;
 	font-size:20px;
-	top: 4px;
+	top: 10px;
 	right: 14px;
 	float: right;
 	position: fixed;
