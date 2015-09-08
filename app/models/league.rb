@@ -1,6 +1,6 @@
 class League < ActiveRecord::Base
   has_many :players
-  has_many :fixtures
+  has_many :fixtures, :dependent => :destroy
   
   accepts_nested_attributes_for :players
   

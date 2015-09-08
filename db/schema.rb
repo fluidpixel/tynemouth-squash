@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20150906141531) do
 
   create_table "fixtures", force: true do |t|
     t.integer  "league_id"
+    t.integer  "playerA_id"
+    t.integer  "playerB_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
