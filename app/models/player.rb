@@ -1,15 +1,22 @@
 class Player < ActiveRecord::Base
 
 has_many :bookings, :dependent => :destroy
-has_many :fixtures, :dependent => :destroy
-has_many :results, through: :fixtures
+# has_many :fixtureA, :class_name => 'Fixture', :dependent => :destroy, :foreign_key => 'player_a_id'
+# has_many :fixtureB, :class_name => 'Fixture', :dependent => :destroy, :foreign_key => 'player_b_id'
+# scope :fixture, lambda {|father_id, mother_id| where('father_id = ? AND mother_id = ?', father_id, mother_id) }
 
+has_many :results, through: :fixtures
 belongs_to :league
 belongs_to :membership_type
 
 validates_presence_of :membership_number, :membership_type, :on => :create
 validates_presence_of :last_name
 validates_uniqueness_of :membership_number
+
+def fixtures
+  Fixture.where('player_a_id = ? OR player_b_id = ?', self.id, self.id)
+end
+
 
 def self.authenticate(last_name, membership_number)
   if !last_name.blank? && !membership_number.blank?

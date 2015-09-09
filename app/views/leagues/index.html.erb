@@ -9,6 +9,8 @@
 	<% end %>
 <% end %>
 
+<br />
+<% if is_super_admin %>
 <%= button_to "Add League", new_league_path, :id => "open-contacts-dialog-btn",
-      :class => "inbox-sf-add-btn tip", :method => :get %>
+      :class => "inbox-sf-add-btn tip", :method => :get %><% end %>
   </div>

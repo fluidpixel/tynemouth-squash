@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20150906141531) do
 
   create_table "fixtures", force: true do |t|
     t.integer  "league_id"
-    t.integer  "playerA_id"
-    t.integer  "playerB_id"
+    t.integer  "player_a_id"
+    t.integer  "player_b_id"
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20150906141531) do
   add_index "players", ["league_id"], name: "index_players_on_league_id", using: :btree
 
   create_table "scores", force: true do |t|
-    t.integer  "first"
-    t.integer  "second"
+    t.integer  "first",      default: 0
+    t.integer  "second",     default: 0
     t.integer  "fixture_id"
     t.datetime "created_at"
     t.datetime "updated_at"

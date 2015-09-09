@@ -15,7 +15,7 @@ class FixturesController < ApplicationController
     @fixture = Fixture.find(params[:id])
  
     if @fixture.update(params[:fixture].permit(score_attributes:[:first, :second, :id]))
-      redirect_to @fixture and return
+      redirect_to @fixture.league and return
     else
       render 'edit'
     end

@@ -1,3 +1,3 @@
 class Score < ActiveRecord::Base
-  belongs_to :fixture, :dependent => :destroy
+  belongs_to :fixture
 end

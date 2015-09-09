@@ -26,7 +26,7 @@ class LeaguesController < ApplicationController
           if vsIndex <= playerIndex
             #do nothing as we don't want to set up a fixture against ourselves, or repeat an existing fixture
           else
-            @fixture = Fixture.new(playerA:player, playerB:vsPlayer, start_date:Date.current, end_date:Date.current+30.days, score:Score.new())
+            @fixture = Fixture.new(player_a:player, player_b:vsPlayer, start_date:Date.current, end_date:Date.current+30.days, score:Score.new())
             @fixture.save
             @league.fixtures << @fixture
           end
@@ -58,8 +58,21 @@ class LeaguesController < ApplicationController
           if @player
             if value[:_destroy] == "true"
               @player.league = nil
+              @player.fixtures.destroy_all
             else
-              @player.league = @league
+              
+              if @player.league == @league
+                #do nothign player is already in this league
+              elsif @player.league
+                #remove fixtures from previous league first
+                @player.fixtures.destroy_all
+                create_fixtures_for_player(@league, @player)
+                @league.players << @player
+              else
+                create_fixtures_for_player(@league, @player)
+                @league.players << @player
+              end
+              
             end
             @player.save
           end
@@ -94,6 +107,15 @@ class LeaguesController < ApplicationController
   end
 
 private
+  
+  def create_fixtures_for_player (league, new_player)
+    league.players.each.with_index do |vsPlayer, playerIndex|
+          @fixture = Fixture.new(player_a:new_player, player_b:vsPlayer, start_date:Date.current, end_date:Date.current+30.days, score:Score.new())
+          @fixture.save
+          @league.fixtures << @fixture
+    end
+  end
+  
   def league_params
     params.require(:league).permit(:league_number, :players_attributes)
   end
