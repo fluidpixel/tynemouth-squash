@@ -1,4 +1,5 @@
 class League < ActiveRecord::Base
+  
   has_many :players
   has_many :fixtures, :dependent => :destroy
   

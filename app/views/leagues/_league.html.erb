@@ -17,8 +17,10 @@
 		  <td class="player"><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
 			<td class="nonLeague"><%= link_to (index+1).to_s26.capitalize, player_path(player.id), :title => player.full_name %></td>
 	  		<% league.players.each_with_index do |vsPlayer, i| %>
-	  		<% if i == index %><td class="nonLeague"> &nbsp </td>
-			<% else %><td class="league resultScore"><%= score_for_player(player, vsPlayer, league) %></td><% end %>
+	  		<% if i == index %>
+				<td class="nonLeague"> &nbsp </td>
+			<% else %>
+				<td class="league resultScore"><%= link_to score_for_player(player, vsPlayer, league), edit_fixture_path(fixture_for_player(player, vsPlayer, league)), :class => 'playerIndex' %></td><% end %>
 	  		<% end %>
 			<td class="nonLeague totalScore"><%= total_score(player, league) %></td>
 	  </tr>

@@ -10,7 +10,10 @@
 		</ul>
 	  </div>
 	<% end %>
-	<%= f.hidden_field :league_number %>
+	
+	<%= f.label :league_number, "League" %><br />
+	<%= f.text_field :league_number %>
+	
 	<%= f.fields_for :players do |builder| %>
 		<%= render "player_fields", :f => builder %>
 	<% end %>

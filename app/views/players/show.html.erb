@@ -15,6 +15,7 @@
 </p>
 <% end %>
 
+<h3><%= @player.fixtures.count %> Fixtures</h3>
 <h3><%= @player.future_bookings.count %> Bookings
 <% if @player.unpaid_bookings.count > 0 %></br><span class='red bold'>(<%= @player.unpaid_bookings.count %> Unpaid)</span><% end %></h3>
 <% @player.future_bookings.each do |booking| %>
