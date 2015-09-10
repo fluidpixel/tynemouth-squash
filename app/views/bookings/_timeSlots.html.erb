@@ -8,7 +8,7 @@
 	<% end %>
 	
 	<% if !@booked && @day >=-10 %>
-		<% if timeSlot.is_peak %><div class='peakTime'><% else %><div class='time'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
+		<% if timeSlot.is_peak(@day) %><div class='peakTime'><% else %><div class='time'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
 		<% if @isBookingTime %>
 			<% if current_player %>
 				<div class="book">
@@ -25,12 +25,12 @@
 		<% end %>
 	<% elsif @day < 0 %>
 		<% if !@booked %>
-			<% if timeSlot.is_peak %><div class='peakTime'><% else %><div class='noTimeOrBooking'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
+			<% if timeSlot.is_peak(@day) %><div class='peakTime'><% else %><div class='noTimeOrBooking'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
 			<% else %>
-				<% if timeSlot.is_peak %><div class='peakTime'><% else %><div class='noTime'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
+				<% if timeSlot.is_peak(@day) %><div class='peakTime'><% else %><div class='noTime'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
 			<% end %>
 	<% else %>
-		<% if timeSlot.is_peak %><div class='peakTime'><% else %><div class='noTime'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
+		<% if timeSlot.is_peak(@day) %><div class='peakTime'><% else %><div class='noTime'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
 	<% end %>
 	
 	<% if bookings %>
