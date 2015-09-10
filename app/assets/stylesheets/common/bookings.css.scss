@@ -217,7 +217,7 @@ a.to_pay_guest{
 	background-color: olive;
 	color: wheat;
 }
-.time, .noTime, .noTimeOrBooking{
+.time, .noTime, .noTimeOrBooking, .peakTime{
 	padding-top: 13px;
 	padding-left: 0px;
 	padding-bottom: 13px;
@@ -243,6 +243,9 @@ a.to_pay_guest{
 	margin-top: -19px;
 }
 
+.peakTime {
+	background-color: gold;
+}
 h3.back, h3.back a{
 	margin-top: 50px;
 	font-size: 20px;
