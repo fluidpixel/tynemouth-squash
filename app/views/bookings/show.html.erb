@@ -50,12 +50,12 @@
 			<p><%= submit_tag "Cancel Booking" %></p>
 			<% if @timeLeft %>
 				<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
-				<p><i>(after this you could be subject to full court fees)</i></p>
+				<% if @booking.should_incur_fine %><p><i>(after this you could be subject to full court fees)</i></p><% end %>
 			<% else %>
 				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 			<% end %>
 		<% else %>
-			Please contact the club to change or cancel this booking on 0191 257 3895. <br /><span class='red'><i>Peak-time bookings cancelled within 48 hours will be subject to full court fee.</i></span>
+			Please contact the club to change or cancel this booking on 0191 257 3895. <br /><% if @booking.incurs_fine %><span class='red'><i>Peak-time bookings cancelled within 48 hours will be subject to full court fee.</i></span><%else%><i>Less than 48 hours before court time</i><% end %>
 		<% end %>
 	<% end %>
 

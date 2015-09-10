@@ -309,11 +309,6 @@ def toggle_paid
   })
   
   redirect_to :back
-  #redirect_to @booking
-  # respond_to do |f|
-  #       f.js { render :layout => false, :content_type => "text/javascript; charset=UTF-8" }
-  #     end
-  #   #render :nothing => true  
 end 
 
 private
@@ -356,7 +351,6 @@ private
         else
         
           @booking.destroy
-        
           Thread.new do
             BookingMailer.cancel_booking_email(@booking).deliver
             view_context.send_to_dropbox(@days)

@@ -55,7 +55,7 @@ def future_bookings
 end
 
 def unpaid_bookings
-  @unpaid = bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 17 AND DATE_PART('hour', start_time) < 20", Date.current, Date.current - 3.months).order("start_time ASC")
+  @unpaid = bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21", Date.current, Date.current - 3.months).order("start_time ASC")
 end
 
 def full_name
