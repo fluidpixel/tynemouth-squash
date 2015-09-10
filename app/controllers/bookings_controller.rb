@@ -351,7 +351,6 @@ private
         else
         
           @booking.destroy
-        
           Thread.new do
             BookingMailer.cancel_booking_email(@booking).deliver
             view_context.send_to_dropbox(@days)
