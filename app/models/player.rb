@@ -61,12 +61,12 @@ def self.authenticateFullName(name, membership_number)
 end
 
 def future_bookings
-  @future = bookings.where('((paid = false OR paid IS NULL) AND start_time >= ?) OR start_time >= ?', Date.new(2015, 8, 31), Date.current).order("start_time ASC")
+  @future = bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
   return @future
 end
 
 def unpaid_bookings
-  @unpaid = bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21", Date.current, Date.new(2015, 8, 31)).order("start_time ASC")
+  @unpaid = bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6", Date.current, Date.new(2015, 8, 31)).order("start_time ASC")
 end
 
 def full_name
