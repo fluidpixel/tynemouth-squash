@@ -5,6 +5,7 @@ def new
 	@court = Court.find(params[:court]) if(params[:court])
 	@court_name = @court.court_name
 	@timeSlot = TimeSlot.find(params[:timeSlot]) if(params[:timeSlot])
+  @forcebooking = params[:force_booking] if(params[:force_booking])
   
 	@days = params[:days] ? (params[:days]) : 0
   
@@ -75,6 +76,7 @@ def create
   	@time_slot_id = params[:booking][:time_slot_id]
 
     @end = params[:booking][:booking_number].to_i
+    @forcebooking = params[:force_booking] if(params[:force_booking])
     
     if !@time.sunday? && !@time.saturday?
       if @time.hour >= 17 && player.isRestricted
@@ -93,8 +95,18 @@ def create
     end
     
     if player.unpaid_bookings.count >= 2
-      @error = 'Sorry, you cannot book with 2 or more outstanding unpaid courts'
-      redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+      if is_admin
+        @error = player.full_name + ' has 2 or more outstanding unpaid courts'
+        if @forcebooking == "true"
+          #allow booking anyway
+        else
+          redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :last_name => params[:booking][:last_name], :force_booking => "true", :error => @error) and return
+        end
+      else
+        @error = 'Sorry, you cannot book with 2 or more outstanding unpaid courts'
+        redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+      end
+      
     end
     
     for i in 0..@end-1
@@ -341,7 +353,7 @@ private
         end
       
       elsif @days
-        if @days < 2 && @booking.incurs_fine
+        if @days < 2 && @booking.should_incur_fine
         
           @booking.cancelled = true;
           @booking.save

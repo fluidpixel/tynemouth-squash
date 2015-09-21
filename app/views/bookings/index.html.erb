@@ -51,7 +51,7 @@
 		<%if @day < 21 %><%= link_to "▶", {:day => (@day + 1)}, :id => 'change_day' %><% else %> <%= link_to "No more courts", '', :class => 'last_day' %><% end %>
 	<% end %>
 	</span>
-	<% if @day <= 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
+	<% if @day < 21 %><%= link_to "+3 Weeks", { :day => 21 }, :class => 'last_day', :id => 'change_day'%><% end %>
 </div>
 
 <div id="clearfix"></div>

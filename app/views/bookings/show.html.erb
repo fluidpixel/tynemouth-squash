@@ -8,7 +8,7 @@
 		<% end %>
 	</h2>
 	<% if @booking.paid %><h4>Court Paid</h4><% end %>
-	<h4><%=membership_type_and_price(@booking).capitalize%></h4>
+	<h4><%=membership_type_and_price(@booking).capitalize%><% if @booking.incurs_fine %><span class="red"> (FINE DUE)</span><% end %></h4>
 <% else %>
 	<p>Book Court</p>
 <% end %>
@@ -30,8 +30,8 @@
 			<p><%= time_ago_in_words(@timeLeft.from_now).humanize %> to cancel court</p>
 			<p><i>(after this the member should be subject to full court fees)</i></p>
 		<% elsif !@booking.cancelled %>
-			<% if @days >= 0 %>
-			<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+			<% if @days >= 0 && @booking.should_incur_fine %>
+				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 			<% end %>
 		<% end %>
 		
@@ -43,9 +43,10 @@
 			<% end %>
 		<% end %>
 	<% else %>
+		<% if !@booking.cancelled && @days >= 0 %>
 		<%= label_tag 'Membership Number:' %><%= text_field_tag :membership_number %>
 		<p><%= submit_tag "Change Opponent" %></p>
-	
+		<% end %>
 		<% if @cancellable %>
 			<p><%= submit_tag "Cancel Booking" %></p>
 			<% if @timeLeft %>
@@ -55,7 +56,8 @@
 				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
 			<% end %>
 		<% else %>
-			Please contact the club to change or cancel this booking on 0191 257 3895. <br /><% if @booking.incurs_fine %><span class='red'><i>Peak-time bookings cancelled within 48 hours will be subject to full court fee.</i></span><%else%><i>Less than 48 hours before court time</i><% end %>
+			<% if @booking.incurs_fine %><span class='red'><i>Peak-time bookings cancelled within 48 hours are subject to full court fees + £1.</i></span><%else%><i>Less than 48 hours before court time</i><% end %>
+			<br />Please contact the club to change or cancel this booking on 0191 257 3895. 
 		<% end %>
 	<% end %>
 
