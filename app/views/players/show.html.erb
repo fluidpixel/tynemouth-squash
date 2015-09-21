@@ -21,7 +21,7 @@
 		<%= link_to booking.time_slot.time.strftime("%l:%M%P") + booking.start_time.strftime(" on %a #{booking.start_time.day.ordinalize} %b "), booking_path(booking) %>
 		<br /><%= link_to booking.court.court_name, bookings_path(:day => booking.day) %>
 		<% if booking.vs_player_id %> vs <%= booking.vs_player.first_name.capitalize %> <%= booking.vs_player.last_name.capitalize %><% end %>
-		<% if booking.paid != true && booking.start_time < Date.current %><span class='red bold unpaid'>(unpaid)</span><% end %>
+		<% if booking.paid != true && booking.start_time < Date.current %><span class='red bold unpaid'>(unpaid)</span><%= link_to 'PAY FINE', toggle_paid_booking_path(booking), :id => "paid_link_#{booking.id}", :class => "gold", :title => membership_type_and_price(booking) %><% end %>
 		<br />
 <% end %>
 
