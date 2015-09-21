@@ -48,7 +48,7 @@ h3.holiday {
 
 table.booking {
 	margin-top: 10px;
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 }
 
 #user_nav {
@@ -65,7 +65,7 @@ ul.nav, li.nav {
 	overflow-x:scroll;
 }
 
-.time, .noTime, .noTimeOrBooking {
+.time, .noTime, .noTimeOrBooking, .peakTime {
 	position:relative;
 }
 

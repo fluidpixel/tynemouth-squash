@@ -153,7 +153,7 @@ a#change_day_left, a#change_day_right
 	float:right;
 	width:118px;
 }
-.book, .login_to_book {
+.book, .login_to_book, .cancelled {
 	 line-height:20px;
 	 text-decoration: none;
 	 background: #DAE6F1;
@@ -167,22 +167,32 @@ a#change_day_left, a#change_day_right
 	background: none;
 }
 
-.booked, .cancelled{
+.booked {
 	z-index: 3;
 	line-height: 20px;
 	background: #AAC9E4;
 }
 
+
 .booked a{
 	color: #285784;
- 	display:block;
- 	overflow: hidden;
- 	text-overflow: ellipsis;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bookingError {
+	margin-top: -40px !important;
 }
 
 .cancelled a{
-	color: #8895b3;
+	color: Crimson;
+	font-style: bold;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
+
 .paid {
 	z-index: 4;
 	position: absolute;
