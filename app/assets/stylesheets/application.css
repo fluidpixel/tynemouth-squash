@@ -73,14 +73,15 @@ a {
 }
 ul.nav
 {
-	margin: 7px 0px 0px 0px;
-	padding: 0;
+	margin: 0px 0px 0px 0px;
+	padding: 7px 0px 0px 0px;
 	text-align: center;
     list-style-type: none;
     position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
+	background-color: #0A4B81;
 	z-index: 2;
 }
 
@@ -246,4 +247,12 @@ ul.ui-autocomplete {
 p.paragraph{
 	text-align: center;
 	margin-top: 75px;
+}
+
+hr {
+	width: 200px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	border-style: solid;
+	color: Azure ;
 }
