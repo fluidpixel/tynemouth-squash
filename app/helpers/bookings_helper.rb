@@ -69,7 +69,13 @@ def membership_type_and_price(booking)
     end
   end
   
-  @membership_type.membership_type + ' ' + number_to_currency(@membership_type.court_cost, :unit => "£")
+  if booking.incurs_fine
+    @cost = (@membership_type.court_cost + 1)
+  else 
+    @cost = @membership_type.court_cost
+  end
+  
+  @membership_type.membership_type + ' ' + number_to_currency(@cost, :unit => "£")
 end
 
 end
