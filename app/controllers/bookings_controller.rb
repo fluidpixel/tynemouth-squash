@@ -94,13 +94,13 @@ def create
       redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
     end
     
-    if player.unpaid_bookings.count >= 2
+    if player.unpaid_bookings.count >= 2 && player.isFineable
       if is_admin
         @error = player.full_name + ' has 2 or more outstanding unpaid courts'
         if @forcebooking == "true"
           #allow booking anyway
         else
-          redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :last_name => params[:booking][:last_name], :force_booking => "true", :error => @error) and return
+          redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :last_name => params[:booking][:last_name], :vs_player_name => params[:booking][:vs_player_name], :booking_number => params[:booking][:booking_number], :force_booking => "true", :error => @error) and return
         end
       else
         @error = 'Sorry, you cannot book with 2 or more outstanding unpaid courts'
