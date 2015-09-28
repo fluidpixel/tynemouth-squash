@@ -7,7 +7,7 @@
 		<% end %>
 	<% end %>
 	
-	<% if !@booked && @day >=0 %>
+	<% if !@booked && @day >= 0 %>
 		<% if timeSlot.is_peak(@day) %><div class='peakTime'><% else %><div class='time'><% end %><%= timeSlot.time.strftime("%l:%M")%></div>
 		<% if @isBookingTime %>
 			<% if current_player %>
