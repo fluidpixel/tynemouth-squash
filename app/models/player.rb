@@ -50,7 +50,7 @@ def self.authenticateFullName(name, membership_number)
 end
 
 def future_bookings
-  @future = bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
+  @future = bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
   return @future
 end
 
@@ -104,6 +104,13 @@ def isRestricted
   end
 end
 
+def isFineable
+  if self.membership_type.membership_type == 'class' || self.membership_type.membership_type == 'team' || self.membership_type.membership_type == 'competition'
+    return false
+  else
+    return true
+  end
+end
   
 def self.search(search)  
     if search  
