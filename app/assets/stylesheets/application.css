@@ -158,6 +158,11 @@ input[type="submit"]
 	margin-top: 20px;
 }
 
+input.force_book
+{
+	background: firebrick;
+}
+
 select[id^="player_trial_date"]
 {
 	width: 62px;
