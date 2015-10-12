@@ -23,7 +23,7 @@
    <br /><%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, :value => params[:vs_player_name] %><!-- <% if is_admin %><span class='guest'>Guest? <%= f.check_box :guest_booking %></span><% end %> -->
    <p class="hint">(search via name or membership number)</p>
    <% if is_admin %>
-	   <%= f.label 'Number of bookings: '%><%= f.number_field :booking_number, :value => params[:booking_number], :options => {:min => 1, :step => 1} %>
+	   <%= f.label 'Number of bookings: '%><%= f.number_field :booking_number, :value => 1, :options => {:min => 1, :step => 1} %>
    <% else %>
 	   <%= f.hidden_field :booking_number, :value => 1%>
    <% end %>
@@ -41,7 +41,7 @@
   <%= %>
     <p>
 	<% if @forcebooking == "true" %>
-	    <%= f.submit 'Book Court Anyway', :class => 'force_book' %>
+	    <%= f.submit 'Book Court Anyway' %>
 	<% else %>
 		<%= f.submit 'Book Court' %>
 	<% end %>
