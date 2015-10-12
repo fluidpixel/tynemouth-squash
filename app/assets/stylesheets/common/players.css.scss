@@ -18,12 +18,17 @@
 }
 
 h2.newPlayer{
-	margin-top: 75px;
-	margin-bottom: -65px;
-	position: fixed;
+	margin-top: 5px;
+	margin-bottom: -85px;
+	position: relative;
 	left: 0;
 	right: 0;
-	z-index: -2;
+	z-index: 0;
+}
+
+h1.listing {
+	position:relative;
+	z-index: 0;
 }
 
 form.new_player p, div.field_with_errors
