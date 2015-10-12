@@ -40,6 +40,22 @@ ActiveRecord::Schema.define(version: 20150826083719) do
     t.datetime "updated_at"
   end
 
+  create_table "fixtures", force: true do |t|
+    t.integer  "league_id"
+    t.integer  "player_a_id"
+    t.integer  "player_b_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leagues", force: true do |t|
+    t.integer  "league_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "membership_types", force: true do |t|
     t.string   "membership_type"
     t.float    "court_cost"
@@ -69,6 +85,14 @@ ActiveRecord::Schema.define(version: 20150826083719) do
   end
 
   add_index "players", ["last_name"], name: "index_players_on_last_name", using: :btree
+
+  create_table "scores", force: true do |t|
+    t.integer  "first",      default: 0
+    t.integer  "second",     default: 0
+    t.integer  "fixture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "time_slots", force: true do |t|
     t.time     "time"
