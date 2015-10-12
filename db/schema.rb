@@ -96,14 +96,6 @@ ActiveRecord::Schema.define(version: 20150906141531) do
     t.datetime "updated_at"
   end
 
-  create_table "scores", force: true do |t|
-    t.integer  "first",      default: 0
-    t.integer  "second",     default: 0
-    t.integer  "fixture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "time_slots", force: true do |t|
     t.time     "time"
     t.integer  "court_id"
