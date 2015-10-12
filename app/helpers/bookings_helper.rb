@@ -10,13 +10,14 @@ def paid_link_class(booking)
   @membership_type = MembershipType.find(@player.membership_type_id)
   
   if booking.vs_player_id
-    @vsplayer = Player.find(booking.vs_player_id)
-    @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
+    @vsplayer = Player.find_by_id(booking.vs_player_id)
+    if @vsplayer
+      @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
     
-    if @vs_membership_type.court_cost < @membership_type.court_cost
-      @membership_type = @vs_membership_type
+      if @vs_membership_type.court_cost < @membership_type.court_cost
+        @membership_type = @vs_membership_type
+      end
     end
-    
   end
   
   
@@ -28,11 +29,13 @@ def membership_type(booking)
   @membership_type = MembershipType.find(@player.membership_type_id)
   
   if booking.vs_player_id
-    @vsplayer = Player.find(booking.vs_player_id)
-    @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
+    @vsplayer = Player.find_by_id(booking.vs_player_id)
     
-    if @vs_membership_type.court_cost < @membership_type.court_cost
-      @membership_type = @vs_membership_type
+    if @vsplayer
+      @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
+      if @vs_membership_type.court_cost < @membership_type.court_cost
+        @membership_type = @vs_membership_type
+      end
     end
   end
   
@@ -61,11 +64,13 @@ def membership_type_and_price(booking)
   @membership_type = MembershipType.find(@player.membership_type_id)
   
   if booking.vs_player_id
-    @vsplayer = Player.find(booking.vs_player_id)
-    @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
+    @vsplayer = Player.find_by_id(booking.vs_player_id)
+    if @vsplayer
+      @vs_membership_type = MembershipType.find(@vsplayer.membership_type_id)
     
-    if @vs_membership_type.court_cost < @membership_type.court_cost
-      @membership_type = @vs_membership_type
+      if @vs_membership_type.court_cost < @membership_type.court_cost
+        @membership_type = @vs_membership_type
+      end
     end
   end
   

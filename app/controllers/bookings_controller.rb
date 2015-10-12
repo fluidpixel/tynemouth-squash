@@ -134,7 +134,8 @@ def create
     		redirect_to players_path
     	end
     else
-      render 'new'
+      @error = 'Sorry, this booking could not be saved'
+      redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
     end
     
   else
@@ -166,10 +167,10 @@ def show
   end
   
   if (!@booking.player_id.blank?)
-	  @player = Player.find(@booking.player_id)
+	  @player = Player.find_by_id(@booking.player_id)
   end
   if (!@booking.vs_player_id.blank?)
-    @vs_player = Player.find(@booking.vs_player_id)
+    @vs_player = Player.find_by_id(@booking.vs_player_id)
   end
   
 end
