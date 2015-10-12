@@ -82,7 +82,7 @@ a {
 ul.nav
 {
 	margin: 0px 0px 0px 0px;
-	padding: 7px 0px 0px 0px;
+	padding: 7px 0px 4px 0px;
 	text-align: center;
     list-style-type: none;
     position: fixed;
