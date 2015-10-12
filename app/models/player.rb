@@ -1,6 +1,8 @@
 class Player < ActiveRecord::Base
 
 has_many :bookings, :dependent => :destroy
+has_many :vs_bookings, :foreign_key => 'vs_player_id', :class_name => 'Booking', :dependent => :destroy
+
 belongs_to  :membership_type
 
 validates_presence_of :membership_number, :membership_type, :on => :create
@@ -11,14 +13,14 @@ def self.authenticate(last_name, membership_number)
   if !last_name.blank? && !membership_number.blank?
     player = Player.where("lower(last_name) = ? AND lower(membership_number) = ?", last_name.downcase, membership_number.downcase).first
     if player
-      return player
+      player
     # elsif membership_number == "xxx"
 #       player = Player.where("lower(last_name) = ?", last_name.downcase).first
 #       if player
 #         return player
 #       end
     else
-      return nil
+      nil
     end
   else
     nil
@@ -49,17 +51,20 @@ def self.authenticateFullName(name, membership_number)
   end
 end
 
+def bookings_after(date)
+  bookings.where("start_time >= ?", date).order("start_time ASC")
+end
+
 def future_bookings
-  @future = bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
-  return @future
+  bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
 end
 
 def unpaid_bookings
-  @unpaid = bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6", Date.current, Date.new(2015, 8, 31)).order("start_time ASC")
+  bookings.where("(paid IS NULL OR paid = false) AND start_time <= ? AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6", Date.current, Date.new(2015, 8, 31)).order("start_time ASC")
 end
 
 def future_vs_bookings
-  return bookings.where("start_time >= ?", Date.current).order("start_time ASC")
+  bookings.where("start_time >= ?", Date.current).order("start_time ASC")
 end
 
 def full_name
@@ -83,7 +88,7 @@ def isValidMember
 end
 
 def isArchived
-  return self.archived
+  self.archived
 end
 
 def trialExpires
