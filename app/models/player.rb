@@ -1,13 +1,23 @@
 class Player < ActiveRecord::Base
 
 has_many :bookings, :dependent => :destroy
+# has_many :fixtureA, :class_name => 'Fixture', :dependent => :destroy, :foreign_key => 'player_a_id'
 has_many :vs_bookings, :foreign_key => 'vs_player_id', :class_name => 'Booking', :dependent => :destroy
+# has_many :fixtureB, :class_name => 'Fixture', :dependent => :destroy, :foreign_key => 'player_b_id'
+# scope :fixture, lambda {|father_id, mother_id| where('father_id = ? AND mother_id = ?', father_id, mother_id) }
 
-belongs_to  :membership_type
+has_many :results, through: :fixtures
+belongs_to :league
+belongs_to :membership_type
 
 validates_presence_of :membership_number, :membership_type, :on => :create
 validates_presence_of :last_name
 validates_uniqueness_of :membership_number
+
+def fixtures
+  Fixture.where('player_a_id = ? OR player_b_id = ?', self.id, self.id)
+end
+
 
 def self.authenticate(last_name, membership_number)
   if !last_name.blank? && !membership_number.blank?
@@ -68,7 +78,9 @@ def future_vs_bookings
 end
 
 def full_name
-  self.first_name + " " + self.last_name
+  if self.first_name && self.last_name
+    self.first_name + " " + self.last_name
+  end
 end
 
 def self.find_all_by_name_containing(text)

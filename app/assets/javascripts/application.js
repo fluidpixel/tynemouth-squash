@@ -30,6 +30,8 @@ $(document).on('click', 'a', function(e) {
 (function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")
 */
 
+
+
 $.ajaxSetup ({
     // Disable caching of AJAX responses
     cache: false
@@ -135,13 +137,27 @@ function show(id) {
 	 document.getElementById(id).style.visibility = 'visible';
 };
 
-/*
-$(document).click(function (e)
-{
-    var container = $("#select_admin_date");
-    if (container.has(e.target).length === 0)
-    {
-        //container.hide();
-    }
+function remove_fields(link) {
+        $(link).prev("input[type=hidden]").val(true);
+        $(link).closest(".fields").hide();
+}
+
+jQuery(function($){
+	$(document).on("click", "a.link_to_add_fields", function(e){
+		e.preventDefault();
+		var link = $(this);
+		var association = $(this).data("association");
+		var content = $(this).data("content");
+	
+	    var new_id = new Date().getTime();
+	    var regexp = new RegExp("new_" + association, "g");
+    
+		$(link).parent().before(content.replace(regexp, new_id));
+		//'league_players_attributes_' + new_id + '_full_name'
+	
+		$('#league_players_attributes_' + new_id + '_full_name').autocomplete({
+			source: $('#league_players_attributes_' + new_id + '_full_name').data('autocomplete-source')
+		});
+	
+	});
 });
-*/

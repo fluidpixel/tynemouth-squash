@@ -1,0 +1,12 @@
+<div id="center" class="players">
+	
+<h1 class="league"><%= @league.league_name %></h1>
+
+<%= render "league", :league => @league %>
+
+<% if is_super_admin %><h3> <%= link_to 'Edit', edit_league_path(@league) %> </h3>
+<%= button_to 'Delete League', league_path(@league), method: :delete, data: { confirm: 'Are you sure?' }, form_class: "delete" %>
+<% end %>
+
+<p><%= link_to 'All Leagues', leagues_path %></p>
+</div>

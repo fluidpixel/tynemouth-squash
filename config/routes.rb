@@ -11,6 +11,8 @@ resources :bookings do
 end
 resources :players
 resources :sessions
+resources :leagues
+resources :fixtures
 
 get 'playerlist' => 'players#list', :as => :playerlist
 get 'log_in' => 'sessions#new', :as => 'log_in'

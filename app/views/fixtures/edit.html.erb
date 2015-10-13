@@ -1,0 +1,29 @@
+<div id="center" class="players">
+	
+<h1 class="league">Fixture for <%= @fixture.league.league_name %></h1>
+
+<%= @fixture.player_a.full_name %> vs <%= @fixture.player_b.full_name %>
+
+<%= form_for @fixture, html: {class: "player"} do |f| %>
+	<% if @fixture.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@fixture.errors.count, "error") %> prohibited
+		  this league from being saved:</h2>
+		<ul>
+		<% @fixture.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+	
+	<%= f.fields_for :score do |builder| %>
+		<%= render "score_field", :f => builder %>
+	<% end %>
+	<br />
+	
+  <%= f.submit %>
+  
+<% end %>
+
+</div>

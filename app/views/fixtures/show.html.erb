@@ -1,0 +1,19 @@
+<div id="center" class="players">
+	
+<h1 class="league">Fixture for <%= @fixture.league.league_name %></h1>
+
+<table class="leagueTable">
+	<tr>
+		<th><%= @fixture.player_a.full_name %></th>
+		<th>vs</th>
+		<th><%= @fixture.player_b.full_name %></th>
+	</tr>
+	<tr>
+		<td><%= @fixture.score.first %></td>
+		<td></td>
+		<td><%= @fixture.score.second %></td>
+	</tr>
+</table>
+
+<h3> <%= link_to 'Edit', edit_fixture_path(@fixture) %>
+</div>

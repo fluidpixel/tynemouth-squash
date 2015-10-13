@@ -1,0 +1,16 @@
+<div id="center">
+<h1>Leagues</h1>
+
+<% @leagues.each do |league| %>
+
+	<div id="center" class="leagueTitle"><%= link_to (league.league_name), league_path(league.id), :class => 'leagueTitle' %></div>
+	<% if league.players.count > 0 %>
+		<%= render "league", :league => league %>
+	<% end %>
+<% end %>
+
+<br />
+<% if is_super_admin %>
+<%= button_to "Add League", new_league_path, :id => "open-contacts-dialog-btn",
+      :class => "inbox-sf-add-btn tip", :method => :get %><% end %>
+  </div>
