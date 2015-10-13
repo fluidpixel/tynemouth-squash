@@ -13,9 +13,13 @@ class LeaguesController < ApplicationController
           @player = Player.authenticateFullName(value[:full_name], "xxx")
           if @player
             if value[:_destroy] == "true"
+              @player.date_added_to_league = nil
+              @player.save
               @league.players.delete(@player)
             else
-              @league.players << @player              
+              @league.players << @player   
+              @player.date_added_to_league = Time.zone.now
+              @player.save
             end
           end
         end
@@ -58,9 +62,9 @@ class LeaguesController < ApplicationController
           if @player
             if value[:_destroy] == "true"
               @player.league = nil
+              @player.date_added_to_league = nil
               @player.fixtures.destroy_all
             else
-              
               if @player.league == @league
                 #do nothign player is already in this league
               elsif @player.league
@@ -68,9 +72,11 @@ class LeaguesController < ApplicationController
                 @player.fixtures.destroy_all
                 create_fixtures_for_player(@league, @player)
                 @league.players << @player
+                @player.date_added_to_league = Time.zone.now
               else
                 create_fixtures_for_player(@league, @player)
                 @league.players << @player
+                @player.date_added_to_league = Time.zone.now
               end
               
             end
