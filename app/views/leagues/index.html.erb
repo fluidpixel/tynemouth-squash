@@ -1,6 +1,7 @@
 <div id="center">
 <h1>Leagues</h1>
-
+ <%= render "rules" %>
+ 
 <% @leagues.each do |league| %>
 
 	<div id="center" class="leagueTitle"><%= link_to (league.league_name), league_path(league.id), :class => 'leagueTitle' %></div>
@@ -14,3 +15,6 @@
 <%= button_to "Add League", new_league_path, :id => "open-contacts-dialog-btn",
       :class => "inbox-sf-add-btn tip", :method => :get %><% end %>
   </div>
+  
+ 
+  

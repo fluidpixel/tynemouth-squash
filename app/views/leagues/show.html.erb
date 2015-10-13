@@ -8,5 +8,9 @@
 <%= button_to 'Delete League', league_path(@league), method: :delete, data: { confirm: 'Are you sure?' }, form_class: "delete" %>
 <% end %>
 
-<p><%= link_to 'All Leagues', leagues_path %></p>
 </div>
+
+<%= render "rules" %>
+
+<p id="center"><%= link_to 'All Leagues', leagues_path %></p>
+

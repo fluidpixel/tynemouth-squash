@@ -20,7 +20,7 @@
 	  		<% if i == index %>
 				<td class="nonLeague"> &nbsp </td>
 			<% else %>
-				<td class="league resultScore"><%= link_to score_for_player(player, vsPlayer, league), edit_fixture_path(fixture_for_player(player, vsPlayer, league)), :class => 'playerIndex' %></td><% end %>
+				<td class="league resultScore"><%= link_to score_for_player(player, vsPlayer, league), edit_fixture_path(fixture_for_player(player, vsPlayer, league)), :class => 'playerIndex', :title => "#{player.first_name}'s Score vs #{vsPlayer.first_name}" %></td><% end %>
 	  		<% end %>
 			<td class="nonLeague totalScore"><%= total_score(player, league) %></td>
 	  </tr>
