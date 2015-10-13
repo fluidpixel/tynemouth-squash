@@ -4,19 +4,19 @@
 		<th></th>
 		<th>Players</th>
 		<th>vs</th>
-		<% league.players.each_with_index do |player, index| %>
+		<% league.sorted_players.each_with_index do |player, index| %>
 		<th><%= link_to (index+1).to_s26.capitalize, '#', :title => player.full_name %></th>
 		<% end %>
 		<th>TOTAL</th>
 		
 	</tr>
-	<% league.players.each_with_index do |player, index| %>
+	<% league.sorted_players.each_with_index do |player, index| %>
 	  <tr class="playerIndex">
 		  <td class="contact"><% if current_player %><%= player.mobile %><% end %></td>
 		  <td></td>
 		  <td class="player"><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
 			<td class="nonLeague"><%= link_to (index+1).to_s26.capitalize, player_path(player.id), :title => player.full_name %></td>
-	  		<% league.players.each_with_index do |vsPlayer, i| %>
+	  		<% league.sorted_players.each_with_index do |vsPlayer, i| %>
 	  		<% if i == index %>
 				<td class="nonLeague"> &nbsp </td>
 			<% else %>

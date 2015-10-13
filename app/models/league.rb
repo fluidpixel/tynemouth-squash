@@ -10,7 +10,10 @@ class League < ActiveRecord::Base
       "Premier League"
     else
       "League " + self.league_number.to_s
-    end
-    
+    end 
+  end
+  
+  def sorted_players
+    return self.players.order("date_added_to_league")
   end
 end
