@@ -37,14 +37,20 @@ $.ajaxSetup ({
     cache: false
 });
 
-$( "html" ).click(function() 
-{
-	$.cookie('scroll', $(window).scrollTop());
-});
+// $( "html" ).click(function()
+// {
+// 	$.cookie('scroll', $(window).scrollTop());
+// });
 
 // document.oncontextmenu = new Function("return false");
 
-jQuery(function($)
+// $(window).load(function()
+// {
+//      $("html,body").animate({scrollTop: $.cookie('scroll')}, 0);
+// })
+
+jQuery
+(function($)
 {
 	$(document).on('click', '.toggle', function()
 	{
@@ -75,11 +81,6 @@ jQuery(function($)
 	  }
 	});
 });
-
-$(window).load(function()
-{
-     $("html,body").animate({scrollTop: $.cookie('scroll')}, 0);
-})
 
 function treatAsUTC(date) {
     var result = new Date(date);

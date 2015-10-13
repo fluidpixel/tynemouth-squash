@@ -62,3 +62,24 @@ table tr td:empty {
 	font-style: italic;
 	padding-top: 10px;
 }
+
+form.fixture {
+	margin-top: 5px;
+}
+
+form.fixture input[type="number"] {
+	width: 60px;
+	height: 55px;
+	text-align: center;
+	line-height: 55px;
+	font-size: 40px;
+	font-weight: bold;
+	margin-right: 30px;
+	margin-left: 30px;
+/*	background-color: white;*/
+	background: transparent;
+	color: white;
+	border: solid;
+	border-color: gold;
+	
+}
