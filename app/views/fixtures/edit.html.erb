@@ -4,7 +4,7 @@
 
 <%= @fixture.player_a.full_name %> vs <%= @fixture.player_b.full_name %>
 
-<%= form_for @fixture, html: {class: "player"} do |f| %>
+<%= form_for @fixture, html: {class: "fixture"} do |f| %>
 	<% if @fixture.errors.any? %>
 	  <div id="errorExplanation">
 		<h2><%= pluralize(@fixture.errors.count, "error") %> prohibited
@@ -20,10 +20,12 @@
 	<%= f.fields_for :score do |builder| %>
 		<%= render "score_field", :f => builder %>
 	<% end %>
-	<br />
 	
+	<%= render "leagues/rules" %>
+	<br />
   <%= f.submit "Update Scores"%>
   
 <% end %>
 
 </div>
+
