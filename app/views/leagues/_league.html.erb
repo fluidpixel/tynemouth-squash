@@ -12,7 +12,7 @@
 	</tr>
 	<% league.players.each_with_index do |player, index| %>
 	  <tr class="playerIndex">
-		  <td class="contact"><%= player.mobile %></td>
+		  <td class="contact"><% if current_player %><%= player.mobile %><% end %></td>
 		  <td></td>
 		  <td class="player"><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
 			<td class="nonLeague"><%= link_to (index+1).to_s26.capitalize, player_path(player.id), :title => player.full_name %></td>
