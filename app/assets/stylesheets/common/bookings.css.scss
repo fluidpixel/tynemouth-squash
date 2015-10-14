@@ -101,15 +101,20 @@ tr {
 .date a.day{
 	color:azure;
 }
-.date a.last_day{
+.date a.last_day, a.no_day{
 	color: gold;
 	font-size: 30px;
 	padding-left: 5px;
 	padding-bottom: 5px;
 }
 
+a.no_day {
+	font-size: 20px;
+	color: #AAC9E4;
+}	
 .date a.today{
 	font-size: 30px;
+	color: gold;
 }
 
 a#change_day_left, a#change_day_right
@@ -242,7 +247,7 @@ a.to_pay_guest{
 	padding-right: 1px;
 	width:53px;
 	position:absolute;
-	z-index:1;
+	z-index:2;
 	font-size: 20px;
 	//font-weight: 200;
 	//width: 90px;
