@@ -1,6 +1,6 @@
-<h1>Book <%= @court_name %> for <%=  @time.strftime("%l:%M%P") %> on <%= @time.strftime("%A") %> </h1>
+<h1>Book <%= @court_name %> at <%=  @time.strftime("%l:%M%P") %><br /><%= @time.strftime("%a %d %b") %> </h1>
 <% if @error %>
-<p id="errorExplanation" class="bookingError">
+ <p id="errorExplanation" class="bookingError">
   <%= @error %>
 </p>
 <% end %>

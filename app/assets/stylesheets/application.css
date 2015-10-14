@@ -82,7 +82,7 @@ ul.nav
 	right: 0;
 	top: 0;
 	background-color: #0A4B81;
-	z-index: 2;
+	z-index: 3;
 	background-color:#0A4B81;
 }
 
@@ -95,7 +95,7 @@ ul.nav li.nav { display: inline; }
 	right: 14px;
 	float: right;
 	position: fixed;
-	z-index: 2;
+	z-index: 3;
 	
 }
 
@@ -122,7 +122,7 @@ z-index: 1;
 form.booking, form.player
 {
 	text-align: center;
-	margin-top:50px;
+	margin-top:20px;
 }
 form.delete {
 	text-align: center;

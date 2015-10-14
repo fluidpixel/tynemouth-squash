@@ -26,24 +26,8 @@ h3.holiday {
 	position:relative;
 }
 
-.date {
-	font-size: 20px;
-	position: fixed;
-	z-index: 200;
-	padding-top:10px;
-	bottom: 0px;
-	width: 100%;
-	height: 60px;
-	background-color: #0A4B81;
-	margin-bottom:0px;
-}
-
-.date a.last_day {
-	display: none;
-}
-
-#change_day {
-	font-size: 15px;
+input[type="submit"] {
+	-webkit-appearance: none;
 }
 
 table.booking {
@@ -100,22 +84,57 @@ ul.nav, li.nav {
 	position: fixed;
 }
 
+.date {
+	font-size: 20px;
+	position: fixed;
+	z-index: 200;
+	padding-top:10px;
+	bottom: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: #0A4B81;
+	margin-bottom:0px;
+}
+
+/*.date a.last_day {
+	display: none;
+}*/
+
+#change_day {
+	font-size: 15px;
+}
+
 a#change_day.today {
-	float:left;
-	margin-left: 20px;
+	left:5px;
+	top: 5px;
+	position: absolute;
+	color: gold;
 }
 
 a#change_day.last_day {
-	display:block;
-	margin-top: -48px;
-	margin-right:20px;
-	float:right;
+	right:5px;
+	top: 5px;
+	position: absolute;
+}
+
+a#change_day.no_day {
+	right:5px;
+	top: 5px;
+	position: absolute;
+	color: azure;
+}
+
+a#change_day.arrow {
+	font-size: 35px;
+	display:inline-block;
+    transform:scale(1,2); /* W3C */
+    -webkit-transform:scale(1,2); /* Safari and Chrome */
 }
 
 .datePicker {
 	display:block;
 	float:none;
-	margin-top: 20px;
+	margin-top: 0px;
 }
 
 div.ui-datepicker{
