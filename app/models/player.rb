@@ -65,7 +65,7 @@ end
 end
 
 def future_bookings
-  bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 8, 31), Date.current).order("start_time ASC")
+  bookings.where("((paid = false OR paid IS NULL) AND start_time >= ? AND DATE_PART('hour', start_time) >= 16 AND DATE_PART('hour', start_time) < 21 AND NOT DATE_PART('dow', start_time) = 0 AND NOT DATE_PART('dow', start_time) = 6) OR start_time >= ?", Date.new(2015, 11, 1), Date.current).order("start_time ASC")
 end
 
 def unpaid_bookings
