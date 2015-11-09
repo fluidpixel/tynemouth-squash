@@ -29,8 +29,10 @@
 	<% if is_super_admin %>
 		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
 		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %><br />
-	<% end %>	
+	<% end %>
+	<% if !@leagues.nil? %>
   	<% f.label 'League' %><%= f.collection_select :league_id, @leagues.all, :id, :league_name, {:include_blank => 'Select League...'} %><br />
+	<% end %>
   <%= f.submit %>
 
 <% end %>
