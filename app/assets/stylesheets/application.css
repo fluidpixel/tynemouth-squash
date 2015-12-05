@@ -114,7 +114,7 @@ top: 4px;
 left: 4px;
 float: left;
 position: fixed;
-z-index: 1;
+z-index: 5;
 }
 
 #flashalert, #flashnotice{
