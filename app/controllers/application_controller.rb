@@ -41,28 +41,21 @@ class ApplicationController < ActionController::Base
   end
     
   def is_bank_holiday(day)
-    bankholidays = Array["2014-01-01", 
-                        "2014-04-18", 
-                        "2014-04-21", 
-                        "2014-05-05", 
-                        "2014-05-26", 
-                        "2014-08-25", 
-                        "2014-12-25", 
-                        "2014-12-26", 
-                        "2015-04-03", 
+    bankholidays = Array["2015-04-03", 
                         "2015-04-06",
                         "2015-05-04",
                         "2015-05-25",
                         "2015-08-31",
                         "2015-12-25",
-                        "2015-12-28"]
+                        "2015-12-28",
+                        "2016-01-01"]
                         
     date = day.in_time_zone
     bankholidays.include?(date.strftime("%Y-%m-%d"))
   end
   
   def is_closed_day(day)
-    closedDays = Array["2014-12-25", "2014-12-26", "2015-01-01"]
+    closedDays = Array["2015-12-25", "2015-12-26", "2016-01-01"]
     date = day.in_time_zone
     closedDays.include?(date.strftime("%Y-%m-%d"))
   end
