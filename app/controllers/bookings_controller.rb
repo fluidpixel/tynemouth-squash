@@ -124,7 +124,7 @@ def create
     end
     
     if @saved == true
-      Pusher['test_channel'].trigger('greet', { :greeting => "New booking created!" })
+      Pusher['tynemouthChannel'].trigger('booking', { :greeting => "New booking created!", :reloadDay => @day })
       view_context.send_to_dropbox(@day)
       
       if @day
@@ -317,7 +317,7 @@ def toggle_paid
 	@booking = Booking.find(params[:id])  
 	@booking.toggle!(:paid)  
 	
-  Pusher['test_channel'].trigger('greet', {
+  Pusher['tynemouthChannel'].trigger('togglePaid', {
     :greeting => "Toggle Paid!"
   })
   
@@ -344,8 +344,8 @@ private
   
         view_context.send_to_dropbox(@days)
       
-        Pusher['test_channel'].trigger('greet', {
-          :greeting => "Booking Removed!"
+        Pusher['tynemouthChannel'].trigger('booking', {
+          :greeting => "Booking Removed!", :reloadDay => @days
         })
       
         flash.alert = "Removed Cancelled Booking"
@@ -370,8 +370,8 @@ private
             ActiveRecord::Base.connection.close
           end
                 
-          Pusher['test_channel'].trigger('greet', {
-            :greeting => "Booking Removed!"
+          Pusher['tynemouthChannel'].trigger('booking', {
+            :greeting => "Booking Removed!", :reloadDay => @days
           })
     
           flash.alert = "Removed Booking"

@@ -62,6 +62,10 @@
 <p id="center" class="warning">Due to the substantial amount of unpaid court fines The Management Committee will incorporate a means of preventing members booking courts on the system if they have two outstanding fines.
 	<br /><b>This will take effect from 1st November 2015</b>.</p>
 
+<%= javascript_tag do %>
+  window.day = '<%= @day %>';
+<% end %>
+
 <script src="http://js.pusher.com/2.2/pusher.min.js"></script>
  <script type="text/javascript">
  // If your Heroku application is within the EU region,
@@ -70,9 +74,16 @@
   //Pusher.sockjs_host = 'sockjs-eu.pusher.com';
 
  var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
- var channel = pusher.subscribe('test_channel');
- channel.bind('greet', function(data) {
-   location.reload(true)
+ var channel = pusher.subscribe('tynemouthChannel');
+ 
+ channel.bind('booking', function(data) {
+	 // window.alert(data.reloadDay + ':' + day)
+	 if (day == data.reloadDay) {
+		// window.alert('reloading')
+	 	location.reload(true)
+	 } else {
+	 	// window.alert('not reloading')
+	 }
  });
  </script>
  
