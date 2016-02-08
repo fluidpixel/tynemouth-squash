@@ -224,7 +224,7 @@ ul.ui-autocomplete {
   border: solid 1px #999;
   cursor: default;
   background-color: #FFF;
-  li {
+  /*li {
     background-color: #FFF;
     border-top: solid 1px #DDD;
     margin: 0;
@@ -237,7 +237,7 @@ ul.ui-autocomplete {
     a.ui-state-hover, a.ui-state-active {
       background-color: #FFFCB2;
     }
-  }
+  }*/
 } 
 
 .hint{
