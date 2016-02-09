@@ -16,4 +16,8 @@ class League < ActiveRecord::Base
   def sorted_players
     return self.players.order("date_added_to_league")
   end
+  
+  # def points_sorted_players
+  #   return self.players.order("date_added_to_league")
+  # end
 end
