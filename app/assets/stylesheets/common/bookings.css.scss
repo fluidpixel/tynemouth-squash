@@ -162,7 +162,7 @@ a#change_day_left, a#change_day_right
 }
 .book, .login_to_book, .booked, .cancelled{
 	margin-right:28px;
-	font-size:16px;
+	font-size:15px;
 	float:right;
 	width:118px;
 }
@@ -193,6 +193,7 @@ a#change_day_left, a#change_day_right
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .bookingError {
