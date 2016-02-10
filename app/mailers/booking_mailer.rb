@@ -26,9 +26,9 @@ class BookingMailer < ActionMailer::Base
     @greeting = @court.court_name + " has been cancelled late"
     
     @message = @court.court_name + " has been cancelled with less than 48 hours notice. You need to check if it's not rebooked. If not then " + @booking.player.first_name + " " + @booking.player.last_name + " needs to be fined."
-    @date = Date.current.strftime("%l:%M%P on %A %dth %B")
+    @date = Date.current.strftime("%H:%M%P on %A %dth %B")
     
-    @bookingDetails = @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+    @bookingDetails = @court.court_name + ", " + @booking.time_slot.time.strftime("%H:%M%P ") + @booking.start_time.strftime("on %A #{@booking.start_time.day.ordinalize} %B")
     
     @current_member = current_member
      
@@ -41,7 +41,7 @@ class BookingMailer < ActionMailer::Base
 
     if @booking.player.email?
       @greeting = @booking.player.first_name + " your booking has been cancelled"
-      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+      @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
       end.deliver
@@ -50,7 +50,7 @@ class BookingMailer < ActionMailer::Base
     if @booking.vs_player_id?
       if @booking.vs_player.email?
         @greeting = "Squash booking against " + @booking.player.first_name + " has been cancelled"
-        @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+        @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
         mail(to: @booking.vs_player.email, subject: @greeting) do |format|
           format.text
         end.deliver
@@ -69,7 +69,7 @@ class BookingMailer < ActionMailer::Base
         @greeting = "Squash Booking"
       end
       
-      @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+      @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
       end
@@ -82,7 +82,7 @@ class BookingMailer < ActionMailer::Base
         
     if @booking.vs_player_id?
       if @booking.vs_player.email?
-        @message =  @court.court_name + ", " + @booking.time_slot.time.strftime("%l:%M%P ") + @booking.start_time.strftime("on %A %dth %B")
+        @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
         @greeting = "Squash vs " + @booking.player.first_name + " " + @booking.player.last_name.first
         mail(to: @booking.vs_player.email, subject: @greeting) do |format|
           format.text
