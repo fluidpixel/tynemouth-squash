@@ -11,6 +11,9 @@
 
 <br />
 <% if is_super_admin %>
+
+<%= button_to 'Reset All Leagues', leagues_reset_leagues_path, method: :post, confirm: 'This will reset all results for all leagues. Are you sure?' %>
+
 <%= button_to "Add League", new_league_path, :id => "open-contacts-dialog-btn",
       :class => "inbox-sf-add-btn tip", :method => :get %><% end %>
   </div>

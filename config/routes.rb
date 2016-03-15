@@ -14,6 +14,8 @@ resources :sessions
 resources :leagues
 resources :fixtures
 
+post "leagues/reset_leagues" 
+
 get 'playerlist' => 'players#list', :as => :playerlist
 get 'log_in' => 'sessions#new', :as => 'log_in'
 get 'log_out' => 'sessions#destroy', :as => 'log_out'

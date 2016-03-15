@@ -111,6 +111,11 @@ class LeaguesController < ApplicationController
   	#  @membership_type = MembershipType.find(Player.membership_type_id)
     #end
   end
+  
+  def reset_leagues
+    Score.destroy_all
+    redirect_to leagues_path
+  end
 
 private
   
