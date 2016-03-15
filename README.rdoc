@@ -7,3 +7,9 @@ Bookings can be made by members who login with their last name and membership nu
 Admins have rights to book courts under any players name, remove and change bookings.
 
 Admins are also able to mark the court as paid/un paid upon collection of payment. 
+
+
+== Download remote database to local
+heroku pg:backups capture
+curl -o latest.dump `heroku pg:backups public-url`
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U [USERNAME] -d [DATABASENAME] latest.dump
