@@ -1,8 +1,14 @@
 <div id="center">
 <h1>Leagues</h1>
- 
+<ul class="leagueList">
 <% @leagues.each do |league| %>
+<li class="leagueList">
+	<%= link_to (league.league_short_name), :anchor => league.league_name %>
+</li>
+<% end %>
 
+<% @leagues.each do |league| %>
+	<a id='<%= league.league_name %>' class='anchor'></a>
 	<div id="center" class="leagueTitle"><%= link_to (league.league_name), league_path(league.id), :class => 'leagueTitle' %></div>
 	<% if league.players.count > 0 %>
 		<%= render "league", :league => league %>

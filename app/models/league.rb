@@ -13,6 +13,14 @@ class League < ActiveRecord::Base
     end 
   end
   
+  def league_short_name
+    if self.league_number == 0
+      "P"
+    else
+      self.league_number.to_s
+    end 
+  end
+  
   def sorted_players
     return self.players.order("date_added_to_league")
   end
