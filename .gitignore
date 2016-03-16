@@ -21,3 +21,4 @@ app_environment_variables.rb
 config/app_environment_variables.rb
 
 *.dump
+.tm_properties

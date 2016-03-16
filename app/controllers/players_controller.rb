@@ -81,7 +81,7 @@ def update
 end
 
 def list
-   @players = Player.order(:last_name).where('lower(last_name) like ? OR membership_number like ? OR lower(first_name) like ? AND NOT archived', "%#{params[:term].downcase}%", "%#{params[:term]}%", "%#{params[:term].downcase}%")
+   @players = Player.order(:last_name).where("first_name || ' ' || last_name ILIKE ? OR membership_number ILIKE ? AND NOT archived", "%#{params[:term]}%", "%#{params[:term]}%")
     #@players = Player.all
     render json: @players.map { |player| player.first_name + ' ' + player.last_name }
     #render json: @players.map(&:last_name,&:first_name)

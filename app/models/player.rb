@@ -84,7 +84,7 @@ def full_name
 end
 
 def self.find_all_by_name_containing(text)
-  self.where("LOWER(first_name || ' ' || last_name) LIKE ? AND NOT archived", "%#{text.downcase}%")
+  self.where("first_name || ' ' || last_name ILIKE ? AND NOT archived", "%#{text}%")
 end
   
 def isValidMember
@@ -135,7 +135,7 @@ end
   
 def self.search(search)  
     if search  
-      where('last_name || first_name ILIKE ? AND NOT archived', "%#{search}%")  
+      where("first_name || ' ' || last_name ILIKE ? AND NOT archived", "%#{search}%")  
     else  
       all  
     end  
