@@ -44,7 +44,7 @@ class BookingMailer < ActionMailer::Base
       @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
       mail(to: @booking.player.email, subject: @greeting) do |format|
         format.text
-      end.deliver
+      end
     end
     
     if @booking.vs_player_id?
@@ -53,7 +53,7 @@ class BookingMailer < ActionMailer::Base
         @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
         mail(to: @booking.vs_player.email, subject: @greeting) do |format|
           format.text
-        end.deliver
+        end
       end
     end
   end

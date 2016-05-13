@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require_tree ./common
- *= require jquery.ui.datepicker
+ *= require jquery-ui/datepicker
  */
  
  html {

@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-	$('#booking_last_name').autocomplete
-		source: $('#booking_last_name').data('autocomplete-source')
+	$('#booking_full_name').autocomplete
+		source: $('#booking_full_name').data('autocomplete-source')
 	$('#booking_vs_player_name').autocomplete
 		source: $('#booking_vs_player_name').data('autocomplete-source')

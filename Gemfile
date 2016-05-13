@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.6'
 
 gem 'unicorn'
 
@@ -32,6 +32,8 @@ gem 'jquery-ui-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+gem 'responders', '~> 2.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
