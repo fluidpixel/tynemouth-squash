@@ -26,21 +26,21 @@ class Booking < ActiveRecord::Base
 		where(:time_slot_id => time_slot.id)
 	end
 	
-	def last_name
+	def full_name
 		player.try(:first_name)
 	end
 	
-	def last_name=(last_name)
-    if last_name.present?
-      @nameArray = last_name.downcase.split
+	def full_name=(full_name)
+    if full_name.present?
+      @nameArray = full_name.downcase.split
       if @nameArray.count > 1
-        last_name = last_name.downcase
-    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', last_name.split(" ")[0], last_name.split(" ")[1]).first
+        full_name = full_name.downcase
+    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', full_name.split(" ")[0], full_name.split(" ")[1]).first
     		if player
     			self.player_id = player.id
     		end
       else
-    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', "guest", last_name.split(" ")[0]).first
+    		player = Player.where('lower(first_name) = ? AND lower(last_name) = ?', "guest", full_name.split(" ")[0]).first
     		if player
     			self.player_id = player.id
     		end

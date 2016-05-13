@@ -1,5 +1,11 @@
 <h1>Edit Booking</h1>
-<h2><%= @booking.time_slot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %></h2>
+<% if @error %>
+ <p id="errorExplanation" class="editBookingError">
+  <%= @error %>
+</p>
+<% end %>
+<h2 class="editBooking"> <%= @booking.time_slot.time.strftime("%l:%M%P") + @booking.start_time.strftime(" on %A %dth %B") %></h2>
+
 
 <% if @allowEdit %>
 	<%= form_for :booking, url: booking_path(@booking.id), method: :patch, html: {class: "booking"} do |f| %>
@@ -14,20 +20,27 @@
 			</ul>
 		  </div>
 		<% end %>
-  
+  	  	
+		
 		<p>
 			<!--<%= f.collection_select :court_id, @courts.all, :id, :court_name %> -->
 			<% if @editPlayer %>
-			<%= f.label 'Player: ' %><%=f.text_field :last_name, data: {autocomplete_source: playerlist_path}, value: @player.first_name + ' ' + @player.last_name %>
+			<%= f.label 'Player: ' %><%=f.text_field :full_name, data: {autocomplete_source: playerlist_path}, value: @player.first_name + ' ' + @player.last_name %>
 			<% else %>
-			<%= f.label 'Player: ' %><%=f.text_field :last_name, :readonly => true, value: @player.first_name + ' ' + @player.last_name %>
+			<%= f.label 'Player: ' %><%=f.text_field :full_name, :readonly => true, value: @player.first_name + ' ' + @player.last_name %>
 			<% end %>
-			<br />
+			<% if !is_admin %>
+		  	<p>
+		  	    <%= f.label 'Membership Number:' %><%= f.text_field :membership_number, :value => '' %>
+		  	</p>
+				<% end %>
+				<p>
 			<% if @vs_player %>
 			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path}, value: @vs_player.first_name + ' ' + @vs_player.last_name %><button type="button" onclick="clearFields();" class="clear">remove opponent</button>
 			<% else %>
 			<%= f.label 'Optional Vs Player: ' %><%=f.text_field :vs_player_name, data: {autocomplete_source: playerlist_path} %>
 			<% end %>
+		</p>
 		</p>
 		<!--
 		<p>

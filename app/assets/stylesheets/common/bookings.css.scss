@@ -200,6 +200,14 @@ a#change_day_left, a#change_day_right
 	margin-top: -40px !important;
 }
 
+.editBookingError {
+	margin-top: 0px !important;
+	position: relative !important;
+}
+
+.editBooking {
+	margin-top: 10px;
+}
 .cancelled a{
 	color: Crimson;
 	font-style: bold;

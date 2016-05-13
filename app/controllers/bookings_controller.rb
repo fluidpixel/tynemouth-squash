@@ -9,15 +9,22 @@ def new
   
 	@days = params[:days] ? (params[:days]) : 0
   
-	@time = ActiveSupport::TimeWithZone.new(nil, Time.zone, Time.zone.parse(params[:hour] + ':' + params[:min])) if(params[:hour])
+  Time.zone.parse('2007-02-10 15:30:45')
+  
+  if (params[:hour]) 
+    @time = Time.zone.parse(params[:hour] + ':' + params[:min])
+  else 
+    @time = Time.zone
+  end
+  
 	@time += @days.to_i.days
-	
+  
 	@booking = Booking.new	
 	@booking.start_time = @time
 	@booking.time_slot_id = @timeSlot.id
 	@booking.court_time = 40
 	@booking.court_id = @court.id
-	@booking.player_id = :last_name if(:last_name)
+	@booking.player_id = :full_name if(:full_name)
 	@booking.vs_player_id = :vs_player_name if (:vs_player_name)
   
 end
@@ -25,9 +32,9 @@ end
 def create
   
   if !is_admin
-    player = Player.authenticateFullName(params[:booking][:last_name], params[:booking][:membership_number])
+    player = Player.authenticateFullName(params[:booking][:full_name], params[:booking][:membership_number])
   else
-    player = Player.authenticateFullName(params[:booking][:last_name], "xxx")
+    player = Player.authenticateFullName(params[:booking][:full_name], "xxx")
   end
   
   if params[:booking][:guest_booking] == "1" #true
@@ -35,8 +42,7 @@ def create
       
     else
       #create new guest player
-      #params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin, :email)
-      @nameArray = params[:booking][:last_name].split
+      @nameArray = params[:booking][:full_name].split
       #@nameArray = @fullname.
       
       @player = Player.new
@@ -45,7 +51,7 @@ def create
         @player.last_name = @nameArray[1]
       else
         @player.first_name = "guest"
-        @player.last_name = params[:booking][:last_name]
+        @player.last_name = params[:booking][:full_name]
       end
       
       @player.membership_number = "guest_" + (Player.last.id + 1).to_s
@@ -100,7 +106,7 @@ def create
         if @forcebooking == "true"
           #allow booking anyway
         else
-          redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :last_name => params[:booking][:last_name], :vs_player_name => params[:booking][:vs_player_name], :booking_number => params[:booking][:booking_number], :force_booking => "true", :error => @error) and return
+          redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :full_name => params[:booking][:full_name], :vs_player_name => params[:booking][:vs_player_name], :booking_number => params[:booking][:booking_number], :force_booking => "true", :error => @error) and return
         end
       else
         @error = 'Sorry, you cannot book with 2 or more outstanding unpaid courts'
@@ -113,13 +119,29 @@ def create
       @booking = Booking.new(booking_params)
       @booking.time_slot_id = @booking.time_slot_id + i
       
-    	if @booking.save
-        @saved = true
-        BookingMailer.create_booking_email(@booking).deliver
-        BookingMailer.vs_booking_email(@booking).deliver
+      if timeslot = TimeSlot.find_by(id: @booking.time_slot_id)
+      
+        puts "booking CourtID: #{timeslot.court_id}"
+        puts "params courtID: #{params[:booking][:court_id].to_i}"
+      
+        if timeslot.court_id == params[:booking][:court_id].to_i
+          puts "CORRECT COURT"
+        	if @booking.save
+            puts "SAVED"
+            @saved = true
+            BookingMailer.create_booking_email(@booking).deliver_now
+            BookingMailer.vs_booking_email(@booking).deliver_now
+          else
+            @saved = false
+            #flash.alert = 'false'
+          end
+        else
+          puts "BREAK"
+          break
+        end
       else
-        @saved = false
-        #flash.alert = 'false'
+        puts "ID doesn't exist"
+        break
       end
     end
     
@@ -142,7 +164,7 @@ def create
     #render :nothing => true
      #@time = DateTime.parse('13' + ':' + '05')
      #flash.now.alert = "Invalid Surname or Membership Number"
-     @error = "Invalid Name: (" + params[:booking][:last_name] + ") or membership number (#{params[:booking][:membership_number]})"
+     @error = "Invalid Name: (" + params[:booking][:full_name] + ") or membership number: (#{params[:booking][:membership_number]})"
      
     redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => params[:booking][:start_time].to_time.strftime('%H'), :min => params[:booking][:start_time].to_time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error)
   end
@@ -191,6 +213,8 @@ def processform
       redirect_to edit_booking_path(:id => @booking.id)
     elsif player
       redirect_to edit_booking_path(:id => @booking.id, :allow_edit => true)
+    elsif @booking.cancelled
+      redirect_to edit_booking_path(:id => @booking.id)
     else
       redirect_to booking_path(:id => @booking.id)
       flash.alert = "matching Membership number required for changing booking " + params[:membership_number]
@@ -201,8 +225,9 @@ end
 
 def edit
 	@booking = Booking.find(params[:id])
+  @error = params[:error] if(params[:error])
   
-  if (@booking.player_id == session[:player_id] || is_admin || params[:allow_edit])
+  if (@booking.player_id == session[:player_id] || is_admin || params[:allow_edit] || @booking.cancelled)
     @allowEdit = true
   else
     @allowEdit = false
@@ -233,16 +258,27 @@ end
 def update
   @booking = Booking.find(params[:id])
   
-  @booking.cancelled = false;
   
-  if @booking.update(params[:booking].permit(:court_id, :player_id, :last_name, :start_time, :court_time, :vs_player_name))
-    #booking changed, send email?
-    @day = (@booking.start_time.to_date - Date.current).to_i
-    view_context.send_to_dropbox(@day)
-    
-    redirect_to @booking
+  if !is_admin
+    player = Player.authenticateFullName(params[:booking][:full_name], params[:booking][:membership_number])
   else
-    render 'edit'
+    player = Player.authenticateFullName(params[:booking][:full_name], "xxx")
+  end
+  
+  if player
+    @booking.cancelled = false;
+    if @booking.update(params[:booking].permit(:court_id, :player_id, :full_name, :start_time, :court_time, :vs_player_name))
+      #booking changed, send email?
+      
+      @day = (@booking.start_time.to_date - Date.current).to_i
+      view_context.send_to_dropbox(@day)
+      redirect_to @booking
+    else
+      render 'edit'
+    end
+  else
+    @error = "Invalid Name: (" + params[:booking][:full_name] + ") or membership number: (#{params[:booking][:membership_number]})"
+    redirect_to edit_booking_path(params[:id], :error => @error)
   end
 end
 
@@ -338,8 +374,7 @@ private
     if player || is_admin
     
       if @booking.cancelled
-        #if we've already cancelled the court, then delete it now
-        # BookingMailer.cancel_booking_email(@booking).deliver
+        
         @booking.destroy
   
         view_context.send_to_dropbox(@days)
@@ -359,13 +394,13 @@ private
           @booking.cancelled = true;
           @booking.save
         
-          BookingMailer.cancelled_court_late(@booking, current_player).deliver
+          BookingMailer.cancelled_court_late(@booking, current_player).deliver_now
           flash.alert = "Peak Court cancelled too late to remove!"
         else
         
           @booking.destroy
           Thread.new do
-            BookingMailer.cancel_booking_email(@booking).deliver
+            BookingMailer.cancel_booking_email(@booking).deliver_now
             view_context.send_to_dropbox(@days)
             ActiveRecord::Base.connection.close
           end
@@ -388,7 +423,7 @@ private
   end
   
   def booking_params
-    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :last_name, :vs_player_id, :vs_player_name, :guest_booking)
+    params.require(:booking).permit(:court_id, :player_id, :start_time, :court_time, :time_slot_id, :paid, :full_name, :vs_player_id, :vs_player_name, :guest_booking)
   end
   respond_to :html, :js
 end
