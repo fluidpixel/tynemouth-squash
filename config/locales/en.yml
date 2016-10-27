@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
-#en.booking_mailer.daily_email.subject
+ hello: "Hello world"
+ helpers:
+  submit:
+   membership_type:
+    create: "Create Membership"
+    update: "Update Membership"

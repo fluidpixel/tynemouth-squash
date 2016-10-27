@@ -204,17 +204,18 @@ li
 
 #errorExplanation, #flashwarning{
  list-style: none;
- color: Gold;
+ color: gold;
  text-align: center;
- margin-top: 80px;
- margin-bottom: 10px;
- position:fixed;
  left:0;
  right:0;
 }
 .ui-helper-hidden-accessible
 {
 	display:none;
+}
+
+.field_with_errors input{
+    color: firebrick;
 }
 ul.ui-autocomplete {
   position: absolute;

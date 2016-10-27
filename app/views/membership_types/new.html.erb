@@ -1,12 +1,15 @@
-<h1>Enter a new Court</h1>
-<%= form_for :court, url: courts_path, html: {class: "booking"} do |f| %>
-  <p>
-    <%= f.label :court_name %><br>
-    <%= f.text_field :court_name %>
-  </p>
-  
-  <p>
-    <%= f.submit %>
-  </p>
+<h1>Enter a new Membership</h1>
+
+<div id="center">
+    
+<% if is_super_admin %>
+<%= render 'form' %>
+
+<% else %>
+
+<p id="center" class="warning">Log in as super admin to create new membership types</p>
+
 <% end %>
-<%= link_to 'Courts', courts_path %>
+
+<%= link_to 'Back to Memberships', membership_types_path %>
+</div>

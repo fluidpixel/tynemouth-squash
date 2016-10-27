@@ -1,0 +1,24 @@
+<%= form_for @type do |f| %>
+
+  <p>
+	<%= f.text_field :membership_type %><br>
+    <%= f.number_field :court_cost, min: 0, value: 0 %><br>
+    <%= f.number_field :membership_cost, min: 0, value: 0 %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+  
+  <% if @type.errors.any? %>
+  	  <div id="errorExplanation">
+  		<h2><%= pluralize(@type.errors.count, "error") %> prohibited
+  		  this court from being saved:</h2>
+  		<ul>
+  		<% @type.errors.full_messages.each do |msg| %>
+  		  <li><%= msg %></li>
+  		<% end %>
+  		</ul>
+  	  </div>
+  	<% end %>
+<% end %>
