@@ -1,6 +1,7 @@
 class MembershipTypesController < ApplicationController
 
   def new
+    @type = MembershipType.new
   end
 
   def create
@@ -27,7 +28,7 @@ class MembershipTypesController < ApplicationController
   def update
     @type = MembershipType.find(params[:id])
  
-    if @type.update(params[:type].permit(:court_cost, :membership_cost))
+    if @type.update(params[:membership_type].permit(:membership_type, :court_cost, :membership_cost))
       redirect_to @type
     else
       render 'edit'
@@ -36,6 +37,6 @@ class MembershipTypesController < ApplicationController
   
   private
     def type_params
-      params.require(:membershipType).permit(:membership_type, :court_cost, :membership_cost)
+      params.require(:membership_type).permit(:membership_type, :court_cost, :membership_cost)
     end  
 end
