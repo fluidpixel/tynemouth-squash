@@ -1,10 +1,11 @@
-<h1><%= @type.membership_type %></h1>
+<h1><%= @type.membership_type.humanize.titleize %></h1>
 
 <div id="center" class="players">
 	<h3>Court Cost</h3>
-<%= @type.court_cost %>
+<%= number_to_currency(@type.court_cost, :unit => "£") %>
 	<h3>Membership Cost</h3>
-<%= @type.membership_cost %>
+	
+<%= number_to_currency(@type.membership_cost, :unit => "£") %>
 <% if is_super_admin %>
 <h3> <%= link_to 'Edit', edit_membership_type_path(@type) %> </h3>
 <% end %>

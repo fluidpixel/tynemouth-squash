@@ -2,7 +2,7 @@
 <h1>Edit Membership </h1>
 
 <div id="center" class="players">
-<h3><%= @type.membership_type.capitalize %></h3>
+<h3><%= @type.membership_type.humanize.titleize %></h3>
 
 <% if is_super_admin %>
 <%= form_for :type, url: membership_type_path(@type.id), method: :patch do |f| %>

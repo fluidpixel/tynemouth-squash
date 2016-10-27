@@ -21,7 +21,7 @@ class MembershipTypesController < ApplicationController
   end
     
   def index
-    @types = MembershipType.all
+    @types = MembershipType.order(:membership_type).all
   end
   
   def update
