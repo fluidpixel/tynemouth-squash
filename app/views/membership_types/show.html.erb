@@ -1,0 +1,14 @@
+<h1><%= @type.membership_type %></h1>
+
+<div id="center" class="players">
+	<h3>Court Cost</h3>
+<%= @type.court_cost %>
+	<h3>Membership Cost</h3>
+<%= @type.membership_cost %>
+<% if is_super_admin %>
+<h3> <%= link_to 'Edit', edit_membership_type_path(@type) %> </h3>
+<% end %>
+</div>
+
+
+

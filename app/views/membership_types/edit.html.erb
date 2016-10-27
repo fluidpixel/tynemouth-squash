@@ -1,0 +1,34 @@
+
+<h1>Edit Membership </h1>
+
+<div id="center" class="players">
+<h3><%= @type.membership_type.capitalize %></h3>
+
+<% if is_super_admin %>
+<%= form_for :type, url: membership_type_path(@type.id), method: :patch do |f| %>
+<% if @type.errors.any? %>
+	  <div id="errorExplanation">
+		<h2><%= pluralize(@type.errors.count, "error") %> prohibited
+		  this court from being saved:</h2>
+		<ul>
+		<% @type.errors.full_messages.each do |msg| %>
+		  <li><%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
+  <p>
+    <%= f.text_field :court_cost %><br>
+    <%= f.text_field :membership_cost %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% else %>
+
+<p id="center" class="warning">Log in as super admin to edit the membership type</p>
+
+<% end %>
+</div>

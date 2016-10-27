@@ -1,0 +1,10 @@
+<h1>Membership Types</h1>
+<div id="center" class="players">
+<table class="booking">
+  <% @types.each do |type| %>
+    <tr>
+      <td class="first"><%= link_to type.membership_type, membership_type_path(type.id) %></td>
+    </tr>
+  <% end %>
+</table>
+</div>

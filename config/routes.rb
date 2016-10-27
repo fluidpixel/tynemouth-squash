@@ -13,6 +13,7 @@ resources :players
 resources :sessions
 resources :leagues
 resources :fixtures
+resources :membership_types
 
 post "leagues/reset_leagues" 
 
