@@ -29,13 +29,19 @@ namespace :archive do
 
       if members.count > 1
         puts "too many matches: #{full_name}"
-      end
-
-      member = members.first
-      if member != nil
-        puts "#{member.membership_number}"
       else
-        puts "invalid member: #{full_name}"
+        member = members.first
+        if member != nil
+          if member.bookings_after(Date.today - 3.months).count == 0 && member.future_vs_bookings.count == 0
+            puts "#{member.full_name} Removed"
+            member.archived = true
+            member.save
+          else
+            puts "#{member.full_name} Has future bookings"
+          end
+        else
+          puts "NIL #{full_name}"
+        end
       end
     end
   end
