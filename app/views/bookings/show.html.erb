@@ -41,7 +41,7 @@
 			<p><i>(after this the member should be subject to full court fees)</i></p>
 		<% elsif !@booking.cancelled %>
 			<% if @days >= 0 && @booking.should_incur_fine %>
-				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+				<p>There is less than 2 days till this booking, cancelling should incur a fine</p>
 			<% end %>
 		<% end %>
 		
@@ -65,11 +65,11 @@
 				<p><%= time_ago_in_words(@timeLeft.seconds.from_now).humanize %> to cancel court</p>
 				<% if @booking.should_incur_fine %><p><i>(after this you could be subject to full court fees)</i></p><% end %>
 			<% else %>
-				<p>There is less than 48 hours till this booking, cancelling should incure a fine</p>
+				<p>There is less than 2 days till this booking, cancelling should incur a fine</p>
 			<% end %>
 		<% else %>
 			<br />
-			<% if @booking.incurs_fine %><span class='red'><i>Peak-time bookings cancelled within 48 hours are subject to full court fees + £1.</i></span><%else%><i>Less than 48 hours before court time</i><% end %>
+			<% if @booking.incurs_fine %><span class='red'><i>Peak-time bookings cancelled within 2 days are subject to full court fees + £1.</i></span><%else%><i>Less than 2 days before court time</i><% end %>
 			<br />Please contact the club to change or cancel this booking on 0191 257 3895. 
 		<% end %>
 	<% end %>

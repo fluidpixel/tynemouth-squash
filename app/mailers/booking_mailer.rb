@@ -25,7 +25,7 @@ class BookingMailer < ActionMailer::Base
     @court = Court.find(@booking.court_id)
     @greeting = @court.court_name + " has been cancelled late"
     
-    @message = @court.court_name + " has been cancelled with less than 48 hours notice. You need to check if it's not rebooked. If not then " + @booking.player.first_name + " " + @booking.player.last_name + " needs to be fined."
+    @message = @court.court_name + " has been cancelled with less than 2 days notice. You need to check if it's not rebooked. If not then " + @booking.player.first_name + " " + @booking.player.last_name + " needs to be fined."
     @date = Date.current.strftime("%H:%M%P on %A %dth %B")
     
     @bookingDetails = @court.court_name + ", " + @booking.time_slot.time.strftime("%H:%M%P ") + @booking.start_time.strftime("on %A #{@booking.start_time.day.ordinalize} %B")
