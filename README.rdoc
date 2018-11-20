@@ -15,3 +15,7 @@ curl -o latest.dump `heroku pg:backups public-url -a tynemouth-squash`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U [USERNAME] -d [DATABASENAME] latest.dump
 
 rake db:create to create local database
+
+Deploy
+set heroku up as a remote
+heroku git:remote -a tynemouth-squash
