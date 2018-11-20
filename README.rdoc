@@ -10,6 +10,8 @@ Admins are also able to mark the court as paid/un paid upon collection of paymen
 
 
 == Download remote database to local
-heroku pg:backups capture
-curl -o latest.dump `heroku pg:backups public-url`
+heroku pg:backups capture -a tynemouth-squash
+curl -o latest.dump `heroku pg:backups public-url -a tynemouth-squash`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U [USERNAME] -d [DATABASENAME] latest.dump
+
+rake db:create to create local database
