@@ -168,7 +168,8 @@ a#change_day_left, a#change_day_right
 	 color: #285784;
 }
 .book, .login_to_book, .booked, .cancelled{
-	margin-right:28px;
+	// margin-right:28px;
+	margin-left: 56px;
 	font-size:15px;
 	float:right;
 	width:118px;
@@ -262,7 +263,7 @@ a.to_pay_guest{
 	padding-left: 0px;
 	padding-bottom: 13px;
 	padding-right: 1px;
-	width:53px;
+	width:56px;
 	position:absolute;
 	z-index:2;
 	font-size: 20px;
