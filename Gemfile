@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.3.7"
+ruby "2.6.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails'
 
 gem 'unicorn'
 
@@ -14,26 +14,28 @@ gem 'pg'
 gem 'rails_12factor' , group: :production
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
 gem 'jquery-ui-rails'
 
+gem 'rails-ujs'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
-gem 'responders', '~> 2.0'
+gem 'responders'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
