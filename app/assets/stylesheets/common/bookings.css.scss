@@ -130,6 +130,10 @@ a#change_day_left, a#change_day_right
 	position: absolute;
 }
 
+// .arrow {
+// 	background: url("data:image/svg+xml;utf8,<svg height='50' width='25'><polygon points='0,0 0,50 25,25' style='fill:white;' /></svg>");
+// }
+
 @media (min-width:1165px)
 {
 	a#change_day_left
@@ -167,21 +171,26 @@ a#change_day_left, a#change_day_right
 .booking_link{
 	 color: #285784;
 }
-.book, .login_to_book, .booked, .cancelled{
+.book, .login_to_book, .booked, .cancelled, .cleaning {
 	// margin-right:28px;
 	margin-left: 56px;
 	font-size:15px;
 	float:right;
-	width:118px;
+	width:138px;
 }
 
-.book, .login_to_book, .cancelled {
+.book, .login_to_book, .cancelled, .cleaning {
 	 line-height:20px;
 	 text-decoration: none;
 	 background: #DAE6F1;
 	 z-index:1;
 	 position:relative;
 	 height: 38px;
+}
+
+.cleaning {
+	color: #426B8C;
+	background: #AAC9E4;
 }
 
 .login_to_book{
@@ -258,7 +267,7 @@ a.to_pay_guest{
 	background-color: olive;
 	color: wheat;
 }
-.time, .noTime, .noTimeOrBooking, .peakTime{
+.time, .noTime, .noTimeOrBooking, .peakTime, .cleaningTime{
 	padding-top: 13px;
 	padding-left: 0px;
 	padding-bottom: 13px;
@@ -277,6 +286,10 @@ a.to_pay_guest{
 
 .noTime{
 	color: #426B8C;
+}
+
+.cleaningTime {
+	color: darkgray;
 }
 
 .noTimeOrBooking{

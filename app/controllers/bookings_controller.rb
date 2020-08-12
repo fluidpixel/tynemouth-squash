@@ -72,7 +72,6 @@ def create
   end
   
   #flash.alert = "booking slots: " + params[:booking][:booking_number]
-  
   if player || @player
     #varibles if we fail to save
     @day = params[:booking][:days]
@@ -292,40 +291,44 @@ def index
 	@bookingDay = (Date.current + @day.days).strftime("%A %d %B")
 	
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
-	
+  
+  currentDay = Date.current + @day.days
+
   @courts = Court.order("id DESC")
   saturday = [6] #[saturday]
   sunday = [0] #[sunday]
   
-  if is_closed_day(Date.current + @day.days)
+  covid_slot = is_covid_day(currentDay)
+
+  if is_closed_day(currentDay)
     @slots = 0
-  elsif is_bank_holiday(Date.current + @day.days)
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC")
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true).order("time ASC")
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true).order("time ASC")
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true).order("time ASC")
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true).order("time ASC")
+  elsif is_bank_holiday(currentDay)
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC")
     @slots = @court1Slots.count
-  elsif (saturday.include?((Date.current + @day.days).wday))
-		@court1Slots = TimeSlot.where(:court_id => 1).order("time ASC")
-		@court2Slots = TimeSlot.where(:court_id => 2).order("time ASC")
-		@court3Slots = TimeSlot.where(:court_id => 3).order("time ASC")
-		@court4Slots = TimeSlot.where(:court_id => 4).order("time ASC")
-		@court5Slots = TimeSlot.where(:court_id => 5).order("time ASC")
+  elsif (saturday.include?((currentDay).wday))
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:covid_slot => covid_slot).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:covid_slot => covid_slot).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:covid_slot => covid_slot).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:covid_slot => covid_slot).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:covid_slot => covid_slot).order("time ASC")
     @slots = @court1Slots.count
-  elsif (sunday.include?((Date.current + @day.days).wday))
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:sunday => true).order("time ASC")
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:sunday => true).order("time ASC")
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:sunday => true).order("time ASC")
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:sunday => true).order("time ASC")
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:sunday => true).order("time ASC")
+  elsif (sunday.include?((currentDay).wday))
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:sunday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:sunday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:sunday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:sunday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:sunday => true).where(:covid_slot => covid_slot).order("time ASC")
     @slots = @court1Slots.count
 	else
-		@court1Slots = TimeSlot.where(:court_id => 1).where(:weekday => true).order("time ASC")
-		@court2Slots = TimeSlot.where(:court_id => 2).where(:weekday => true).order("time ASC")
-		@court3Slots = TimeSlot.where(:court_id => 3).where(:weekday => true).order("time ASC")
-		@court4Slots = TimeSlot.where(:court_id => 4).where(:weekday => true).order("time ASC")
-		@court5Slots = TimeSlot.where(:court_id => 5).where(:weekday => true).order("time ASC")
+		@court1Slots = TimeSlot.where(:court_id => 1).where(:weekday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court2Slots = TimeSlot.where(:court_id => 2).where(:weekday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court3Slots = TimeSlot.where(:court_id => 3).where(:weekday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court4Slots = TimeSlot.where(:court_id => 4).where(:weekday => true).where(:covid_slot => covid_slot).order("time ASC")
+		@court5Slots = TimeSlot.where(:court_id => 5).where(:weekday => true).where(:covid_slot => covid_slot).order("time ASC")
     @slots = @court1Slots.count
 	end
 	
@@ -333,13 +336,13 @@ def index
     if is_closed_day(Date.current)
       @isBookingTime = false
     elsif is_bank_holiday(Date.current)
-      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:bank_holiday => true).order("time ASC").first.time.strftime("%H"))
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:bank_holiday => true).where(:covid_slot => covid_slot).order("time ASC").first.time.strftime("%H"))
     elsif saturday.include?(Date.current.wday)
-      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).order("time ASC").first.time.strftime("%H"))      
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:covid_slot => covid_slot).order("time ASC").first.time.strftime("%H"))      
     elsif sunday.include?(Date.current.wday)
-      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:sunday => true).order("time ASC").first.time.strftime("%H"))      
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:covid_slot => covid_slot).where(:sunday => true).order("time ASC").first.time.strftime("%H"))      
     else
-      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:weekday => true).order("time ASC").first.time.strftime("%H"))
+      @isBookingTime = (Time.current.strftime("%H") >= TimeSlot.where(:court_id => 1).where(:covid_slot => covid_slot).where(:weekday => true).order("time ASC").first.time.strftime("%H"))
     end
   elsif (@day > 21 && !is_admin)
 		@isBookingTime = false

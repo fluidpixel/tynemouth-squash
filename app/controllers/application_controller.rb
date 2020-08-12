@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :is_admin
   helper_method :is_super_admin
   helper_method :is_bank_holiday
+  helper_method :is_covid_day
 
-  before_filter :set_cache_buster
+  before_action :set_cache_buster
 
   private
 
@@ -41,15 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_bank_holiday(day)
-    bankholidays = Array["2018-05-07",
-                         "2018-05-28",
-                         "2018-08-27",
-                         "2019-04-19",
-                         "2019-04-22",
-                         "2019-05-06",
-                         "2019-05-27",
-                         "2019-08-26",
-                         "2020-04-10",
+    bankholidays = Array["2020-04-10",
                          "2020-04-13",
                         #  "2020-05-04", no longer a bank-holiday
                          "2020-05-25",
@@ -62,6 +55,20 @@ class ApplicationController < ActionController::Base
 
     date = day.in_time_zone
     bankholidays.include?(date.strftime("%Y-%m-%d"))
+  end
+
+  def is_covid_day(day)
+    date = day.in_time_zone.to_date
+    cutoff = Date.new(2020, 8, 12).in_time_zone.to_date
+    # difference = (Date.current - self.trial_date.to_date).to_i #trial is 90 days long
+    difference = (date - cutoff).to_i
+
+    logger.info("day: #{day}, #{date}, #{cutoff}, #{difference}")
+    if difference < 22
+      return false
+    else
+      return true
+    end
   end
 
   def is_closed_day(day)
