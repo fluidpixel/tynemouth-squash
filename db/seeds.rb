@@ -10,4 +10,4 @@
 # require File.open(File.join(Rails.root, 'db/seeds', 'players.rb'))
 # require File.open(File.join(Rails.root, 'db/seeds', 'courts.rb'))
 # require File.open(File.join(Rails.root, 'db/seeds', 'timeslots.rb'))
-# require File.open(File.join(Rails.root, 'db/seeds', 'covid_timeslots.rb'))
+require File.open(File.join(Rails.root, 'db/seeds', 'covid_timeslots.rb'))
