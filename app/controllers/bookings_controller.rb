@@ -360,7 +360,7 @@ def toggle_paid
     :greeting => "Toggle Paid!"
   })
   
-  redirect_to :back
+  redirect_back fallback_location: root_path
 end 
 
 private
