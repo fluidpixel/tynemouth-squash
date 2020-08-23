@@ -20,7 +20,7 @@
 </tr>
 
 <% (0..@slots - 1).each do |i| %>
-<tr class="<%= cleaning_class(@court5Slots[i].first) %>">
+<tr class="<%= cleaning_class(@court5Slots[i]) %>">
 	<td class="booking"><%= render "timeSlots" , :timeSlot => @court5Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 5 %></td>
 	<td class="booking"><%= render "timeSlots" , :timeSlot => @court4Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 4 %></td>
 	<td class="booking"><%= render "timeSlots" , :timeSlot => @court3Slots[i], :bookings => @daysBookings, :day => @day, :court_id => 3 %></td>

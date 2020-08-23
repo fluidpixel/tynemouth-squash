@@ -72,11 +72,11 @@ div.first{
 	margin-top: -6px
 }
 
-tr.normal {
+tr.normal_row {
 	height: 40px;
 }
 
-tr.cleaning {
+tr.cleaning_row {
 	height: 20px;
 }
 
@@ -291,6 +291,7 @@ a.to_pay_guest{
 .cleaningTime{
 	padding-top: 0px;
 	padding-bottom: 0px;
+	line-height: 20px;
 }
 .noTime{
 	color: #426B8C;

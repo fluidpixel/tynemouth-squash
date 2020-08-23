@@ -42,6 +42,10 @@ def membership_type(booking)
   @membership_type.membership_type
 end
 
+def cleaning_class(timeSlot)
+  timeSlot.cleaning ? 'cleaning_row' : 'normal_row'
+end
+
 def send_to_dropbox(day)
   @daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(day.to_i).order("start_time ASC")      
   Dropbox::API::Config.app_key    = ENV['DROPBOX_APPKEY']
