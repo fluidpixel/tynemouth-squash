@@ -72,8 +72,12 @@ div.first{
 	margin-top: -6px
 }
 
-tr {
+tr.normal {
 	height: 40px;
+}
+
+tr.cleaning {
+	height: 20px;
 }
 
 #select_date, #select_admin_date{
