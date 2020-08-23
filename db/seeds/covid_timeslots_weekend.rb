@@ -1,18 +1,18 @@
 #reset
 # TimeSlot.delete_all
 # remove the last timeslots for each court
-TimeSlot.where(time: Time.zone.parse('22:40'), court_id: 5, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('23:20'), court_id: 5, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:00'), court_id: 1, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:40'), court_id: 1, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:10'), court_id: 2, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:50'), court_id: 2, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:20'), court_id: 3, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('23:00'), court_id: 3, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:30'), court_id: 4, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('23:10'), court_id: 4, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('22:40'), court_id: 5, covid_slot: true).destroy
-TimeSlot.where(time: Time.zone.parse('23:20'), court_id: 5, covid_slot: true).destroy
+TimeSlot.delete_by(time: Time.zone.parse('22:40'), court_id: 5, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('23:20'), court_id: 5, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:00'), court_id: 1, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:40'), court_id: 1, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:10'), court_id: 2, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:50'), court_id: 2, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:20'), court_id: 3, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('23:00'), court_id: 3, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:30'), court_id: 4, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('23:10'), court_id: 4, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('22:40'), court_id: 5, covid_slot: true)
+TimeSlot.delete_by(time: Time.zone.parse('23:20'), court_id: 5, covid_slot: true)
 
 # create morning slots for the weekend
 TimeSlot.create([
