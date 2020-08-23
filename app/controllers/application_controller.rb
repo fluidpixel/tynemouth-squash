@@ -51,7 +51,9 @@ class ApplicationController < ActionController::Base
                          "2021-04-05",
                          "2021-05-03",
                          "2021-05-31",
-                         "2021-05-30"]
+                         "2021-08-30",
+                         "2021-12-27",
+                         "2021-12-28"]
 
     date = day.in_time_zone
     bankholidays.include?(date.strftime("%Y-%m-%d"))
@@ -72,21 +74,17 @@ class ApplicationController < ActionController::Base
   end
 
   def is_closed_day(day)
-    closedDays = Array["2018-01-01",
-                       "2018-12-25",
-                       "2018-12-26",
-                       "2019-01-01",
-                       "2019-12-25",
-                       "2019-12-26",
-                       "2020-01-01",
-                       "2020-12-25",
-                       "2020-12-26",
-                       "2021-01-01",
-                       "2021-12-25",
+    closedDays = Array["2021-12-25",
                        "2021-12-26",
                        "2022-01-01",
                        "2022-12-25",
-                       "2022-12-26"]
+                       "2022-12-26",
+                       "2023-01-01",
+                       "2023-12-25",
+                       "2023-12-26",
+                       "2024-01-01",
+                       "2024-12-25",
+                       "2024-12-26"]
     date = day.in_time_zone
     closedDays.include?(date.strftime("%Y-%m-%d"))
   end
