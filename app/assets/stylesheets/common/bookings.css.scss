@@ -191,6 +191,7 @@ a#change_day_left, a#change_day_right
 .cleaning {
 	color: darkgrey;
 	background: #F2F6F9;
+	height: 20px;
 }
 
 .login_to_book{
@@ -283,7 +284,10 @@ a.to_pay_guest{
 	background-color: #F2F6F9;
 	letter-spacing: -1px;
 }
-
+.cleaningTime{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
 .noTime{
 	color: #426B8C;
 }
