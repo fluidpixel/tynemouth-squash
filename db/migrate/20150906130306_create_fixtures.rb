@@ -1,4 +1,4 @@
-class CreateFixtures < ActiveRecord::Migration
+class CreateFixtures < ActiveRecord::Migration[6.0]
   def change
     create_table :fixtures do |t|
       t.belongs_to :league

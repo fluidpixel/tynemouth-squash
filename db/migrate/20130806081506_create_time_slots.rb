@@ -1,4 +1,4 @@
-class CreateTimeSlots < ActiveRecord::Migration
+class CreateTimeSlots < ActiveRecord::Migration[6.0]
   def change
     create_table :time_slots do |t|
       t.time :time

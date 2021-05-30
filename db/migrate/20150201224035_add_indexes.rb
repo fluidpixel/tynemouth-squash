@@ -1,4 +1,4 @@
-class AddIndexes < ActiveRecord::Migration
+class AddIndexes < ActiveRecord::Migration[6.0]
   def change
     add_index :players, :last_name, order: { last_name: "ASC" }
     add_index :bookings, :paid, where: "paid = false OR paid is NULL"
