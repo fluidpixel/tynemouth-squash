@@ -289,7 +289,8 @@ def index
 	end
   
 	@bookingDay = (Date.current + @day.days).strftime("%A %d %B")
-	
+	@bookingDate = (Date.current + @day.days)
+
 	@daysBookings = Booking.where(Booking.arel_table[:time_slot_id].not_eq(nil)).by_day(@day)
   
   currentDay = Date.current + @day.days

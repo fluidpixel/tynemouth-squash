@@ -42,18 +42,22 @@ class ApplicationController < ActionController::Base
   end
 
   def is_bank_holiday(day)
-    bankholidays = Array["2020-04-10",
-                         "2020-04-13",
-                        #  "2020-05-04", no longer a bank-holiday
-                         "2020-05-25",
-                         "2020-08-31",
-                         "2021-04-02",
+    bankholidays = Array["2021-04-02",
                          "2021-04-05",
                          "2021-05-03",
                          "2021-05-31",
                          "2021-08-30",
                          "2021-12-27",
-                         "2021-12-28"]
+                         "2021-12-28",
+                         "2022-01-03",
+                         "2022-04-15",
+                         "2022-04-18",
+                         "2022-05-02",
+                         "2022-06-02",
+                         "2022-06-03",
+                         "2022-08-29",
+                         "2022-12-26",
+                         "2022-12-27"]
 
     date = day.in_time_zone
     bankholidays.include?(date.strftime("%Y-%m-%d"))
@@ -61,15 +65,15 @@ class ApplicationController < ActionController::Base
 
   def is_covid_day(day)
     date = day.in_time_zone.to_date
-    cutoff = Date.new(2020, 8, 12).in_time_zone.to_date
-    # difference = (Date.current - self.trial_date.to_date).to_i #trial is 90 days long
+    cutoff = Date.new(2021, 6, 21).in_time_zone.to_date
+
     difference = (date - cutoff).to_i
 
-    logger.info("day: #{day}, #{date}, #{cutoff}, #{difference}")
-    if difference < 22
-      return false
-    else
+    logger.info("📆 day: #{day}, #{date}, #{cutoff}, #{difference}")
+    if difference < 0
       return true
+    else
+      return false
     end
   end
 
