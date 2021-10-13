@@ -73,7 +73,7 @@ end
 def update
   @player = Player.find(params[:id])
  
-  if @player.update(params[:player].permit(:first_name, :last_name, :email, :membership_type_id, :landline, :mobile, :membership_number, :admin, :super_admin, :trial_date, :league_id, :date_added_to_league))
+  if @player.update(params[:player].permit(:first_name, :last_name, :email, :membership_type_id, :landline, :mobile, :membership_number, :active_membership, :admin, :super_admin, :trial_date, :league_id, :date_added_to_league))
     redirect_to @player
   else
     render 'edit'
@@ -89,7 +89,7 @@ def list
   
 private
   def player_params
-    params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :admin, :super_admin, :email, :trial_date, :league_id, :date_added_to_league)
+    params.require(:player).permit(:first_name, :last_name, :membership_number, :membership_type_id, :landline, :mobile, :active_membership, :admin, :super_admin, :email, :trial_date, :league_id, :date_added_to_league)
   end
 
   def sort_column
