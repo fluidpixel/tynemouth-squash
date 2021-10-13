@@ -14,8 +14,12 @@
 	<% if is_admin %>
 		<%= f.label 'membership Number' %><%= f.text_field :membership_number %><br>
 	<% end %>
+	<br>
     <%= f.label 'first name' %><%= f.text_field :first_name %><br>
     <%= f.label 'last name' %><%= f.text_field :last_name %><br>
+	<%= f.label 'mobile' %><%= f.text_field :mobile %><br>
+	<%= f.label 'email' %><%= f.text_field :email %><br>
+	<br>
 	<% if is_super_admin %>
 		<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.all, :id, :membership_type, {:include_blank => 'Select Type...'} %><br/>
 		<% if @membership_type == "trial" %>
@@ -24,8 +28,9 @@
 	<% else %>
 		<%= f.label 'Membership Type'%><%= f.collection_select :membership_type_id, @membership_types.where(membership_type: 'guest'), :id, :membership_type %><br/>
 	<% end %>
-	<%= f.label 'mobile' %><%= f.text_field :mobile %><br>
-	<%= f.label 'email' %><%= f.text_field :email %><br>
+	
+	<%= f.label 'Active Membership' %><%= f.check_box :active_membership, disabled: @membership_type == "trial" %><br />
+	<br>
 	<% if is_super_admin %>
 		<%= f.label 'Admin' %><%= f.check_box :admin %><br />
 		<%= f.label 'Super Admin' %><%= f. check_box :super_admin %><br />
@@ -33,6 +38,7 @@
 	<% if false %>
   	<% f.label 'League' %><%= f.collection_select :league_id, @leagues.all, :id, :league_name, {:include_blank => 'Select League...'} %><br />
 	<% end %>
+	<br>
   <%= f.submit %>
 
 <% end %>

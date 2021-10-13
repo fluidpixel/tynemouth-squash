@@ -92,6 +92,10 @@ def isValidMember
     self.trial_date = self.created_at
   end
   
+  if (!self.membership_type.active_membership && self.membership_type.membership_type != 'trial')
+    return false
+  end
+
   if (self.membership_type.membership_type == 'trial' && self.trial_date < 1.day.ago) || self.archived
     return false
   else

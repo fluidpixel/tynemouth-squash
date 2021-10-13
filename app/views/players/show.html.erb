@@ -4,7 +4,9 @@
 <% if @membership_type == "trial" %>
 <h4><%= @player.trialExpires %></h4>
 <% end %>
-
+<% if !@player.active_membership %>
+<h4 class="gold">Membership Fee Due</h4>
+<% end %>
 <% if is_super_admin %><h3> <%= link_to 'Edit', edit_player_path(@player) %> </h3><% end %>
 
 <% if current_player %>

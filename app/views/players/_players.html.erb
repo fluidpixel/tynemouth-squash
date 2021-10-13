@@ -9,7 +9,7 @@
 	    <th>Landline</th>
 		<th>Mobile</th>
 	<% end %>
-	<%if is_admin %>
+	<%if false %>
 	    <th>Future Bookings</th>
 	<% end %>
   </tr>
@@ -17,14 +17,15 @@
     <tr class = "playerIndex" >
 		<%if is_admin %>
 			<td class="first player"><%= player.membership_number %></td>
-			<td class = "player thin"><%= player.membership_type.membership_type %></td>
+
+			<td class = "player thin <%= 'background-gold' if !player.active_membership && player.membership_type.membership_type == 'full' %>"><%= player.membership_type.membership_type %></td>
 		<% end %>
 		<td class = "player wide"><%= link_to (player.full_name), player_path(player.id), :class => 'playerIndex' %></td>
 		<% if current_player %>
 			<td class = "player"><%= player.landline %></td>
 			<td class = "player"><%= player.mobile %></td>
 		<% end %>
-		<%if is_admin %>
+		<%if false %>
 			<td class = "player thin"><%= player.future_bookings.count %></td>
 		<% end %>
     </tr>
