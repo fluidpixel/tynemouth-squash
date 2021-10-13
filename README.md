@@ -20,9 +20,9 @@ rake db:create //to create local database
 ```
 ## Deploy
 
-set heroku up as a remote
+set heroku up as a remote (https://git.heroku.com/tynemouth-squash.git)
 heroku git:remote -a tynemouth-squash
-
+push to heroku master branch
 
 ## Setting up on fresh Mac install
 
