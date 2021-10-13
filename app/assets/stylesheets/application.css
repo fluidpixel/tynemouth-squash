@@ -255,6 +255,10 @@ ul.ui-autocomplete {
  color: Gold;
 }
 
+.background-gold {
+	background-color: gold !important;
+}
+
 .bold {
 	font-weight: bold;
 }
