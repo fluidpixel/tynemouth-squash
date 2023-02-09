@@ -9,8 +9,6 @@ def new
   
 	@days = params[:days] ? (params[:days]) : 0
   
-  Time.zone.parse('2007-02-10 15:30:45')
-  
   if (params[:hour]) 
     @time = Time.zone.parse(params[:hour] + ':' + params[:min])
   else 
