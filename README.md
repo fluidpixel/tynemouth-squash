@@ -27,15 +27,18 @@ push to heroku master branch
 ## Setting up on fresh Mac install
 
 1. `ruby -v` //check for installation
+   `brew install ruby if less 2.7.0`
 
 2. `sudo gem install rails` //install rails globally
 
+//to run the db locally
 3. install postgress: https://www.postgresql.org/download/macosx/ (https://postgresapp.com/documentation/cli-tools.html)
 
 4. `bundle install`
 
 5. install heroku cli:
-
+    `brew tap heroku/brew && brew install heroku`
+    OR
     `curl https://cli-assets.heroku.com/install.sh | sh`
 
 5. follow backup instructions above
