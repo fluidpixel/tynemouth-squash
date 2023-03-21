@@ -92,7 +92,7 @@ def isValidMember
     self.trial_date = self.created_at
   end
   
-  if (!self.membership_type.active_membership && self.membership_type.membership_type != 'trial')
+  if (!self.active_membership && self.membership_type.membership_type != 'trial')
     return false
   end
 
