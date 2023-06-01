@@ -32,7 +32,11 @@ class BookingMailer < ActionMailer::Base
     
     @current_member = current_member
      
-    mail(to: "courtbookings@tynemouthsquash.com", subject: @greeting)
+    begin
+      response = mail(to: "courtbookings@tynemouthsquash.com", subject: @greeting)
+    rescue
+      puts "error sending email"
+    end
   end
   
   def cancel_booking_email(booking)
@@ -42,8 +46,12 @@ class BookingMailer < ActionMailer::Base
     if @booking.player.email?
       @greeting = @booking.player.first_name + " your booking has been cancelled"
       @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
-      mail(to: @booking.player.email, subject: @greeting) do |format|
-        format.text
+      begin
+        response = mail(to: @booking.player.email, subject: @greeting) do |format|
+          format.text
+        end
+      rescue
+        puts "error sending email"
       end
     end
     
@@ -51,8 +59,12 @@ class BookingMailer < ActionMailer::Base
       if @booking.vs_player.email?
         @greeting = "Squash booking against " + @booking.player.first_name + " has been cancelled"
         @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
-        mail(to: @booking.vs_player.email, subject: @greeting) do |format|
-          format.text
+        begin
+          response = mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+            format.text
+          end
+        rescue
+          puts "error sending email"
         end
       end
     end
@@ -70,9 +82,14 @@ class BookingMailer < ActionMailer::Base
       end
       
       @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
-      mail(to: @booking.player.email, subject: @greeting) do |format|
-        format.text
+      begin
+        response = mail(to: @booking.player.email, subject: @greeting) do |format|
+          format.text
+        end
+      rescue
+        puts "error sending email"
       end
+      
     end
   end
   
@@ -84,8 +101,12 @@ class BookingMailer < ActionMailer::Base
       if @booking.vs_player.email?
         @message =  @court.court_name + ", " + @booking.start_time.strftime("%A #{@booking.start_time.day.ordinalize} %B") + " at " + @booking.time_slot.time.strftime("%H:%M%P")
         @greeting = "Squash vs " + @booking.player.first_name + " " + @booking.player.last_name.first
-        mail(to: @booking.vs_player.email, subject: @greeting) do |format|
-          format.text
+        begin
+          response = mail(to: @booking.vs_player.email, subject: @greeting) do |format|
+            format.text
+          end
+        rescue
+          puts "error sending email"
         end
       end
     end
