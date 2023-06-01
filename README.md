@@ -44,4 +44,8 @@ push to heroku master branch
 5. follow backup instructions above
 
 6. rails db:migrate RAILS_ENV=development
-5. `rails s`
+7. `rails s`
+
+
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_ed25519

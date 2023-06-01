@@ -44,3 +44,5 @@ end
 
 gem 'pusher'
 gem 'dropbox-api'
+
+gem 'webrick', '~> 1.7'
