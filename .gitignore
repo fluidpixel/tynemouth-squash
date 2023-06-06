@@ -22,3 +22,4 @@ config/app_environment_variables.rb
 
 *.dump
 .tm_properties
+.DS_Store
