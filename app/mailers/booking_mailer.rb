@@ -1,7 +1,7 @@
 class BookingMailer < ActionMailer::Base
   
   require 'mail'
-  address = Mail::Address.new "bookings@tynemouth-squash.herokuapp.com" # ex: "john@example.com"
+  address = Mail::Address.new "info@tynemouthsquash.com" # ex: "john@example.com"
   address.display_name = "Tynemouth Squash Club" # ex: "John Doe"
   # Set the From or Reply-To header to the following:
   
