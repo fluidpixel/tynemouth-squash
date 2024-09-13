@@ -84,6 +84,7 @@ GEM
     erubi (1.13.0)
     execjs (2.9.1)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (3.4.6)
@@ -124,6 +125,8 @@ GEM
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oauth (0.4.7)
     pg (1.5.8)
@@ -218,6 +221,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x86_64-linux
 
 DEPENDENCIES
   coffee-rails
