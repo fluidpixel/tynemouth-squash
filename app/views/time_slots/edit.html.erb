@@ -1,0 +1,16 @@
+<h1>Edit Timeslot</h1>
+
+<%= @timeSlot.time.strftime("%l:%M%P") %> Court <%= @timeSlot.court_id %>
+<% if is_super_admin %>
+    <%= form_for @timeSlot do |f| %>
+        
+        <%= f.label 'Weekday' %><%= f. check_box :weekday %><br />
+        <%= f.label 'Sunday' %><%= f. check_box :sunday %><br />
+        <%= f.label 'Bank Holiday' %><%= f. check_box :bank_holiday %><br />
+        <p>
+            <%= f.submit %>
+        </p>
+    <% end %>
+<% else %>
+    <p id="center" class="warning">Log in as super admin to edit the timeslot</p>
+<% end %>

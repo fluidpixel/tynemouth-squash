@@ -14,6 +14,7 @@ resources :sessions
 resources :leagues
 resources :fixtures
 resources :membership_types
+resources :time_slots
 
 post "leagues/reset_leagues" 
 

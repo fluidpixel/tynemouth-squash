@@ -2,11 +2,22 @@
  
 <table>
   <tr>
-  <th>TimeSlots </th>
+  <th>Time </th>
+  <th>Weekday</th>
+  <th>Covid</th>
+  <th>Sunday</th>
+  <th>Bank Holiday</th>
+  <th>Court</th>
   </tr>
   <% @timeSlots.each do |timeSlot| %>
     <tr>
-		<td><%= timeSlot.time.strftime("%l:%M%P") %></td>
+		<td><%= link_to timeSlot.time.strftime("%l:%M%P"), edit_time_slot_path(timeSlot.id) %></td>
+    <td><%= check_box(:weekday, :id, :checked => timeSlot.weekday) %></td>
+    <td><%= check_box(:covid, :id, :checked => timeSlot.covid_slot) %></td>
+    
+    <td><%= check_box(:sunday, :id, :checked => timeSlot.sunday) %></td>
+    <td><%= check_box(:bank_holiday, :id, :checked => timeSlot.bank_holiday) %></td>
+    <td><%= timeSlot.court_id %></td>
     </tr>
   <% end %>
 </table>
