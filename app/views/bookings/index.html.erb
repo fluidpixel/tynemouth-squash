@@ -59,8 +59,9 @@
 
 <div id="clearfix"></div>
 
-
+<% if false %>
 <p id="center" class="warning"><% if @bookingDate && is_covid_day(@bookingDate) %>Covid rules are in operation. A 20 minute cleaning gap is required between bookings.<% else %>Covid rules relaxed. Please continue to practise good hygiene at all times.<% end %></p>
+<% end %>
 
 <%= javascript_tag do %>
   window.day = '<%= @day %>';
