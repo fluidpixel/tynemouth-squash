@@ -32,7 +32,7 @@ push to heroku master branch
 2. `sudo gem install rails` //install rails globally
 
 //to run the db locally
-3. install postgress: https://www.postgresql.org/download/macosx/ (https://postgresapp.com/documentation/cli-tools.html)
+3. install postgress: [https://www.postgresql.org/download/macosx/ (https://postgresapp.com/documentation/cli-tools.html)](https://www.slingacademy.com/article/how-to-set-up-postgresql-and-pgadmin-on-mac/)
 
 4. `bundle install`
 
