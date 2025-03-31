@@ -81,7 +81,11 @@ def create
     @end = params[:booking][:booking_number].to_i
     @forcebooking = params[:force_booking] if(params[:force_booking])
     
-    if !@time.sunday? && !@time.saturday?
+    if @time.sunday? || @time.saturday?
+      if @time.hour < 12 && player.isRestricted
+        #do nothing, let them book
+      end
+    elsif
       if @time.hour >= 17 && player.isRestricted
         @error = "Restricted Membership, can't book after 5pm"
         redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
@@ -174,7 +178,7 @@ def show
   @days = (@booking.start_time.to_date - Date.current).to_i
   
   @timeSlot = TimeSlot.find(@booking.time_slot_id)
-  
+
   @court = Court.find(@booking.court_id)
   
   if (Time.current + 2.days) <= @booking.start_time.end_of_day
@@ -183,8 +187,17 @@ def show
   elsif @booking.start_time.hour < 17 && @booking.start_time > Time.current
     @timeLeft = (Time.current - @booking.start_time).to_i * -1
     @cancellable = true
+  # elsif @timeSlot.is_peak_cancellable(@days, @booking.court_id)
+  #   @cancellable = true
+  #   @timeLeft = (Time.current - @booking.start_time).to_i * -1
+  # elsif @booking.start_time.hour < 12 && (@booking.court_id == 1 || @booking.court_id == 2)
+  #   @timeLeft = (Time.current - @booking.start_time).to_i * -1
+  #   @cancellable = true
+  # elsif @booking.start_time.hour < 17 && @booking.start_time > Time.current || @time.sunday? || @time.saturday?
+  #   @timeLeft = (Time.current - @booking.start_time).to_i * -1
+  #   @cancellable = true
   end
-  
+
   if (!@booking.player_id.blank?)
 	  @player = Player.find_by_id(@booking.player_id)
   end

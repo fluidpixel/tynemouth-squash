@@ -55,6 +55,8 @@ class Booking < ActiveRecord::Base
   def incurs_fine
     if (self.start_time.to_date - Date.current).to_i < 0 && !self.paid && self.start_time.hour >= 16 && self.start_time.hour <= 20 && !self.start_time.saturday? && !self.start_time.sunday?
       return true
+	elsif (self.start_time.to_date - Date.current).to_i < 0 && !self.paid && self.start_time.hour < 12 && (self.start_time.saturday? || self.start_time.sunday?)
+	  return true
     else
       return false
     end
@@ -63,6 +65,8 @@ class Booking < ActiveRecord::Base
   def should_incur_fine
     if self.start_time.hour >= 16 && self.start_time.hour <= 20 && !self.start_time.saturday? && !self.start_time.sunday?
       return true
+	elsif self.start_time.hour < 12 && (self.start_time.saturday? || self.start_time.sunday?)
+	  return true
     else
       return false
     end
