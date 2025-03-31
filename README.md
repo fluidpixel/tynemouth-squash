@@ -20,6 +20,9 @@ rake db:create //to create local database
 ```
 ## Deploy
 
+Push to the master github branch and heroku will deploy the build.
+
+Alternatively, push to heroku directly:
 set heroku up as a remote (https://git.heroku.com/tynemouth-squash.git)
 heroku git:remote -a tynemouth-squash
 push to heroku master branch
