@@ -184,9 +184,9 @@ def show
   if (Time.current + 2.days) <= @booking.start_time.end_of_day
     @cancellable = true
     @timeLeft = ((Time.current + 2.days) - @booking.start_time.end_of_day).to_i * -1
-  elsif @booking.start_time.hour < 17 && @booking.start_time > Time.current
-    @timeLeft = (Time.current - @booking.start_time).to_i * -1
-    @cancellable = true
+  # elsif @booking.start_time.hour < 17 && @booking.start_time > Time.current
+  #   @timeLeft = (Time.current - @booking.start_time).to_i * -1
+  #   @cancellable = true
   # elsif @timeSlot.is_peak_cancellable(@days, @booking.court_id)
   #   @cancellable = true
   #   @timeLeft = (Time.current - @booking.start_time).to_i * -1
