@@ -2,6 +2,7 @@ class TimeSlot < ActiveRecord::Base
 	belongs_to :court
 	has_many :bookings
   
+  #used for css in view to mark court
   def is_peak(day, court_id)
     dayOfWeek = Date.current + day.days
     # weekday 16:00-19:10

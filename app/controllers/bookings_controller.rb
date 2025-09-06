@@ -35,6 +35,8 @@ def create
     player = Player.authenticateFullName(params[:booking][:full_name], "xxx")
   end
   
+  vs_player = Player.authenticateFullName(params[:booking][:vs_player_name], "xxx")
+
   if params[:booking][:guest_booking] == "1" #true
     if player
       
@@ -81,14 +83,32 @@ def create
     @end = params[:booking][:booking_number].to_i
     @forcebooking = params[:force_booking] if(params[:force_booking])
     
-    if @time.sunday? || @time.saturday?
-      if @time.hour < 12 && player.isRestricted
-        #do nothing, let them book
-      end
-    elsif
-      if @time.hour >= 17 && player.isRestricted
-        @error = "Restricted Membership, can't book after 5pm"
-        redirect_to new_booking_path(:days => params[:booking][:days], :court => params[:booking][:court_id], :hour => @time.strftime('%H'), :min => @time.strftime('%M'), :timeSlot => params[:booking][:time_slot_id], :error => @error) and return
+    #restricted player bookings
+    #not sunday between 17-19:50
+    #not weekdays between 16-19:10
+    if player.isRestricted || (vs_player && vs_player.isRestricted)
+      if @time.sunday? && @time.hour >= 17 && @time.hour <= 19
+        @error = "Restricted Membership, can't book between 5-8pm on a Sunday."
+        redirect_to new_booking_path(
+          :days => params[:booking][:days],
+          :court => params[:booking][:court_id],
+          :hour => @time.strftime('%H'),
+          :min => @time.strftime('%M'),
+          :timeSlot => params[:booking][:time_slot_id],
+          :error => @error) and return
+      elsif !@time.saturday? && @time.hour >= 16 && @time.hour < 20
+        if @time.hour == 19 && @time.min > 10
+          #ignore
+        else
+          @error = "Restricted Membership, can't book between 4-7:30pm on a weekday."
+        redirect_to new_booking_path(
+          :days => params[:booking][:days],
+          :court => params[:booking][:court_id],
+          :hour => @time.strftime('%H'),
+          :min => @time.strftime('%M'),
+          :timeSlot => params[:booking][:time_slot_id],
+          :error => @error) and return
+        end
       end
     end
     
