@@ -19,13 +19,27 @@ th.booking{
 	background-color: #0A4B81;
 }
  
-td.booking, td.player {
+td.booking {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	text-align:center;
 	vertical-align:middle;
 /*	border-width: 0px 1px 1px 1px;*/
-	line-height: 13px;
+	line-height: 12px;
+	width:198px;
+	background-color: #F2F6F9;
+	border-bottom: #F2F6F9;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}
+
+td.player {
+	padding-top: 4px;
+	padding-bottom: 0px;
+	text-align:center;
+	vertical-align:middle;
+/*	border-width: 0px 1px 1px 1px;*/
+	line-height: 14px;
 	width:198px;
 	background-color: #F2F6F9;
 	border-bottom: #F2F6F9;
@@ -219,7 +233,7 @@ a#change_day_left, a#change_day_right
 }
 
 .bookingError {
-	margin-top: -40px !important;
+	margin-top: 0px !important;
 }
 
 .editBookingError {
